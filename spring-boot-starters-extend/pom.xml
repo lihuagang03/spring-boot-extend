@@ -13,8 +13,9 @@
   <packaging>pom</packaging>
 
   <name>spring-boot-starters-extend</name>
-  <description>Spring Boot Starters 启动器扩展</description>
+  <description>业务层面扩展的 Spring Boot Starters 启动器</description>
 
   <modules>
+    <module>mybatis-plus-spring-boot-starter</module>
   </modules>
 </project>
