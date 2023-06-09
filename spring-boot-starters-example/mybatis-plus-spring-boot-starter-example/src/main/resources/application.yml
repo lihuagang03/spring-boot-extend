@@ -1,0 +1,75 @@
+
+spring:
+  application:
+    name: mybatis-plus-spring-boot-starter-example
+  servlet:
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 10MB
+  mvc:
+    format:
+      date: 'yyyy-MM-dd'
+      date-time: 'yyyy-MM-dd HH:mm:ss'
+#    dispatch-trace-request: true
+  jackson:
+    default-property-inclusion: NON_NULL
+#    serialization.WRITE_DATES_AS_TIMESTAMPS: false
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/digital?autoReconnect=true&failOverReadOnly=false&maxReconnects=10&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: huofo141005_mysql
+    druid:
+#      配置初始化大小、最小、最大
+      initial-size: 5
+      min-idle: 10
+      max-active: 20
+#      配置获取连接等待超时的时间
+      max-wait: 6000
+#      配置间隔多久才进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+#      配置一个连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 600000
+      validation-query: select 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      keep-alive: true
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      max-open-prepared-statements: 20
+      use-global-data-source-stat: false
+#      配置监控统计拦截的filters
+      filters: stat,wall,slf4j
+#      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=1000
+      filter:
+        stat:
+          enabled: true
+          merge-sql: true
+          slow-sql-millis: 1000
+          log-slow-sql: true
+      stat-view-servlet:
+        enabled: false
+      web-stat-filter:
+        enabled: false
+
+server:
+#  port: 56789
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
+    accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
+      enabled: true
+      pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
+      prefix: tomcat_access
+      directory: "/data/logs/${spring.application.name}/"
+
+mybatis-plus:
+  executor-type: reuse
+#  事务未实时提交，数据未实时写入，未查询到刚写入的数据记录
+#  executor-type: batch
+  global-config:
+    db-config:
+      id-type: auto
+#  db-type: mysql

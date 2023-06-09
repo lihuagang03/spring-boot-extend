@@ -16,5 +16,6 @@
   <description>Spring Boot Starters 启动器代码示例</description>
 
   <modules>
+    <module>mybatis-plus-spring-boot-starter-example</module>
   </modules>
 </project>
