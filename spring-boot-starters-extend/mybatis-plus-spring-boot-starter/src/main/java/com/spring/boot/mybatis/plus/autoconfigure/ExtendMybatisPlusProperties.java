@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * MybatisPlus配置属性集
+ * MybatisPlus 配置属性集
  *
  * @author lihuagang
  * @date 2023/6/9
@@ -21,9 +21,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class ExtendMybatisPlusProperties {
 
     /**
-     * MybatisPlus支持的数据库类型，主要用于分页方言
-     *
-     * @see com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor#getDbType()
+     * MybatisPlus 支持的数据库类型，主要用于分页方言
      */
     private DbType dbType;
 

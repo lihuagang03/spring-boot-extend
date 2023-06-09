@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 /**
- * MybatisPlus自动配置
+ * MybatisPlus 自动配置
  *
  * @author lihuagang
  * @date 2023/6/9
@@ -38,7 +38,7 @@ import javax.sql.DataSource;
 public class ExtendMybatisPlusAutoConfiguration {
 
     /**
-     * MybatisPlus配置属性集
+     * MybatisPlus 配置属性集
      *
      * @see MybatisPlusProperties
      */
