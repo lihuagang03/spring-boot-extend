@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spring.boot.mybatis.plus.example.repository.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.*;
@@ -23,6 +23,7 @@ import static org.assertj.core.api.Assertions.*;
  * @author lihuagang
  * @date 2023/6/10
  */
+@Slf4j
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserServiceTest {
@@ -38,13 +39,16 @@ class UserServiceTest {
     @Test
     @Order(10)
     void save() {
-        User user = new User();
-        user.setUserName("liXiaoHua");
-        user.setAge(18);
-        user.setMobile("13588886666");
-        LocalDateTime now = LocalDateTime.now();
-        user.setCreateTime(now);
-        user.setUpdateTime(now);
+//        LocalDateTime now = LocalDateTime.now();
+
+        // 字段填充，生效
+        User user = new User()
+                .setUserName("liXiaoHua")
+                .setAge(18)
+                .setMobile("13588886666")
+//                .setCreateTime(now)
+//                .setUpdateTime(now)
+                ;
 
         boolean result = userService.save(user);
         assertThat(result).isTrue();
@@ -65,6 +69,7 @@ class UserServiceTest {
     @Order(25)
     void lambdaQuery() {
         IPage<User> page = new Page<>(1, 10);
+
         Wrapper<User> queryWrapper = Wrappers.<User>lambdaQuery()
                 .select(User::getId)
                 .eq(User::getAge, 18);
@@ -92,23 +97,24 @@ class UserServiceTest {
         // 模拟更新操作延时
         mockTimeDelay();
 
-        LocalDateTime now = LocalDateTime.now();
+//        LocalDateTime now = LocalDateTime.now();
 
         // 字段填充，生效
-//        User user = new User();
-//        user.setId(id);
-//        user.setMobile("13566668888");
-////        user.setUpdateTime(now);
-//        boolean result = userService.updateById(user);
+        User user = new User()
+                .setId(id)
+                .setMobile("13566668888")
+//                .setUpdateTime(now)
+                ;
+        boolean result = userService.updateById(user);
         // 字段填充，不生效
-        boolean result = userService.lambdaUpdate()
-                .set(User::getMobile, "13566668888")
-                .set(User::getUpdateTime, now)
-                .eq(User::getId, id)
-                .update();
+//        boolean result = userService.lambdaUpdate()
+//                .set(User::getMobile, "13566668888")
+//                .set(User::getUpdateTime, now)
+//                .eq(User::getId, id)
+//                .update();
         assertThat(result).isTrue();
 
-        User user = userService.getById(id);
+        user = userService.getById(id);
         assertThat(user).isNotNull();
         assertThat(user.getUpdateTime()).isNotEqualTo(user.getCreateTime());
     }
@@ -127,7 +133,7 @@ class UserServiceTest {
         try {
             TimeUnit.SECONDS.sleep(1L);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("Thread.sleep() exception", e);
         }
     }
 }
