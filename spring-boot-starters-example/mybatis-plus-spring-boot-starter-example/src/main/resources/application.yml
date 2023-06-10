@@ -54,7 +54,7 @@ spring:
         enabled: false
 
 server:
-#  port: 56789
+  port: 8080
   tomcat:
     threads:
       max: 200
