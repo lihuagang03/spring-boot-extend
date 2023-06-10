@@ -1,0 +1,6 @@
+
+# Process Monitoring - https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.process-monitoring
+# Application Listeners
+org.springframework.context.ApplicationListener=\
+org.springframework.boot.context.ApplicationPidFileWriter,\
+org.springframework.boot.web.context.WebServerPortFileWriter
