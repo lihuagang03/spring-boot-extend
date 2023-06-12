@@ -17,5 +17,6 @@
 
   <modules>
     <module>mybatis-plus-spring-boot-starter-example</module>
+    <module>autowire-bean-with-diff-impl-conditional-on-property</module>
   </modules>
 </project>
