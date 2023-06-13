@@ -1,9 +1,9 @@
 package com.spring.boot.meeting.service.impl;
 
+import com.spring.boot.meeting.autoconfigure.condition.CloudService;
 import com.spring.boot.meeting.service.MeetingRoomService;
 import com.spring.boot.meeting.service.MeetingService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,9 +15,9 @@ import javax.annotation.Resource;
  * @date 2023/6/13
  */
 @Slf4j
-@ConditionalOnProperty(prefix = "meeting", name = "service", havingValue = "cloud")
-//@Service("meetingService")
+@CloudService
 @Service("cloudMeetingService")
+//@Service("meetingService")
 public class CloudMeetingServiceImpl implements MeetingService {
 
     @Resource
