@@ -17,7 +17,6 @@ import javax.annotation.Resource;
 @Slf4j
 @EdgeService
 @Service("edgeMeetingService")
-//@Service("meetingService")
 public class EdgeMeetingServiceImpl implements MeetingService {
 
     @Resource

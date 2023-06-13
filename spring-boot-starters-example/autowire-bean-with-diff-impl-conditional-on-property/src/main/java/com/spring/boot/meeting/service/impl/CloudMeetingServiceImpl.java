@@ -17,7 +17,6 @@ import javax.annotation.Resource;
 @Slf4j
 @CloudService
 @Service("cloudMeetingService")
-//@Service("meetingService")
 public class CloudMeetingServiceImpl implements MeetingService {
 
     @Resource

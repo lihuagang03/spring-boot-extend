@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @CloudService
 @Service("cloudMeetingRoomService")
-//@Service("meetingRoomService")
 public class CloudMeetingRoomServiceImpl implements MeetingRoomService {
 
     public CloudMeetingRoomServiceImpl() {
