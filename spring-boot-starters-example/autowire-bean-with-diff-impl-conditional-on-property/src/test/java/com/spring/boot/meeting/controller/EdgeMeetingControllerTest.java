@@ -8,6 +8,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.annotation.Resource;
 
+import static org.assertj.core.api.Assertions.*;
+
 /**
  * Test of {@link MeetingController}.
  *
@@ -23,6 +25,9 @@ class EdgeMeetingControllerTest {
     @Resource
     private MockMvc mockMvc;
 
+    @Resource
+    private MeetingController meetingController;
+
     static {
         System.setProperty("meeting.service", "edge");
     }
@@ -33,5 +38,8 @@ class EdgeMeetingControllerTest {
         String expectedContent = "edgeMeetingRoom";
         MockMvcRequestUtils.getMock(mockMvc, url, EMPTY_PARAMS,
                 expectedContent);
+
+        String response = meetingController.getAuthSession();
+        assertThat(response).isEqualTo("edgeMeetingRoom");
     }
 }
