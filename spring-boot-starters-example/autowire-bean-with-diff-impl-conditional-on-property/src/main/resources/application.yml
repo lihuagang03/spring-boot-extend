@@ -1,0 +1,11 @@
+
+
+spring:
+  application:
+    name: autowire-bean-with-diff-impl-conditional-on-property
+
+# 会议服务实现
+meeting:
+  service: edge
+#  service: cloud
+
