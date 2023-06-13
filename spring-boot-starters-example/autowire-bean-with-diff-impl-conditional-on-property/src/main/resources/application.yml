@@ -9,3 +9,19 @@ meeting:
   service: edge
 #  service: cloud
 
+logging:
+#  config: 'classpath:log4j2.xml'
+  level:
+    root: info
+  charset:
+    file: utf-8
+  file:
+    path: '/var/log'
+  logback:
+    rollingpolicy:
+      file-name-pattern: '${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz'
+      clean-history-on-start: false
+      max-file-size: 30MB
+      total-size-cap: 0MB
+      max-history: 14
+
