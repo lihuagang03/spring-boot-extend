@@ -1,7 +1,7 @@
 package com.spring.boot.gpt.chat.web.socket;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
@@ -14,7 +14,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
  * @see org.springframework.web.socket.config.annotation.WebSocketConfigurer
  */
 @Slf4j
-@AutoConfiguration
+@Configuration(proxyBeanMethods = false)
 @EnableWebSocket
 public class WebSocketConfiguration implements WebSocketConfigurer {
 
