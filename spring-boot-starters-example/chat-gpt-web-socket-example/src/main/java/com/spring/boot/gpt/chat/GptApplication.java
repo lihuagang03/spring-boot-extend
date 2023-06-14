@@ -10,9 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2023/6/14
  */
 @SpringBootApplication
-public class Application {
+public class GptApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(GptApplication.class, args);
     }
 }
