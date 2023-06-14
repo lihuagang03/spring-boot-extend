@@ -18,5 +18,6 @@
   <modules>
     <module>mybatis-plus-spring-boot-starter-example</module>
     <module>autowire-bean-with-diff-impl-conditional-on-property</module>
+    <module>chat-gpt-web-socket-example</module>
   </modules>
 </project>
