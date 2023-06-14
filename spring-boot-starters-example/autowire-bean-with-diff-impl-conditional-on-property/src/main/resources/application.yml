@@ -10,18 +10,19 @@ meeting:
 #  service: cloud
 
 logging:
-#  config: 'classpath:log4j2.xml'
-  level:
-    root: info
   charset:
-    file: utf-8
+    console: UTF-8
+    file: UTF-8
+#  config: 'classpath:org/springframework/boot/logging/log4j2/log4j2-file.xml'
   file:
     path: '/var/log'
-  logback:
-    rollingpolicy:
-      file-name-pattern: '${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz'
-      clean-history-on-start: false
-      max-file-size: 30MB
-      total-size-cap: 0MB
-      max-history: 14
+  level:
+    root: info
+#  logback:
+#    rollingpolicy:
+#      file-name-pattern: '${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz'
+#      clean-history-on-start: false
+#      max-file-size: 10MB
+#      total-size-cap: 0MB
+#      max-history: 7
 
