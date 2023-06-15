@@ -1,0 +1,35 @@
+
+
+spring:
+  application:
+    name: chat-gpt-web-socket-example
+
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
+    accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
+      enabled: true
+      pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
+      prefix: tomcat_access
+      directory: "/data/logs/${spring.application.name}/"
+
+logging:
+  charset:
+    console: UTF-8
+    file: UTF-8
+#  config: "classpath:org/springframework/boot/logging/log4j2/log4j2-file.xml"
+  file:
+    path: "/var/log"
+  level:
+    root: info
+#  logback:
+#    rollingpolicy:
+#      file-name-pattern: "${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz"
+#      clean-history-on-start: false
+#      max-file-size: 10MB
+#      total-size-cap: 0MB
+#      max-history: 14
+

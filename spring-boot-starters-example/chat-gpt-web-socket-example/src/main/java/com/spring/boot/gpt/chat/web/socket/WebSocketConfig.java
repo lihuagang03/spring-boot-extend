@@ -11,8 +11,17 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 /**
  * WebSocket配置，注册处理器
  * <pre>
+ * WebSockets
+ * https://docs.spring.io/spring-framework/docs/5.3.x/reference/html/web.html#websocket
+ *
  * WebSocket API
- * https://docs.spring.io/spring-framework/docs/5.3.x/reference/html/web.html#websocket-server
+ *
+ * ws://localhost:8080/gpt/chat/web-socket/123456789_16:333666999
+ * Host: localhost:8080
+ * Upgrade: websocket
+ * Connection: Upgrade
+ * Sec-WebSocket-Key: KW2SMxi93DAvbzP9caUEVw==
+ * Sec-WebSocket-Version: 13
  * </pre>
  *
  * @author lihuagang
