@@ -16,11 +16,21 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
  * @see org.springframework.web.socket.handler.TextWebSocketHandler
  */
 @Slf4j
-public class ExtendTextWebSocketHandler extends TextWebSocketHandler {
+public class ClientTextWebSocketHandler extends TextWebSocketHandler {
+
+    private final transient Object lock = new Object();
+
+    private String outputText;
+
+    public String getOutputText() {
+        synchronized (lock) {
+            return outputText;
+        }
+    }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        log.info("connection established, session={}", session);
+        log.info("Client connection established, session={}", session);
         super.afterConnectionEstablished(session);
     }
 
@@ -33,7 +43,11 @@ public class ExtendTextWebSocketHandler extends TextWebSocketHandler {
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         super.handleTextMessage(session, message);
         String payload = message.getPayload();
-        log.info("handleTextMessage, payload={}", payload);
+        log.info("Client handleTextMessage, payload={}", payload);
+        // 接收文本消息
+        synchronized (lock) {
+            outputText = payload;
+        }
     }
 
 //    @Override
@@ -43,15 +57,15 @@ public class ExtendTextWebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        log.info("handle transport error, session={}", session, exception);
+        log.info("Client handle transport error, session={}", session, exception);
         super.handleTransportError(session, exception);
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        log.info("connection closed, session={}, status={}", session, status);
-        if (status != CloseStatus.NORMAL) {
-            log.error("connection closed fail, session={}, status={}", session, status);
+        log.info("Client connection closed, session={}, status={}", session, status);
+        if (!CloseStatus.NORMAL.equals(status)) {
+            log.error("Client connection closed fail, session={}, status={}", session, status);
         }
         super.afterConnectionClosed(session, status);
     }

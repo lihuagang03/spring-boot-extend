@@ -15,6 +15,13 @@ public final class WebSocketUtil {
     /**
      * 创建一个新的WebSocket客户端
      */
+    public static WebSocketClient applyWebSocketClient() {
+        return applyWebSocketClient(null);
+    }
+
+    /**
+     * 创建一个新的WebSocket客户端
+     */
     public static WebSocketClient applyWebSocketClient(String threadNamePrefix) {
         StandardWebSocketClient webSocketClient = new StandardWebSocketClient();
         // 容器化场景下，返回的是容器/Pod使用的CPU核数，还是物理机的CPU核数？
@@ -26,7 +33,7 @@ public final class WebSocketUtil {
         if (StringUtils.hasText(threadNamePrefix)) {
             taskExecutor.setThreadNamePrefix(threadNamePrefix);
         } else {
-            taskExecutor.setThreadNamePrefix("gpt.chat.web.socket");
+            taskExecutor.setThreadNamePrefix("gpt.web.socket-");
         }
         taskExecutor.initialize();
         webSocketClient.setTaskExecutor(taskExecutor);
