@@ -10,10 +10,10 @@
   </parent>
 
   <groupId>com.spring.boot</groupId>
-  <artifactId>autowire-bean-with-diff-impl-conditional-on-property</artifactId>
+  <artifactId>autowired-bean-with-diff-impl-conditional-on-property</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
-  <name>autowire-bean-with-diff-impl-conditional-on-property</name>
+  <name>autowired-bean-with-diff-impl-conditional-on-property</name>
   <description>基于配置属性条件自动装配不同实现的服务组件</description>
 
   <properties>
