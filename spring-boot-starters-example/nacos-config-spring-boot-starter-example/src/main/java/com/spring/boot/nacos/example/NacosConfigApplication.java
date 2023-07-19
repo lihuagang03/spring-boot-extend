@@ -10,9 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2023/7/18
  */
 @SpringBootApplication
-public class NacosApplication {
+public class NacosConfigApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(NacosApplication.class, args);
+        SpringApplication.run(NacosConfigApplication.class, args);
     }
 }
