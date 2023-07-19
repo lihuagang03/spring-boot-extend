@@ -28,3 +28,9 @@ nacos:
     bootstrap:
       enable: true
       log-enable: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
