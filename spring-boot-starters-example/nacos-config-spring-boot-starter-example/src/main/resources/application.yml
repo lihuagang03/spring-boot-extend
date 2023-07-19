@@ -1,0 +1,30 @@
+
+spring:
+  application:
+    name: nacos-config-spring-boot-starter-example
+
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
+    accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
+      enabled: true
+      pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
+      prefix: tomcat_access
+      directory: "~/logs/${spring.application.name}/"
+
+# config
+# com.alibaba.boot.nacos.config.autoconfigure.NacosConfigAutoConfiguration
+nacos:
+  config:
+#    enabled: true
+    server-addr: 'localhost:8848'
+    data-id: 'nacos-config-spring-boot-starter-example'
+    group: 'DEFAULT_GROUP'
+    auto-refresh: true
+    type: 'YAML'
+    bootstrap:
+      enable: true
+      log-enable: true
