@@ -16,11 +16,11 @@
   <packaging>jar</packaging>
 
   <name>nacos-config-spring-boot-starter-example</name>
-  <description>Nacos Example for Spring Boot Starter</description>
+  <description>Nacos Config Example for Spring Boot Starter</description>
 
   <properties>
     <java.version>11</java.version>
-    <nacos-config-spring-boot-starter.version>0.2.12</nacos-config-spring-boot-starter.version>
+    <nacos-config-spring-boot.version>0.2.12</nacos-config-spring-boot.version>
   </properties>
 
   <dependencyManagement>
@@ -28,7 +28,12 @@
       <dependency>
         <groupId>com.alibaba.boot</groupId>
         <artifactId>nacos-config-spring-boot-starter</artifactId>
-        <version>${nacos-config-spring-boot-starter.version}</version>
+        <version>${nacos-config-spring-boot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba.boot</groupId>
+        <artifactId>nacos-config-spring-boot-actuator</artifactId>
+        <version>${nacos-config-spring-boot.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -39,11 +44,19 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
 
     <!-- config -->
     <dependency>
       <groupId>com.alibaba.boot</groupId>
       <artifactId>nacos-config-spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba.boot</groupId>
+      <artifactId>nacos-config-spring-boot-actuator</artifactId>
     </dependency>
 
     <dependency>
