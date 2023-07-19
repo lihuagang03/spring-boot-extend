@@ -1,8 +1,13 @@
 
+# Appendices
+# Appendix A: Common Application Properties
+
+# .A.1. Core Properties
 spring:
   application:
     name: nacos-config-spring-boot-starter-example
 
+# .A.11. Server Properties
 server:
   port: 8080
   tomcat:
@@ -15,9 +20,24 @@ server:
       prefix: tomcat_access
       directory: "~/logs/${spring.application.name}/"
 
+# .A.14. Actuator Properties
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-components: always
+      show-details: always
+
 # config
 # com.alibaba.boot.nacos.config.autoconfigure.NacosConfigAutoConfiguration
 nacos:
+  configLongPollTimeout: 5000
+  configRetryTime: 1000
+  maxRetry: 2
+  enableRemoteSyncConfig: true
   config:
 #    enabled: true
     server-addr: 'localhost:8848'
@@ -28,9 +48,3 @@ nacos:
     bootstrap:
       enable: true
       log-enable: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
