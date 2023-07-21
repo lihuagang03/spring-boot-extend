@@ -1,2 +1,8 @@
 
-
+# config
+nacos:
+  config:
+    # 命名空间（隔离）
+    namespace: 'nacos-env-test'
+    # 分组身份
+    group: 'TEST'

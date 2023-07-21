@@ -6,8 +6,9 @@
 spring:
   application:
     name: nacos-config-spring-boot-starter-example
-#  profiles:
+  profiles:
 #    active: prod,test,dev
+    active: dev
 
 # .A.11. Server Properties
 server:
@@ -49,11 +50,14 @@ nacos:
 #    enabled: true
     # 配置中心服务端地址
     server-addr: '127.0.0.1:8848'
+    # 远程配置优先
     remote-first: true
-    # 数据身份集合
+    # 数据身份
     data-id: 'nacos-config-spring-boot-starter-example'
+#    # 数据身份集合
+#    data-ids: ''
     # 命名空间（隔离）
-#    namespace: ''
+    namespace: ''
     # 分组身份
     group: 'DEFAULT_GROUP'
     # 类型
@@ -68,8 +72,9 @@ nacos:
     config-long-poll-timeout: 60000
     # 启用远程同步配置
     enable-remote-sync-config: true
-    username: 'nacos'
-    password: 'nacos'
+#    # 账密
+#    username: 'nacos'
+#    password: 'nacos'
     bootstrap:
       enable: true
       log-enable: true
