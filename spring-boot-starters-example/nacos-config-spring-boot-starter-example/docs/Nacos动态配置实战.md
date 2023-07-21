@@ -13,6 +13,7 @@ https://nacos.io/zh-cn/
 #### 服务发现及管理
 #### 动态DNS服务
 
+
 ## 1.初始化数据库表
 MySQL
 ```shell
