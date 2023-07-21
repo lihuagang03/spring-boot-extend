@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
  *
  * @author guangyi
  * @date 2023/7/19
+ * @see NacosInjected
  */
 @Slf4j
 @Service("configServiceDemo")
@@ -19,6 +20,8 @@ public class ConfigServiceDemo {
 
     /**
      * 配置服务
+     *
+     * @see NacosInjected
      */
     @NacosInjected
     private ConfigService configService;
@@ -38,7 +41,7 @@ public class ConfigServiceDemo {
 //        this.configService = configService;
 //    }
 
-    public String getConfig() {
+    public final String getConfig() {
         try {
             String content = configService.getConfig(dataId, group, 5_000L);
             log.info("get config, content={}", content);
