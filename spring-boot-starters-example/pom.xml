@@ -21,5 +21,6 @@
     <module>chat-gpt-web-socket-example</module>
     <module>nacos-config-spring-boot-starter-example</module>
     <module>reactive-spring-boot-starter-example</module>
+    <module>redis-spring-boot-starter-example</module>
   </modules>
 </project>

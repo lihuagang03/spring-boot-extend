@@ -15,4 +15,5 @@ Spring Boot 扩展实战
   - [chat-gpt-web-socket-example](spring-boot-starters-example/chat-gpt-web-socket-example)  基于WebSocket实现的ChatGPT实时对话交互
   - [nacos-config-spring-boot-starter-example](spring-boot-starters-example/nacos-config-spring-boot-starter-example) Nacos动态配置服务示例
   - [reactive-spring-boot-starter-example](spring-boot-starters-example/reactive-spring-boot-starter-example) 反应式编程范式示例
+  - [redis-spring-boot-starter-example](spring-boot-starters-example/redis-spring-boot-starter-example) Redis数据模型使用最佳实践示例
 
