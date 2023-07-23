@@ -41,6 +41,11 @@ public class ConfigServiceDemo {
 //        this.configService = configService;
 //    }
 
+
+    public ConfigServiceDemo() {
+        log.info("create ConfigServiceDemo");
+    }
+
     public final String getConfig() {
         try {
             String content = configService.getConfig(dataId, group, 5_000L);

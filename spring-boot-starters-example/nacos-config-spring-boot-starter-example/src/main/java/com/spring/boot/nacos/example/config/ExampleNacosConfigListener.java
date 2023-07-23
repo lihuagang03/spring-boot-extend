@@ -26,6 +26,10 @@ public class ExampleNacosConfigListener {
     @NacosValue(value = "${people.count:0}", autoRefreshed = true)
     private String count;
 
+    public ExampleNacosConfigListener() {
+        log.info("create ExampleNacosConfigListener");
+    }
+
     /**
      * 配置监视器
      *

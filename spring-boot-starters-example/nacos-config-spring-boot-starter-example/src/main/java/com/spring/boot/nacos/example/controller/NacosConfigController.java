@@ -48,7 +48,7 @@ public class NacosConfigController {
         this.configServiceDemo = configServiceDemo;
         this.exampleNacosConfigurationProperties = exampleNacosConfigurationProperties;
         this.exampleNacosConfigListener = exampleNacosConfigListener;
-        log.info("create NacosConfigController instance");
+        log.info("create NacosConfigController");
     }
 
     @GetMapping("")

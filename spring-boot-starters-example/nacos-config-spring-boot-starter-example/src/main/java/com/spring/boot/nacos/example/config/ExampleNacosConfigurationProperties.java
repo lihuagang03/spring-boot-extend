@@ -3,6 +3,7 @@ package com.spring.boot.nacos.example.config;
 import com.alibaba.nacos.api.config.ConfigType;
 import com.alibaba.nacos.api.config.annotation.NacosConfigurationProperties;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2023/7/21
  * @see NacosConfigurationProperties
  */
+@Slf4j
 @Data
 @NacosConfigurationProperties(
         groupId = "${nacos.config.group:}",
@@ -25,4 +27,8 @@ public class ExampleNacosConfigurationProperties {
     private String dynamicConfig;
 
     private String configNamespace;
+
+    public ExampleNacosConfigurationProperties() {
+        log.info("create ExampleNacosConfigurationProperties");
+    }
 }
