@@ -45,6 +45,6 @@ Redis' speed makes it ideal for caching database queries, complex computations, 
 The stream data type enables high-rate data ingestion, messaging, event sourcing, and notifications.
 
 
-### 实战
+## 实战
 - [Install Redis on macOS](https://redis.io/docs/getting-started/installation/install-redis-on-mac-os/)
 
