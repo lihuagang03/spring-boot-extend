@@ -54,27 +54,29 @@ class FluxTest {
      */
     @Test
     void subscribe() {
-        Flux<Integer> integers = Flux.range(1, 3);
+        Flux<Integer> ints = Flux.range(1, 3);
         // The preceding code produces no visible output, but it does work.
         // The Flux produces three values.
-        integers.subscribe();
+        ints.subscribe();
         // If we provide a lambda, we can make the values visible.
-        integers.subscribe(System.out::println);
+        ints.subscribe(System.out::println);
+        System.out.println();
 
         // To demonstrate the next signature, we intentionally introduce an error
-        integers = Flux.range(1, 4)
-                .map(integer -> {
-                    if (integer <= 3) {
-                        return integer;
+        ints = Flux.range(1, 4)
+                .map(i -> {
+                    if (i <= 3) {
+                        return i;
                     }
                     throw new RuntimeException("Got to 4");
                 });
-        integers.subscribe(System.out::println,
+        ints.subscribe(System.out::println,
                 error -> System.err.println("Error: " + error));
+        System.out.println();
 
         // The next signature of the subscribe method includes both an error handler and a handler for completion events
-        integers = Flux.range(1, 4);
-        integers.subscribe(System.out::println,
+        ints = Flux.range(1, 4);
+        ints.subscribe(System.out::println,
                 error -> System.err.println("Error: " + error),
                 () -> System.out.println("Done"));
     }
