@@ -4,8 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
+
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * Test of {@link Flux}.
@@ -54,31 +57,55 @@ class FluxTest {
      */
     @Test
     void subscribe() {
-        Flux<Integer> ints = Flux.range(1, 3);
+        Flux<Integer> integers = Flux.range(1, 3);
         // The preceding code produces no visible output, but it does work.
         // The Flux produces three values.
-        ints.subscribe();
+        integers.subscribe();
         // If we provide a lambda, we can make the values visible.
-        ints.subscribe(System.out::println);
+        integers.subscribe(System.out::println);
         System.out.println();
 
         // To demonstrate the next signature, we intentionally introduce an error
-        ints = Flux.range(1, 4)
+        integers = Flux.range(1, 4)
                 .map(i -> {
                     if (i <= 3) {
                         return i;
                     }
                     throw new RuntimeException("Got to 4");
                 });
-        ints.subscribe(System.out::println,
+        integers.subscribe(System.out::println,
                 error -> System.err.println("Error: " + error));
         System.out.println();
 
         // The next signature of the subscribe method includes both an error handler and a handler for completion events
-        ints = Flux.range(1, 4);
-        ints.subscribe(System.out::println,
+        integers = Flux.range(1, 4);
+        integers.subscribe(System.out::println,
                 error -> System.err.println("Error: " + error),
                 () -> System.out.println("Done"));
+    }
+
+    /**
+     * 4.3.2. Cancelling a subscribe() with Its Disposable
+     */
+    @Test
+    void dispose() {
+        Flux<Integer> integers = Flux.range(1, 3);
+        Disposable disposable = integers.subscribe(System.out::println);
+        disposable.dispose();
+        assertThat(disposable.isDisposed()).isTrue();
+    }
+
+    /**
+     * 4.3.3. An Alternative to Lambdas: BaseSubscriber
+     *
+     * There is an additional subscribe method that is more generic and takes a full-blown Subscriber rather than composing one out of lambdas.
+     * In order to help with writing such a Subscriber, we provide an extendable class called BaseSubscriber.
+     */
+    @Test
+    void baseSubscriber() {
+        SampleSubscriber<Integer> baseSubscriber = new SampleSubscriber<>();
+        Flux<Integer> flux = Flux.range(1, 4);
+        flux.subscribe(baseSubscriber);
     }
 
     @Test
