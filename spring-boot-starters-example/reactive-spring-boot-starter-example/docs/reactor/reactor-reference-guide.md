@@ -237,7 +237,7 @@ Operators that change the maximum cardinality of the processing also switch to t
 ### 4.1. Flux, an Asynchronous Sequence of 0-N Items
 The following image shows how a Flux transforms items:
 
-![](../../images/1.flux.svg)
+![](../images/1.flux.svg)
 
 A Flux<T> is a standard Publisher<T> that represents an asynchronous sequence of 0 to N emitted items, optionally terminated by either a completion signal or an error. As in the Reactive Streams spec, these three types of signal translate to calls to a downstream Subscriber’s onNext, onComplete, and onError methods.
 
@@ -246,7 +246,7 @@ With this large scope of possible signals, Flux is the general-purpose reactive 
 ### 4.2. Mono, an Asynchronous 0-1 Result
 The following image shows how a Mono transforms an item:
 
-![](../../images/2.mono.svg)
+![](../images/2.mono.svg)
 
 A Mono<T> is a specialized Publisher<T> that emits at most one item via the onNext signal then terminates with an onComplete signal (successful Mono, with or without value), or only emits a single onError signal (failed Mono).
 
