@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.reactivestreams.Subscription;
 import reactor.core.Disposable;
+import reactor.core.publisher.BaseSubscriber;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
@@ -97,7 +99,7 @@ class FluxTest {
 
     /**
      * 4.3.3. An Alternative to Lambdas: BaseSubscriber
-     *
+     * <p>
      * There is an additional subscribe method that is more generic and takes a full-blown Subscriber rather than composing one out of lambdas.
      * In order to help with writing such a Subscriber, we provide an extendable class called BaseSubscriber.
      */
@@ -106,6 +108,29 @@ class FluxTest {
         SampleSubscriber<Integer> baseSubscriber = new SampleSubscriber<>();
         Flux<Integer> flux = Flux.range(1, 4);
         flux.subscribe(baseSubscriber);
+    }
+
+    /**
+     * 4.3.4. On Backpressure and Ways to Reshape Requests
+     */
+    @Test
+    void onBackpressureReshapeRequests() {
+        // The simplest way of customizing the original request is to subscribe with a BaseSubscriber with the hookOnSubscribe method overridden
+        Flux.range(1, 10)
+                .doOnRequest(r -> System.out.println("request of " + r))
+                .subscribe(new BaseSubscriber<>() {
+                    @Override
+                    protected void hookOnSubscribe(Subscription subscription) {
+                        super.request(1L);
+//                        super.hookOnSubscribe(subscription);
+                    }
+
+                    @Override
+                    protected void hookOnNext(Integer value) {
+                        System.out.println("Cancelling after having received " + value);
+                        super.cancel();
+                    }
+                });
     }
 
     @Test

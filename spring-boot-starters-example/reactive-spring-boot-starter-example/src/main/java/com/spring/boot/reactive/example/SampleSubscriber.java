@@ -11,14 +11,14 @@ import reactor.core.publisher.BaseSubscriber;
  */
 public class SampleSubscriber<T> extends BaseSubscriber<T> {
     @Override
-    public void hookOnSubscribe(Subscription subscription) {
+    protected void hookOnSubscribe(Subscription subscription) {
         System.out.println("Subscribed");
         super.request(1L);
 //        subscription.request(1L);
     }
 
     @Override
-    public void hookOnNext(T value) {
+    protected void hookOnNext(T value) {
         System.out.println(value);
         super.request(1L);
 //        super.hookOnNext(value);
