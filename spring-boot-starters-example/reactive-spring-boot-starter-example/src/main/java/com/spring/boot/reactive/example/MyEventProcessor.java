@@ -30,4 +30,11 @@ public interface MyEventProcessor {
      * 处理完成
      */
     void processComplete();
+
+    /**
+     * 处理错误
+     *
+     * @param e 异常
+     */
+    void processError(Throwable e);
 }

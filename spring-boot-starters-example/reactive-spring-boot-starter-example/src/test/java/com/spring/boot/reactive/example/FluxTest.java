@@ -149,7 +149,8 @@ class FluxTest {
      * In this section, we introduce the creation of a Flux or a Mono by programmatically defining its associated events (onNext, onError, and onComplete).
      * All these methods share the fact that they expose an API to trigger the events that we call a sink.
      * <p>
-     * 4.4.1. Synchronous generate
+     * 4.4.1. Synchronous: generate
+     * 同步：生成
      * <p>
      * This is for synchronous and one-by-one emissions,
      * meaning that the sink is a SynchronousSink and that its next() method can only be called at most once per callback invocation.
@@ -174,8 +175,6 @@ class FluxTest {
                     return state + 1;
                 }
         );
-//        flux.subscribe(System.out::println);
-//        System.out.println();
         StepVerifier.create(flux)
                 .expectNext("3 x 0 = 0")
                 .expectNext("3 x 1 = 3")
@@ -207,8 +206,6 @@ class FluxTest {
                     return state;
                 }
         );
-//        flux.subscribe(System.out::println);
-//        System.out.println();
         StepVerifier.create(flux)
                 .expectNext("3 x 0 = 0")
                 .expectNext("3 x 1 = 3")
@@ -243,8 +240,6 @@ class FluxTest {
                 // In the case of the state containing a database connection or other resource that needs to be handled at the end of the process,
                 // the Consumer lambda could close the connection or otherwise handle any tasks that should be done at the end of the process.
         );
-//        flux.subscribe(System.out::println);
-//        System.out.println();
         StepVerifier.create(flux)
                 .expectNext("3 x 0 = 0")
                 .expectNext("3 x 1 = 3")
@@ -286,21 +281,31 @@ class FluxTest {
                     500L, TimeUnit.MILLISECONDS
             );
         }
+
+        @Override
+        public void processError(Throwable e) {
+            if (eventListener instanceof SingleThreadEventListener) {
+                SingleThreadEventListener<?> listener = (SingleThreadEventListener<?>) eventListener;
+//                executor.execute(() -> listener.processError(e));
+                listener.processError(e);
+            }
+        }
     };
 
     /**
      * 4.4.2. Asynchronous and Multi-threaded: create
+     * 异步和多线程：创建
      * <p>
      * create is a more advanced form of programmatic creation of a Flux which is suitable for multiple emissions per round,
      * even from multiple threads.
      * <p>
      * It exposes a FluxSink, with its next, error, and complete methods.
-     * Contrary to generate, it doesn’t have a state-based variant.
+     * Contrary to generate, it does not have a state-based variant.
      * On the other hand, it can trigger multi-threaded events in the callback.
      * <p>
      * create can be very useful to bridge an existing API with the reactive world - such as an asynchronous API based on listeners.
      * <p>
-     * create doesn’t parallelize your code nor does it make it asynchronous, even though it can be used with asynchronous APIs.
+     * create does not parallelize your code nor does it make it asynchronous, even though it can be used with asynchronous APIs.
      * If you block within the create lambda, you expose yourself to deadlocks and similar side effects.
      */
     @Test
@@ -340,6 +345,54 @@ class FluxTest {
                 .expectNoEvent(Duration.ofSeconds(10L))
                 .then(myEventProcessor::processComplete)
                 .verifyComplete()
+        ;
+    }
+
+    /**
+     * 4.4.3. Asynchronous but single-threaded: push
+     * 异步但是单线程：推送
+     * <p>
+     * push is a middle ground between generate and create which is suitable for processing events from a single producer.
+     * It is similar to create in the sense that it can also be asynchronous and can manage backpressure using any of the overflow strategies supported by create.
+     * However, only one producing thread may invoke next, complete or error at a time.
+     */
+    @Test
+    void pushAsynchronousSequence() {
+        Flux<String> bridge = Flux.push(
+                fluxSink -> myEventProcessor.register(
+                        // Bridge to the SingleThreadEventListener API.
+                        new SingleThreadEventListener<>() {
+                            @Override
+                            public void onDataChunk(List<String> chunk) {
+                                for (String s : chunk) {
+                                    // Events are pushed to the sink using next from a single listener thread.
+                                    fluxSink.next(s);
+                                }
+                            }
+
+                            @Override
+                            public void processComplete() {
+                                // complete event generated from the same listener thread.
+                                fluxSink.complete();
+                            }
+
+                            @Override
+                            public void processError(Throwable e) {
+                                // error event also generated from the same listener thread.
+                                fluxSink.error(e);
+                            }
+                        }
+                )
+        );
+
+        StepVerifier.withVirtualTime(() -> bridge)
+                .expectSubscription()
+                .then(() -> myEventProcessor.dataChunk(Arrays.asList("foo", "bar", "baz")))
+                .expectNext("foo", "bar", "baz")
+                .then(myEventProcessor::processComplete)
+//                .verifyComplete()
+                .then(() -> myEventProcessor.processError(new RuntimeException("done")))
+                .verifyErrorMessage("done")
         ;
     }
 
