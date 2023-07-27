@@ -2,6 +2,7 @@ package com.spring.boot.reactive.example;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
@@ -14,6 +15,9 @@ import static org.assertj.core.api.Assertions.*;
 
 /**
  * Test of {@link Flux}.
+ * <p>
+ * 4. Reactor Core Features
+ * https://projectreactor.io/docs/core/release/reference/index.html#core-features
  *
  * @author guangyi
  * @date 2023/7/25
@@ -25,9 +29,9 @@ class FluxTest {
      */
     @Test
     void createFlux() {
-        Flux<String> seq = Flux.just("foo", "bar", "foobar");
+        Flux<String> sequence = Flux.just("foo", "bar", "foobar");
 
-        StepVerifier.create(seq)
+        StepVerifier.create(sequence)
                 .expectNext("foo")
                 .expectNext("bar")
                 .expectNext("foobar")
@@ -36,9 +40,9 @@ class FluxTest {
         ;
 
         List<String> iterable = Arrays.asList("foo", "bar", "foobar");
-        seq = Flux.fromIterable(iterable);
+        sequence = Flux.fromIterable(iterable);
 
-        StepVerifier.create(seq)
+        StepVerifier.create(sequence)
                 .expectNext("foo")
                 .expectNext("bar")
                 .expectNext("foobar")
@@ -63,6 +67,7 @@ class FluxTest {
         // The preceding code produces no visible output, but it does work.
         // The Flux produces three values.
         integers.subscribe();
+        // Lambda-based subscribe variants for Flux
         // If we provide a lambda, we can make the values visible.
         integers.subscribe(System.out::println);
         System.out.println();
@@ -112,6 +117,7 @@ class FluxTest {
 
     /**
      * 4.3.4. On Backpressure and Ways to Reshape Requests
+     * 关于背压和重塑请求的方法
      */
     @Test
     void onBackpressureReshapeRequests() {
@@ -133,6 +139,99 @@ class FluxTest {
                 });
     }
 
+    /**
+     * 4.4. Programmatically creating a sequence
+     * <p>
+     * In this section, we introduce the creation of a Flux or a Mono by programmatically defining its associated events (onNext, onError, and onComplete).
+     * All these methods share the fact that they expose an API to trigger the events that we call a sink.
+     * <p>
+     * 4.4.1. Synchronous generate
+     */
+    @Test
+    void generateSynchronousSequence() {
+        // state-based generate
+        Flux<String> flux = Flux.generate(
+                // We supply the initial state value of 0.
+                () -> 0,
+                (state, sink) -> {
+                    sink.next("3 x " + state + " = " + 3 * state);
+                    if (state == 10) {
+                        // We also use it to choose when to stop.
+                        sink.complete();
+                    }
+                    // We return a new state that we use in the next invocation (unless the sequence terminated in this one).
+                    return state + 1;
+                }
+        );
+//        flux.subscribe(System.out::println);
+//        System.out.println();
+        StepVerifier.create(flux)
+                .expectNext("3 x 0 = 0", "3 x 1 = 3", "3 x 2 = 6", "3 x 3 = 9", "3 x 4 = 12")
+                .expectNext("3 x 5 = 15", "3 x 6 = 18", "3 x 7 = 21", "3 x 8 = 24", "3 x 9 = 27")
+                .expectNext("3 x 10 = 30")
+                .expectComplete()
+                .verify()
+        ;
+
+        // Mutable state variant
+        // 可变的状态变体
+        flux = Flux.generate(
+                // This time, we generate a mutable object as the state.
+                AtomicLong::new,
+                (state, sink) -> {
+                    // We mutate the state here.
+                    long i = state.getAndIncrement();
+                    sink.next("3 x " + i + " = " + 3 * i);
+                    if (i == 10L) {
+                        sink.complete();
+                    }
+                    // We return the same instance as the new state.
+                    return state;
+                }
+        );
+//        flux.subscribe(System.out::println);
+//        System.out.println();
+        StepVerifier.create(flux)
+                .expectNext("3 x 0 = 0", "3 x 1 = 3", "3 x 2 = 6", "3 x 3 = 9", "3 x 4 = 12")
+                .expectNext("3 x 5 = 15", "3 x 6 = 18", "3 x 7 = 21", "3 x 8 = 24", "3 x 9 = 27")
+                .expectNext("3 x 10 = 30")
+                .expectComplete()
+                .verify()
+        ;
+
+        // uses the generate method that includes a Consumer
+        flux = Flux.generate(
+                // Again, we generate a mutable object as the state.
+                AtomicLong::new,
+                (state, sink) -> {
+                    // We mutate the state here.
+                    long i = state.getAndIncrement();
+                    sink.next("3 x " + i + " = " + 3 * i);
+                    if (i == 10L) {
+                        sink.complete();
+                    }
+                    // We return the same instance as the new state.
+                    return state;
+                },
+                // We see the last state value (11) as the output of this Consumer lambda.
+                (state) -> System.out.println("state: " + state)
+                // In the case of the state containing a database connection or other resource that needs to be handled at the end of the process,
+                // the Consumer lambda could close the connection or otherwise handle any tasks that should be done at the end of the process.
+        );
+//        flux.subscribe(System.out::println);
+//        System.out.println();
+        StepVerifier.create(flux)
+                .expectNext("3 x 0 = 0", "3 x 1 = 3", "3 x 2 = 6", "3 x 3 = 9", "3 x 4 = 12")
+                .expectNext("3 x 5 = 15", "3 x 6 = 18", "3 x 7 = 21", "3 x 8 = 24", "3 x 9 = 27")
+                .expectNext("3 x 10 = 30")
+                .expectComplete()
+                .verify()
+        ;
+    }
+
+    /**
+     * 6.1. Testing a Scenario with StepVerifier
+     */
     @Test
     void testAppendBoomError() {
         Flux<String> source = Flux.just("thing1", "thing2");
