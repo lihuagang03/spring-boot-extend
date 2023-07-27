@@ -9,6 +9,8 @@ import reactor.test.StepVerifier;
  * <p>
  * 4. Reactor Core Features
  * https://projectreactor.io/docs/core/release/reference/index.html#core-features
+ * <p>
+ * https://github.com/reactor/reactor-core/blob/main/reactor-core/src/test/java/reactor/guide/GuideTests.java
  *
  * @author guangyi
  * @date 2023/7/25
@@ -31,8 +33,7 @@ class MonoTest {
 
         StepVerifier.create(data)
                 .expectNext("foo")
-                .expectComplete()
-                .verify()
+                .verifyComplete()
         ;
     }
 }

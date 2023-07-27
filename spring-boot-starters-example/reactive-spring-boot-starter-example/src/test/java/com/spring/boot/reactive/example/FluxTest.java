@@ -1,7 +1,11 @@
 package com.spring.boot.reactive.example;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.jupiter.api.Test;
@@ -18,6 +22,8 @@ import static org.assertj.core.api.Assertions.*;
  * <p>
  * 4. Reactor Core Features
  * https://projectreactor.io/docs/core/release/reference/index.html#core-features
+ * <p>
+ * https://github.com/reactor/reactor-core/blob/main/reactor-core/src/test/java/reactor/guide/GuideTests.java
  *
  * @author guangyi
  * @date 2023/7/25
@@ -46,15 +52,13 @@ class FluxTest {
                 .expectNext("foo")
                 .expectNext("bar")
                 .expectNext("foobar")
-                .expectComplete()
-                .verify()
+                .verifyComplete()
         ;
 
         Flux<Integer> numbersFromFiveToSeven = Flux.range(5, 3);
         StepVerifier.create(numbersFromFiveToSeven)
                 .expectNext(5, 6, 7)
-                .expectComplete()
-                .verify()
+                .verifyComplete()
         ;
     }
 
@@ -146,6 +150,13 @@ class FluxTest {
      * All these methods share the fact that they expose an API to trigger the events that we call a sink.
      * <p>
      * 4.4.1. Synchronous generate
+     * <p>
+     * This is for synchronous and one-by-one emissions,
+     * meaning that the sink is a SynchronousSink and that its next() method can only be called at most once per callback invocation.
+     * <p>
+     * The most useful variant is probably the one that also lets you keep a state that you can refer to in your sink usage to decide what to emit next.
+     * The generator function then becomes a BiFunction<S, SynchronousSink<T>, S>, with <S> the type of the state object.
+     * You have to provide a Supplier<S> for the initial state, and your generator function now returns a new state on each round.
      */
     @Test
     void generateSynchronousSequence() {
@@ -166,11 +177,18 @@ class FluxTest {
 //        flux.subscribe(System.out::println);
 //        System.out.println();
         StepVerifier.create(flux)
-                .expectNext("3 x 0 = 0", "3 x 1 = 3", "3 x 2 = 6", "3 x 3 = 9", "3 x 4 = 12")
-                .expectNext("3 x 5 = 15", "3 x 6 = 18", "3 x 7 = 21", "3 x 8 = 24", "3 x 9 = 27")
+                .expectNext("3 x 0 = 0")
+                .expectNext("3 x 1 = 3")
+                .expectNext("3 x 2 = 6")
+                .expectNext("3 x 3 = 9")
+                .expectNext("3 x 4 = 12")
+                .expectNext("3 x 5 = 15")
+                .expectNext("3 x 6 = 18")
+                .expectNext("3 x 7 = 21")
+                .expectNext("3 x 8 = 24")
+                .expectNext("3 x 9 = 27")
                 .expectNext("3 x 10 = 30")
-                .expectComplete()
-                .verify()
+                .verifyComplete()
         ;
 
         // Mutable state variant
@@ -192,11 +210,18 @@ class FluxTest {
 //        flux.subscribe(System.out::println);
 //        System.out.println();
         StepVerifier.create(flux)
-                .expectNext("3 x 0 = 0", "3 x 1 = 3", "3 x 2 = 6", "3 x 3 = 9", "3 x 4 = 12")
-                .expectNext("3 x 5 = 15", "3 x 6 = 18", "3 x 7 = 21", "3 x 8 = 24", "3 x 9 = 27")
+                .expectNext("3 x 0 = 0")
+                .expectNext("3 x 1 = 3")
+                .expectNext("3 x 2 = 6")
+                .expectNext("3 x 3 = 9")
+                .expectNext("3 x 4 = 12")
+                .expectNext("3 x 5 = 15")
+                .expectNext("3 x 6 = 18")
+                .expectNext("3 x 7 = 21")
+                .expectNext("3 x 8 = 24")
+                .expectNext("3 x 9 = 27")
                 .expectNext("3 x 10 = 30")
-                .expectComplete()
-                .verify()
+                .verifyComplete()
         ;
 
         // uses the generate method that includes a Consumer
@@ -221,11 +246,100 @@ class FluxTest {
 //        flux.subscribe(System.out::println);
 //        System.out.println();
         StepVerifier.create(flux)
-                .expectNext("3 x 0 = 0", "3 x 1 = 3", "3 x 2 = 6", "3 x 3 = 9", "3 x 4 = 12")
-                .expectNext("3 x 5 = 15", "3 x 6 = 18", "3 x 7 = 21", "3 x 8 = 24", "3 x 9 = 27")
+                .expectNext("3 x 0 = 0")
+                .expectNext("3 x 1 = 3")
+                .expectNext("3 x 2 = 6")
+                .expectNext("3 x 3 = 9")
+                .expectNext("3 x 4 = 12")
+                .expectNext("3 x 5 = 15")
+                .expectNext("3 x 6 = 18")
+                .expectNext("3 x 7 = 21")
+                .expectNext("3 x 8 = 24")
+                .expectNext("3 x 9 = 27")
                 .expectNext("3 x 10 = 30")
-                .expectComplete()
-                .verify()
+                .verifyComplete()
+        ;
+    }
+
+    private final MyEventProcessor myEventProcessor = new MyEventProcessor() {
+
+        private MyEventListener<String> eventListener;
+        private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+
+        @Override
+        public void register(MyEventListener<String> eventListener) {
+            this.eventListener = eventListener;
+        }
+
+        @Override
+        public void dataChunk(List<String> values) {
+            executor.schedule(
+                    () -> eventListener.onDataChunk(values),
+                    500L, TimeUnit.MILLISECONDS
+            );
+        }
+
+        @Override
+        public void processComplete() {
+            executor.schedule(
+                    () -> eventListener.processComplete(),
+                    500L, TimeUnit.MILLISECONDS
+            );
+        }
+    };
+
+    /**
+     * 4.4.2. Asynchronous and Multi-threaded: create
+     * <p>
+     * create is a more advanced form of programmatic creation of a Flux which is suitable for multiple emissions per round,
+     * even from multiple threads.
+     * <p>
+     * It exposes a FluxSink, with its next, error, and complete methods.
+     * Contrary to generate, it doesn’t have a state-based variant.
+     * On the other hand, it can trigger multi-threaded events in the callback.
+     * <p>
+     * create can be very useful to bridge an existing API with the reactive world - such as an asynchronous API based on listeners.
+     * <p>
+     * create doesn’t parallelize your code nor does it make it asynchronous, even though it can be used with asynchronous APIs.
+     * If you block within the create lambda, you expose yourself to deadlocks and similar side effects.
+     */
+    @Test
+    void createAsynchronousSequence() {
+        // You can use create to bridge this into a Flux<T>:
+        Flux<String> bridge = Flux.create(
+                // All of this is done asynchronously whenever the myEventProcessor executes.
+                fluxSink -> myEventProcessor.register(
+                        // Bridge to the MyEventListener API
+                        new MyEventListener<>() {
+
+                            @Override
+                            public void onDataChunk(List<String> chunk) {
+                                for (String s : chunk) {
+                                    // Each element in a chunk becomes an element in the Flux.
+                                    fluxSink.next(s);
+                                }
+//                                chunk.forEach(fluxSink::next);
+                            }
+
+                            @Override
+                            public void processComplete() {
+                                // 	The processComplete event is translated to onComplete.
+                                fluxSink.complete();
+                            }
+                        }
+                )
+        );
+        // 空的输出，异步还没有触发数据推送
+//        bridge.subscribe(System.out::println);
+
+        StepVerifier.withVirtualTime(() -> bridge)
+                .expectSubscription()
+                .expectNoEvent(Duration.ofSeconds(10L))
+                .then(() -> myEventProcessor.dataChunk(Arrays.asList("foo", "bar", "baz")))
+                .expectNext("foo", "bar", "baz")
+                .expectNoEvent(Duration.ofSeconds(10L))
+                .then(myEventProcessor::processComplete)
+                .verifyComplete()
         ;
     }
 
