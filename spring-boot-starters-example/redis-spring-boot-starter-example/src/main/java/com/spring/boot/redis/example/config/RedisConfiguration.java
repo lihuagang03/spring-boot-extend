@@ -34,7 +34,7 @@ public class RedisConfiguration {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
         // 序列化程序
-        // 默认是 RedisSerializer.java();
+        // 默认是 RedisSerializer.java()
 
 //        template.setKeySerializer(RedisSerializer.string());
 //        template.setValueSerializer(RedisSerializer.string());
