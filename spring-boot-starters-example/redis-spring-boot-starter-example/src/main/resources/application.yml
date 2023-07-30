@@ -1,0 +1,37 @@
+
+# Appendices
+# Appendix A: Common Application Properties
+
+# .A.1. Core Properties
+spring:
+  application:
+    name: redis-spring-boot-starter-example
+#  profiles:
+#    active: prod,test,dev
+  redis:
+    database: 0
+    host: "localhost"
+    port: 6379
+    timeout: 1s
+    connect-timeout: 500ms
+#    client-type: lettuce
+    lettuce:
+      pool:
+        enabled: true
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+
+# .A.11. Server Properties
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
+    accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
+      enabled: true
+      pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
+      prefix: tomcat_access
+      directory: "~/logs/${spring.application.name}/"
