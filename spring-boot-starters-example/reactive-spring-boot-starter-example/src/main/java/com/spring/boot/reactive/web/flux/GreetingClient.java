@@ -14,6 +14,7 @@ import com.spring.boot.reactive.web.flux.entity.Greeting;
  *
  * @author guang.yi
  * @since 2023/8/14
+ * @see WebClient
  */
 @Component("greetingClient")
 public class GreetingClient {
