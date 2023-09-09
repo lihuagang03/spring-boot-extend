@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class TimeMetaObjectHandler implements MetaObjectHandler {
 
     public TimeMetaObjectHandler() {
-        log.info("create TimeMetaObjectHandler instance");
+        log.info("create TimeMetaObjectHandler");
     }
 
     @Override

@@ -23,7 +23,7 @@ public class CloudMeetingServiceImpl implements MeetingService {
     private MeetingRoomService meetingRoomService;
 
     public CloudMeetingServiceImpl() {
-        log.info("create CloudMeetingServiceImpl instance");
+        log.info("create CloudMeetingServiceImpl");
     }
 
     @Override

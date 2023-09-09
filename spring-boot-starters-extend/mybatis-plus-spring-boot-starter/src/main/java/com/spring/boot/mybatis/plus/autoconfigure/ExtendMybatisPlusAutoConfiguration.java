@@ -25,7 +25,7 @@ import javax.sql.DataSource;
  * MybatisPlus 自动配置
  *
  * @author lihuagang
- * @date 2023/6/9
+ * @since 2023/6/9
  * @see MybatisPlusAutoConfiguration
  */
 @Slf4j
@@ -44,8 +44,10 @@ public class ExtendMybatisPlusAutoConfiguration {
      */
     private final ExtendMybatisPlusProperties properties;
 
-    public ExtendMybatisPlusAutoConfiguration(ExtendMybatisPlusProperties properties) {
-        log.info("create ExtendMybatisPlusAutoConfiguration instance");
+    public ExtendMybatisPlusAutoConfiguration(
+            ExtendMybatisPlusProperties properties
+    ) {
+        log.info("create ExtendMybatisPlusAutoConfiguration");
         this.properties = properties;
     }
 

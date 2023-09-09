@@ -23,7 +23,7 @@ public class EdgeMeetingServiceImpl implements MeetingService {
     private MeetingRoomService meetingRoomService;
 
     public EdgeMeetingServiceImpl() {
-        log.info("create EdgeMeetingServiceImpl instance");
+        log.info("create EdgeMeetingServiceImpl");
     }
 
     @Override

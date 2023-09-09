@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class CloudMeetingRoomServiceImpl implements MeetingRoomService {
 
     public CloudMeetingRoomServiceImpl() {
-        log.info("create CloudMeetingRoomServiceImpl instance");
+        log.info("create CloudMeetingRoomServiceImpl");
     }
 
     @Override

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class EdgeMeetingRoomServiceImpl implements MeetingRoomService {
 
     public EdgeMeetingRoomServiceImpl() {
-        log.info("create EdgeMeetingRoomServiceImpl instance");
+        log.info("create EdgeMeetingRoomServiceImpl");
     }
 
     @Override

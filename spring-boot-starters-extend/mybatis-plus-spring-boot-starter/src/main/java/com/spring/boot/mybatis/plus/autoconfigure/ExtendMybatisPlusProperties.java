@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * MybatisPlus 配置属性集
  *
  * @author lihuagang
- * @date 2023/6/9
+ * @since 2023/6/9
  * @see com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties
  */
 @Slf4j
@@ -26,6 +26,6 @@ public class ExtendMybatisPlusProperties {
     private DbType dbType;
 
     public ExtendMybatisPlusProperties() {
-        log.info("create ExtendMybatisPlusProperties instance");
+        log.info("create ExtendMybatisPlusProperties");
     }
 }

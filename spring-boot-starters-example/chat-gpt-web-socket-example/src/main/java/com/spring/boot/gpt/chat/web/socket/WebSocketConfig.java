@@ -34,7 +34,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class WebSocketConfig implements WebSocketConfigurer {
 
     public WebSocketConfig() {
-        log.info("create WebSocketConfig instance");
+        log.info("create WebSocketConfig");
     }
 
     @Bean
