@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 用户实体映射器
  *
  * @author lihuagang
- * @date 2023/6/10
+ * @since 2023/6/10
  * @see com.baomidou.mybatisplus.core.mapper.BaseMapper
  */
 @Mapper

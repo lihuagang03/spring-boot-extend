@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * 配置属性集
  *
  * @author guangyi
- * @date 2023/7/21
+ * @since 2023/7/21
  * @see NacosConfigurationProperties
  */
 @Slf4j

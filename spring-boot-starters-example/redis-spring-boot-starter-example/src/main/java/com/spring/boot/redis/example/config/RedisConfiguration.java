@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
  * Redis配置
  *
  * @author guangyi
- * @date 2023/7/30
+ * @since 2023/7/30
  * @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
  */
 @Slf4j

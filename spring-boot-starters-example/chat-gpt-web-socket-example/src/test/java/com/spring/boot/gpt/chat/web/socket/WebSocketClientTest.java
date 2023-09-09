@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.*;
  * Test of {@link WebSocketClient}.
  *
  * @author lihuagang
- * @date 2023/6/15
+ * @since 2023/6/15
  */
 @Slf4j
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

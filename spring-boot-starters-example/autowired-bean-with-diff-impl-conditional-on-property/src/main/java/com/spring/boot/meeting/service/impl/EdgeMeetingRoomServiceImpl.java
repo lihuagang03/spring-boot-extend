@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * 边侧数据源的会议室服务实现
  *
  * @author lihuagang
- * @date 2023/6/13
+ * @since 2023/6/13
  */
 @Slf4j
 @EdgeService

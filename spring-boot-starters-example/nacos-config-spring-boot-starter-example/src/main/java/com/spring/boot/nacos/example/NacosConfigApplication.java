@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 应用程序启动入口
  *
  * @author guangyi
- * @date 2023/7/18
+ * @since 2023/7/18
  */
 @SpringBootApplication
 public class NacosConfigApplication {

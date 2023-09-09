@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.*;
  * Test of {@link MeetingController}.
  *
  * @author lihuagang
- * @date 2023/6/13
+ * @since 2023/6/13
  */
 @SpringBootTest
 @AutoConfigureMockMvc

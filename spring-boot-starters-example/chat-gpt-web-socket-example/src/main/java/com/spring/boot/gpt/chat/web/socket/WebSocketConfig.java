@@ -25,7 +25,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
  * </pre>
  *
  * @author lihuagang
- * @date 2023/6/14
+ * @since 2023/6/14
  * @see org.springframework.web.socket.config.annotation.WebSocketConfigurer
  */
 @Slf4j

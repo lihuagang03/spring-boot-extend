@@ -10,7 +10,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
  * 扩展的文本处理器
  *
  * @author lihuagang
- * @date 2023/5/11
+ * @since 2023/5/11
  * @see org.springframework.web.socket.WebSocketHandler
  * @see org.springframework.web.socket.handler.AbstractWebSocketHandler
  * @see org.springframework.web.socket.handler.TextWebSocketHandler

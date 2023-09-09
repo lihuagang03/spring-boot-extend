@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * 配置属性
  *
  * @author guangyi
- * @date 2023/7/21
+ * @since 2023/7/21
  * @see NacosValue
  * @see NacosConfigListener
  */

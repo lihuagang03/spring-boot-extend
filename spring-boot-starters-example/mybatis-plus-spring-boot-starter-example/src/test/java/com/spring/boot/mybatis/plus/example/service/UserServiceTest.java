@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.*;
  * Test of {@link UserService}
  *
  * @author lihuagang
- * @date 2023/6/10
+ * @since 2023/6/10
  */
 @Slf4j
 @SpringBootTest

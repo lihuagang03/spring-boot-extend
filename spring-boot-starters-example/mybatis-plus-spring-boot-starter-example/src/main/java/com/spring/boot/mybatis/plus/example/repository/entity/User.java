@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
  * 用户信息表
  *
  * @author lihuagang
- * @date 2023/6/10
+ * @since 2023/6/10
  */
 @Data
 @Accessors(chain = true)
