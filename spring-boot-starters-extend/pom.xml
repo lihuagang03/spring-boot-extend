@@ -17,5 +17,6 @@
 
   <modules>
     <module>mybatis-plus-spring-boot-starter</module>
+    <module>log-spring-boot-starter</module>
   </modules>
 </project>
