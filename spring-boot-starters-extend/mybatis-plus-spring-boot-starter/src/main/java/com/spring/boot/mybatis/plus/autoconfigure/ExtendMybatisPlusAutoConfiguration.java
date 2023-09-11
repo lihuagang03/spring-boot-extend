@@ -12,8 +12,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -30,12 +28,10 @@ import javax.sql.DataSource;
  * @see MybatisPlusAutoConfiguration
  */
 @Slf4j
-@AutoConfiguration
 @ConditionalOnClass({SqlSessionFactory.class, SqlSessionFactoryBean.class})
 @ConditionalOnSingleCandidate(DataSource.class)
 @EnableConfigurationProperties({MybatisPlusProperties.class, ExtendMybatisPlusProperties.class})
-@AutoConfigureAfter({DataSourceAutoConfiguration.class})
-@AutoConfigureBefore({MybatisPlusAutoConfiguration.class})
+@AutoConfiguration(before = {MybatisPlusAutoConfiguration.class}, after = {DataSourceAutoConfiguration.class})
 public class ExtendMybatisPlusAutoConfiguration {
 
     /**
