@@ -22,5 +22,6 @@
     <module>nacos-config-spring-boot-starter-example</module>
     <module>reactive-spring-boot-starter-example</module>
     <module>redis-spring-boot-starter-example</module>
+    <module>log-spring-boot-starter-example</module>
   </modules>
 </project>
