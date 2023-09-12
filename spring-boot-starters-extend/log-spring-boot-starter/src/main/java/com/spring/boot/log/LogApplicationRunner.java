@@ -1,4 +1,4 @@
-package com.spring.boot.log.autoconfigure;
+package com.spring.boot.log;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

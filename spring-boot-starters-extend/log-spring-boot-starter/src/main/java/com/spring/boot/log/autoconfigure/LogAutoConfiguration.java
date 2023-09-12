@@ -4,6 +4,8 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 
+import com.spring.boot.log.LogApplicationRunner;
+import com.spring.boot.log.LogCommandLineRunner;
 import lombok.extern.slf4j.Slf4j;
 
 /**
