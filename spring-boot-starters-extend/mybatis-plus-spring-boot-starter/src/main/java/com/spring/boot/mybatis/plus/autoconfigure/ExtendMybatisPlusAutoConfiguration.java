@@ -69,4 +69,5 @@ public class ExtendMybatisPlusAutoConfiguration {
             properties.setConfiguration(configuration);
         };
     }
+
 }

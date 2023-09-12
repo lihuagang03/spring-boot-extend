@@ -28,4 +28,5 @@ public class ExtendMybatisPlusProperties {
     public ExtendMybatisPlusProperties() {
         log.info("create ExtendMybatisPlusProperties");
     }
+
 }
