@@ -1,0 +1,40 @@
+
+spring:
+  application:
+    name: log-spring-boot-starter-example
+
+management:
+  # ManagementServerProperties
+  server:
+    port: 38081
+    base-path: "/management"
+  endpoints:
+    # WebEndpointProperties
+    web:
+      exposure:
+        include: "*"
+#        exclude: "*"
+      base-path: "/actuator"
+  # MetricsProperties
+  metrics:
+    use-global-registry: true
+    enable:
+      heapdump: false
+      threaddump: false
+    tags:
+      application: "${spring.application.name}"
+    export:
+      # JmxProperties
+      jmx:
+        enabled: true
+        domain: "metrics"
+        step: 1m
+      # PrometheusProperties
+      prometheus:
+        enabled: true
+#        descriptions: true
+#        pushgateway:
+#          enabled: false
+#          push-rate: 1m
+#          shutdown-operation: push
+        step: 1m
