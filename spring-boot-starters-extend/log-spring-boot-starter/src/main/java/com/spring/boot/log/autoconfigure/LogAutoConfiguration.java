@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.spring.boot.log.LogApplicationRunner;
 import com.spring.boot.log.LogCommandLineRunner;
+import com.spring.boot.log.ReadinessStateEventListener;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -32,6 +33,12 @@ public class LogAutoConfiguration {
     @ConditionalOnMissingBean
     public LogCommandLineRunner logCommandLineRunner() {
         return new LogCommandLineRunner();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public ReadinessStateEventListener readinessStateEventListener() {
+        return new ReadinessStateEventListener();
     }
 
 }
