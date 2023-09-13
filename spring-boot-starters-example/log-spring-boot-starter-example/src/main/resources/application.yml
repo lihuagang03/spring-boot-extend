@@ -7,14 +7,16 @@ management:
   # ManagementServerProperties
   server:
     port: 38081
-    base-path: "/management"
+    base-path: ""
   endpoints:
     # WebEndpointProperties
     web:
       exposure:
         include: "*"
-#        exclude: "*"
-      base-path: "/actuator"
+        exclude: "metrics"
+      base-path: ""
+      path-mapping:
+        "/prometheus": "/metrics"
   # MetricsProperties
   metrics:
     use-global-registry: true
