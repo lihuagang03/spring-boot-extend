@@ -15,8 +15,9 @@ management:
         include: "*"
         exclude: "metrics"
       base-path: ""
+      # Customizing the Management Endpoint Paths
       path-mapping:
-        "/prometheus": "/metrics"
+        "prometheus": "metrics"
   # MetricsProperties
   metrics:
     use-global-registry: true
