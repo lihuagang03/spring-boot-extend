@@ -7,7 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 命令行运行器
+ * 命令行运行程序
  *
  * @author guang.yi
  * @since 2023/9/11

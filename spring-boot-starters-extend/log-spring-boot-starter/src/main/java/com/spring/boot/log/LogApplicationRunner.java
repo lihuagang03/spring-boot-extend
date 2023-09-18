@@ -6,7 +6,7 @@ import org.springframework.boot.ApplicationRunner;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 应用运行器
+ * 应用运行程序
  *
  * @author guang.yi
  * @since 2023/9/11
