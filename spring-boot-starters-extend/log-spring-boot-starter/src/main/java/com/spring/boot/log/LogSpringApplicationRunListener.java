@@ -3,6 +3,7 @@ package com.spring.boot.log;
 import java.time.Duration;
 
 import org.springframework.boot.ConfigurableBootstrapContext;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -20,7 +21,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LogSpringApplicationRunListener implements SpringApplicationRunListener {
 
-    public LogSpringApplicationRunListener() {
+    private final SpringApplication application;
+
+    private final String[] args;
+
+    public LogSpringApplicationRunListener(SpringApplication application, String[] args) {
+        this.application = application;
+        this.args = args;
         log.info("create LogSpringApplicationRunListener");
     }
 
