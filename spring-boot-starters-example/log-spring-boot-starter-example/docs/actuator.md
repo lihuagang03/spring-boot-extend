@@ -1,29 +1,35 @@
 
 
-http://localhost:38081/management/actuator
-http://localhost:38081
+http://localhost:38081/actuator
+http://localhost:38081/actuator/metrics
 
-```properties
+```yaml
+
+spring:
+  application:
+    name: log-spring-boot-starter-example
+
 management:
   # ManagementServerProperties
   server:
     port: 38081
-    base-path: ""
+#    base-path: ""
   endpoints:
     # WebEndpointProperties
     web:
       exposure:
         include: "*"
-        exclude: "metrics"
-      base-path: ""
-      path-mapping:
-        "/prometheus": "/metrics"
+        exclude: "heapdump,threaddump"
+#      base-path: ""
+      # Customizing the Management Endpoint Paths
+#      path-mapping:
+#        "metrics": "metrics"
   # MetricsProperties
   metrics:
     use-global-registry: true
-    enable:
-      heapdump: false
-      threaddump: false
+#    enable:
+#      heapdump: false
+#      threaddump: false
     tags:
       application: "${spring.application.name}"
     export:
@@ -32,15 +38,6 @@ management:
         enabled: true
         domain: "metrics"
         step: 1m
-      # PrometheusProperties
-      prometheus:
-        enabled: true
-#        descriptions: true
-#        pushgateway:
-#          enabled: false
-#          push-rate: 1m
-#          shutdown-operation: push
-        step: 1m
 
 ```
 
@@ -48,87 +45,83 @@ management:
 {
   "_links":{
     "self":{
-      "href":"http://localhost:38081",
+      "href":"http://localhost:38081/actuator",
       "templated":false
     },
     "beans":{
-      "href":"http://localhost:38081/beans",
+      "href":"http://localhost:38081/actuator/beans",
       "templated":false
     },
     "caches":{
-      "href":"http://localhost:38081/caches",
+      "href":"http://localhost:38081/actuator/caches",
       "templated":false
     },
     "caches-cache":{
-      "href":"http://localhost:38081/caches/{cache}",
+      "href":"http://localhost:38081/actuator/caches/{cache}",
       "templated":true
     },
     "health":{
-      "href":"http://localhost:38081/health",
+      "href":"http://localhost:38081/actuator/health",
       "templated":false
     },
     "health-path":{
-      "href":"http://localhost:38081/health/{*path}",
+      "href":"http://localhost:38081/actuator/health/{*path}",
       "templated":true
     },
     "info":{
-      "href":"http://localhost:38081/info",
+      "href":"http://localhost:38081/actuator/info",
       "templated":false
     },
     "conditions":{
-      "href":"http://localhost:38081/conditions",
-      "templated":false
-    },
-    "configprops":{
-      "href":"http://localhost:38081/configprops",
+      "href":"http://localhost:38081/actuator/conditions",
       "templated":false
     },
     "configprops-prefix":{
-      "href":"http://localhost:38081/configprops/{prefix}",
+      "href":"http://localhost:38081/actuator/configprops/{prefix}",
       "templated":true
     },
+    "configprops":{
+      "href":"http://localhost:38081/actuator/configprops",
+      "templated":false
+    },
     "env-toMatch":{
-      "href":"http://localhost:38081/env/{toMatch}",
+      "href":"http://localhost:38081/actuator/env/{toMatch}",
       "templated":true
     },
     "env":{
-      "href":"http://localhost:38081/env",
+      "href":"http://localhost:38081/actuator/env",
       "templated":false
     },
     "loggers-name":{
-      "href":"http://localhost:38081/loggers/{name}",
+      "href":"http://localhost:38081/actuator/loggers/{name}",
       "templated":true
     },
     "loggers":{
-      "href":"http://localhost:38081/loggers",
+      "href":"http://localhost:38081/actuator/loggers",
       "templated":false
     },
     "heapdump":{
-      "href":"http://localhost:38081/heapdump",
+      "href":"http://localhost:38081/actuator/heapdump",
       "templated":false
     },
     "threaddump":{
-      "href":"http://localhost:38081/threaddump",
-      "templated":false
-    },
-    "prometheus":{
-      "href":"http://localhost:38081/metrics",
+      "href":"http://localhost:38081/actuator/threaddump",
       "templated":false
     },
     "metrics-requiredMetricName":{
-      "href":"http://localhost:38081/metrics/{requiredMetricName}",
+      "href":"http://localhost:38081/actuator/metrics/{requiredMetricName}",
       "templated":true
     },
     "metrics":{
-      "href":"http://localhost:38081/metrics",
+      "href":"http://localhost:38081/actuator/metrics",
       "templated":false
     },
     "scheduledtasks":{
-      "href":"http://localhost:38081/scheduledtasks",
+      "href":"http://localhost:38081/actuator/scheduledtasks",
       "templated":false
     },
     "mappings":{
-      "href":"http://localhost:38081/mappings",
+      "href":"http://localhost:38081/actuator/mappings",
       "templated":false
     }
   }

@@ -7,23 +7,23 @@ management:
   # ManagementServerProperties
   server:
     port: 38081
-    base-path: ""
+#    base-path: ""
   endpoints:
     # WebEndpointProperties
     web:
       exposure:
         include: "*"
-        exclude: "metrics"
-      base-path: ""
+        exclude: "heapdump,threaddump"
+#      base-path: ""
       # Customizing the Management Endpoint Paths
-      path-mapping:
-        "prometheus": "metrics"
+#      path-mapping:
+#        "metrics": "metrics"
   # MetricsProperties
   metrics:
     use-global-registry: true
-    enable:
-      heapdump: false
-      threaddump: false
+#    enable:
+#      heapdump: false
+#      threaddump: false
     tags:
       application: "${spring.application.name}"
     export:
@@ -31,13 +31,4 @@ management:
       jmx:
         enabled: true
         domain: "metrics"
-        step: 1m
-      # PrometheusProperties
-      prometheus:
-        enabled: true
-#        descriptions: true
-#        pushgateway:
-#          enabled: false
-#          push-rate: 1m
-#          shutdown-operation: push
         step: 1m
