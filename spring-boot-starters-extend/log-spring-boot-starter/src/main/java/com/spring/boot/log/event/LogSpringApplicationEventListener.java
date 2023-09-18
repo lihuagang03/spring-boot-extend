@@ -19,9 +19,9 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @author guang.yi
  * @since 2023/9/13
- * @see org.springframework.boot.autoconfigure.BackgroundPreinitializer
  * @see org.springframework.context.ApplicationListener
  * @see org.springframework.boot.context.event.SpringApplicationEvent
+ * @see org.springframework.boot.autoconfigure.BackgroundPreinitializer
  */
 @Slf4j
 public class LogSpringApplicationEventListener implements
