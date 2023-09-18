@@ -1,7 +1,7 @@
 
 
 http://localhost:38081/management/actuator
-http://localhost:38081/
+http://localhost:38081
 
 ```properties
 management:
