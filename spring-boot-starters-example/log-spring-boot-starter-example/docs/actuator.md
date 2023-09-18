@@ -5,22 +5,19 @@ http://localhost:38081/actuator/metrics
 
 ```yaml
 
-spring:
-  application:
-    name: log-spring-boot-starter-example
-
 management:
   # ManagementServerProperties
   server:
     port: 38081
 #    base-path: ""
+#    base-path: "/management"
   endpoints:
     # WebEndpointProperties
     web:
       exposure:
         include: "*"
         exclude: "heapdump,threaddump"
-#      base-path: ""
+#      base-path: "/actuator"
       # Customizing the Management Endpoint Paths
 #      path-mapping:
 #        "metrics": "metrics"
