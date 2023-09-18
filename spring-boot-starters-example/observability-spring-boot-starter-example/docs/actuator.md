@@ -4,6 +4,7 @@ http://localhost:38081
 http://localhost:38081/metrics
 
 ```yaml
+
 management:
   # ManagementServerProperties
   server:
@@ -14,16 +15,18 @@ management:
     web:
       exposure:
         include: "*"
-        exclude: "metrics"
+        exclude: "metrics,heapdump,threaddump"
       base-path: ""
+#      base-path: "/actuator"
+      # Customizing the Management Endpoint Paths
       path-mapping:
-        "/prometheus": "/metrics"
+        "prometheus": "metrics"
   # MetricsProperties
   metrics:
     use-global-registry: true
-    enable:
-      heapdump: false
-      threaddump: false
+#    enable:
+#      heapdump: false
+#      threaddump: false
     tags:
       application: "${spring.application.name}"
     export:
