@@ -16,7 +16,7 @@
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::               (v2.7.14)
+ :: Spring Boot ::               (v2.7.16)
 
 # 创建并准备好ApplicationContext后调用
 2023-09-18 10:05:55.899  INFO 48192 --- [           main] .b.l.e.LogSpringApplicationEventListener : receive event org.springframework.boot.context.event.ApplicationContextInitializedEvent[source=org.springframework.boot.SpringApplication@10163d6]
