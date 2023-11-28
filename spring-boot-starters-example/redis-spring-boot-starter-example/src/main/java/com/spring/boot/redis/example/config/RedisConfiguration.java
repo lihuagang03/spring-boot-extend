@@ -2,12 +2,13 @@ package com.spring.boot.redis.example.config;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,25 +31,11 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 @Slf4j
 @EnableCaching
 @Configuration(proxyBeanMethods = false)
-public class RedisConfiguration implements InitializingBean {
+@AutoConfigureBefore({RedisAutoConfiguration.class})
+public class RedisConfiguration {
 
-    private final RedisTemplate<Object, Object> redisTemplate;
-
-    public RedisConfiguration(
-            RedisTemplate<Object, Object> redisTemplate
-    ) {
-        this.redisTemplate = redisTemplate;
+    public RedisConfiguration() {
         log.info("create RedisConfiguration");
-    }
-
-    @Override
-    public void afterPropertiesSet() {
-        // 对象序列化/反序列化
-        this.redisTemplate.setDefaultSerializer(RedisSerializer.string());
-        this.redisTemplate.setKeySerializer(RedisSerializer.string());
-        this.redisTemplate.setValueSerializer(RedisSerializer.json());
-        this.redisTemplate.setHashKeySerializer(RedisSerializer.string());
-        this.redisTemplate.setHashValueSerializer(RedisSerializer.string());
     }
 
     /**
@@ -62,8 +49,10 @@ public class RedisConfiguration implements InitializingBean {
      * @see org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration#createConfiguration
      */
     @Bean
-    @ConditionalOnMissingBean
+//    @ConditionalOnMissingBean
     public RedisCacheConfiguration redisCacheConfiguration(CacheProperties cacheProperties) {
+        log.info("call redisCacheConfiguration()");
+
         // 对象序列化/反序列化
         // valueSerializationPair
         // 默认是 RedisSerializer.java()
@@ -87,53 +76,62 @@ public class RedisConfiguration implements InitializingBean {
         return config;
     }
 
-//    /**
-//     * {@code @ConditionalOnMissingBean(name = "redisTemplate")}
-//     * 表示组件可覆盖
-//     *
-//     * @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration#redisTemplate(RedisConnectionFactory)
-//     * @see RedisTemplate#afterPropertiesSet()
-//     */
-//    @Bean
+    /**
+     * {@code @ConditionalOnMissingBean(name = "redisTemplate")}
+     * 表示组件可覆盖
+     *
+     * @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration#redisTemplate(RedisConnectionFactory)
+     * @see RedisTemplate#afterPropertiesSet()
+     */
+    @Bean
 //    @ConditionalOnMissingBean(name = "redisTemplate")
 //    @ConditionalOnSingleCandidate(RedisConnectionFactory.class)
-//    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-//        RedisTemplate<Object, Object> template = new RedisTemplate<>();
-//        template.setConnectionFactory(redisConnectionFactory);
-//
-//        // 对象序列化/反序列化
-//        // 默认是 RedisSerializer.java()
-//        template.setDefaultSerializer(RedisSerializer.string());
-////        template.setKeySerializer(RedisSerializer.string());
-//        template.setValueSerializer(RedisSerializer.json());
-////        template.setHashKeySerializer(RedisSerializer.string());
-////        template.setHashValueSerializer(RedisSerializer.string());
-//
-//        return template;
-//    }
+    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        log.info("call redisTemplate()");
 
-//    /**
-//     * {@code @ConditionalOnMissingBean}
-//     * 表示组件可覆盖
-//     * <pre>
-//     * 	public StringRedisTemplate() {
-//     * 		setKeySerializer(RedisSerializer.string());
-//     * 		setValueSerializer(RedisSerializer.string());
-//     * 		setHashKeySerializer(RedisSerializer.string());
-//     * 		setHashValueSerializer(RedisSerializer.string());
-//     * }
-//     * </pre>
-//     *
-//     * @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration#stringRedisTemplate(RedisConnectionFactory)
-//     * @see StringRedisTemplate#StringRedisTemplate()
-//     */
-//    @Bean
+        RedisTemplate<Object, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(redisConnectionFactory);
+
+        // 对象序列化/反序列化
+        // 默认是 RedisSerializer.java()
+        template.setDefaultSerializer(RedisSerializer.string());
+//        template.setKeySerializer(RedisSerializer.string());
+        template.setValueSerializer(RedisSerializer.json());
+//        template.setHashKeySerializer(RedisSerializer.string());
+//        template.setHashValueSerializer(RedisSerializer.string());
+
+        return template;
+    }
+
+    /**
+     * {@code @ConditionalOnMissingBean}
+     * 表示组件可覆盖
+     * <pre>
+     * 	public StringRedisTemplate() {
+     * 		setKeySerializer(RedisSerializer.string());
+     * 		setValueSerializer(RedisSerializer.string());
+     * 		setHashKeySerializer(RedisSerializer.string());
+     * 		setHashValueSerializer(RedisSerializer.string());
+     * }
+     * </pre>
+     *
+     * @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration#stringRedisTemplate(RedisConnectionFactory)
+     * @see StringRedisTemplate#StringRedisTemplate()
+     */
+    @Bean
 //    @ConditionalOnMissingBean
 //    @ConditionalOnSingleCandidate(RedisConnectionFactory.class)
-//    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
-//        // 对象序列化/反序列化
-//        // 默认是 RedisSerializer.string()
+    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        log.info("call stringRedisTemplate()");
+
+        // 对象序列化/反序列化
+        // 默认是 RedisSerializer.string()
 //        return new StringRedisTemplate(redisConnectionFactory);
-//    }
+
+        StringRedisTemplate template = new StringRedisTemplate();
+        template.setConnectionFactory(redisConnectionFactory);
+        template.setDefaultSerializer(RedisSerializer.string());
+        return template;
+    }
 
 }
