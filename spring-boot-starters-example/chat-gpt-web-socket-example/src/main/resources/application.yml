@@ -14,7 +14,7 @@ server:
       enabled: true
       pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
       prefix: tomcat_access
-      directory: "/data/logs/${spring.application.name}/"
+      directory: "/opt/logs/${spring.application.name}/"
 
 logging:
   charset:

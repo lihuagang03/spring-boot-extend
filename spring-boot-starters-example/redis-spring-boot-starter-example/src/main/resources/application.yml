@@ -8,20 +8,48 @@ spring:
     name: redis-spring-boot-starter-example
 #  profiles:
 #    active: prod,test,dev
+# RedisProperties
   redis:
     database: 0
     host: "localhost"
     port: 6379
     timeout: 1s
-    connect-timeout: 500ms
+    connect-timeout: 300ms
+    client-name: "user-example"
 #    client-type: lettuce
+#    sentinel:
+#      master: ""
+#      nodes: "host:port"
+#    cluster:
+#      nodes: "host:port"
+#      max-redirects: 3
+#    jedis:
+#      pool:
+#        enabled: true
+#        max-idle: 8
+#        min-idle: 0
+#        max-active: 8
+#        max-wait: 300ms
+#        time-between-eviction-runs: 5m
     lettuce:
+      shutdown-timeout: 100ms
       pool:
         enabled: true
         max-idle: 8
         min-idle: 0
         max-active: 8
         max-wait: -1
+        time-between-eviction-runs: 5m
+  # CacheProperties
+  cache:
+    type: redis
+    cache-names: ["user"]
+    redis:
+      time-to-live: 5m
+#      cache-null-values: true
+#      key-prefix: "user:"
+      use-key-prefix: false
+      enable-statistics: true
 
 # .A.11. Server Properties
 server:
