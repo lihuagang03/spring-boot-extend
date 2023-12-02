@@ -43,12 +43,12 @@ spring:
   # CacheProperties
   cache:
     type: redis
-    cache-names: ["user"]
+#    cache-names: ["user"]
     redis:
       time-to-live: 5m
 #      cache-null-values: true
-#      key-prefix: "user:"
-      use-key-prefix: false
+      key-prefix: "user:"
+      use-key-prefix: true
       enable-statistics: true
 
 # .A.11. Server Properties

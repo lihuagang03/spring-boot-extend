@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +16,7 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
 /**
@@ -47,9 +46,10 @@ public class RedisConfiguration {
      * </pre>
      *
      * @see org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration#createConfiguration
+     * @see org.springframework.data.redis.cache.CacheKeyPrefix#compute
      */
     @Bean
-//    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean
     public RedisCacheConfiguration redisCacheConfiguration(CacheProperties cacheProperties) {
         log.info("call redisCacheConfiguration()");
 
@@ -58,7 +58,7 @@ public class RedisConfiguration {
         // 默认是 RedisSerializer.java()
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
         // GenericJackson2JsonRedisSerializer
-        config = config.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(RedisSerializer.json()));
+        config = config.serializeValuesWith(SerializationPair.fromSerializer(RedisSerializer.json()));
 
         CacheProperties.Redis redisProperties = cacheProperties.getRedis();
         if (redisProperties.getTimeToLive() != null) {
@@ -73,6 +73,8 @@ public class RedisConfiguration {
         if (!redisProperties.isUseKeyPrefix()) {
             config = config.disableKeyPrefix();
         }
+//        // CacheKeyPrefix#compute
+//        config = config.computePrefixWith(cacheName -> cacheName + ':');
         return config;
     }
 
