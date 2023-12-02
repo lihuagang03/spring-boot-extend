@@ -1,5 +1,7 @@
 package com.spring.boot.redis.example.config;
 
+import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
+import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.ObjectProvider;
@@ -16,6 +18,7 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
@@ -46,6 +49,8 @@ public class RedisConfiguration {
      * </pre>
      *
      * @see org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration#createConfiguration
+     * @see org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer
+     * @see com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer
      * @see org.springframework.data.redis.cache.CacheKeyPrefix#compute
      */
     @Bean
@@ -59,6 +64,12 @@ public class RedisConfiguration {
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
         // GenericJackson2JsonRedisSerializer
         config = config.serializeValuesWith(SerializationPair.fromSerializer(RedisSerializer.json()));
+//        // Jackson2JsonRedisSerializer - 不推荐，有坑！
+//        config = config.serializeValuesWith(SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer<>(Object.class)));
+        // GenericFastJsonRedisSerializer
+//        config = config.serializeValuesWith(SerializationPair.fromSerializer(new GenericFastJsonRedisSerializer()));
+//        // FastJsonRedisSerializer - 不推荐，有坑！
+//        config = config.serializeValuesWith(SerializationPair.fromSerializer(new FastJsonRedisSerializer<>(Object.class)));
 
         CacheProperties.Redis redisProperties = cacheProperties.getRedis();
         if (redisProperties.getTimeToLive() != null) {
