@@ -24,7 +24,7 @@ valuexr\x00\x10java.lang.Number\x86\xac\x95\x1d\x0b\x94\xe0\x8b\x02\x00\x00xp\x0
 > new StringRedisSerializer(StandardCharsets.UTF_8)
 
 
-## Jackson2Json
+## Jackson
 ### RedisSerializer.json()
 > new GenericJackson2JsonRedisSerializer()
 >
