@@ -6,7 +6,6 @@ import com.spring.boot.redis.example.service.RedisService;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.data.redis.cache.BatchStrategies;
-import org.springframework.data.redis.cache.CacheStatisticsCollector;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
