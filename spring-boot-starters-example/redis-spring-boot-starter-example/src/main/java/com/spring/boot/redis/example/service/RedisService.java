@@ -3,7 +3,7 @@ package com.spring.boot.redis.example.service;
 /**
  * Redis服务
  *
- * @author guangyi
+ * @author guang.yi
  * @since 2023/7/30
  */
 public interface RedisService {
