@@ -49,7 +49,6 @@ public class RedisServiceImpl implements RedisService {
     public void clean(String cacheName, String pattern) {
         RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(
                 redisConnectionFactory, BatchStrategies.scan(10));
-        redisCacheWriter.withStatisticsCollector(CacheStatisticsCollector.create());
         redisCacheWriter.clean(cacheName, pattern.getBytes(StandardCharsets.UTF_8));
     }
 
