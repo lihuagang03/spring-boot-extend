@@ -7,6 +7,8 @@ Redis对象序列化/反序列化
 
 ### RedisSerializer.java()
 > new JdkSerializationRedisSerializer(null)
+>
+> 不推荐，值可读性差且又长！
 
 ```shell
 localhost:6379> GET "user:user-info::123456"

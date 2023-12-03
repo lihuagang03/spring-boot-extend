@@ -49,7 +49,7 @@ spring:
 #      cache-null-values: true
       key-prefix: "user:"
       use-key-prefix: true
-      enable-statistics: true
+#      enable-statistics: true
 
 # .A.11. Server Properties
 server:
