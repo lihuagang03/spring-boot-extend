@@ -63,8 +63,8 @@ public class RedisConfiguration {
         log.info("call redisCacheConfiguration()");
 
         // 对象序列化/反序列化
-        // valueSerializationPair
-        // 默认是 RedisSerializer.java()
+        // keySerializationPair，默认是 RedisSerializer.string()
+        // valueSerializationPair，默认是 RedisSerializer.java()
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
         // RedisSerializer.json()
         // GenericJackson2JsonRedisSerializer
