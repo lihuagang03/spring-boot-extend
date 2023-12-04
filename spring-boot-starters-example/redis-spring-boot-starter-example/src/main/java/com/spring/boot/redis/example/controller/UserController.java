@@ -1,6 +1,8 @@
 package com.spring.boot.redis.example.controller;
 
-import org.springframework.util.StopWatch;
+import javax.validation.Valid;
+
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
  * @since 2023/11/27
  */
 @Slf4j
+@Validated
 @RestController("userController")
 public class UserController {
 
@@ -54,15 +57,9 @@ public class UserController {
      */
     @PostMapping("/cache/cleanCache")
     @ResponseBody
-    public String cleanCache(@RequestBody CacheKey cacheKey) {
-        log.info("cleanCache start");
-        StopWatch stopWatch = new StopWatch("cleanCache");
-        stopWatch.start();
+    public String cleanCache(@Valid @RequestBody CacheKey cacheKey) {
+        redisService.cleanCache(cacheKey);
 
-        redisService.clean(cacheKey.getCacheName(), cacheKey.getKeyPattern());
-
-        stopWatch.stop();
-        log.info("cleanCache end, totalTimeMillis={}", stopWatch.getTotalTimeMillis());
         return "{\"code\":0,\"message\":\"ok\"}";
     }
 

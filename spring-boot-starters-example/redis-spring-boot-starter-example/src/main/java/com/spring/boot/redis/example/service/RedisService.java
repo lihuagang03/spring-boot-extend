@@ -1,5 +1,7 @@
 package com.spring.boot.redis.example.service;
 
+import com.spring.boot.redis.example.model.CacheKey;
+
 /**
  * Redis服务
  *
@@ -12,9 +14,8 @@ public interface RedisService {
     /**
      * Remove all keys following the given pattern.
      *
-     * @param cacheName The cache name must not be {@literal null}.
-     * @param pattern The pattern for the keys to remove. Must not be {@literal null}.
+     * @param cacheKey 缓存的键模式
      */
-    void clean(String cacheName, String pattern);
+    void cleanCache(CacheKey cacheKey);
 
 }
