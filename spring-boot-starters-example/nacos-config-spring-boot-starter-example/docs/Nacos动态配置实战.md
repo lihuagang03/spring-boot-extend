@@ -116,6 +116,6 @@ sh startup.sh -m standalone
 
 ```
 
-Console: http://172.0.0.1:8848/nacos/index.html
+Console: http://127.0.0.1:8848/nacos/index.html
 http://localhost:8848/nacos
 
