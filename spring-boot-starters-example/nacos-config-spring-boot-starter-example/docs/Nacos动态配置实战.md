@@ -113,9 +113,19 @@ sudo chown -R feimen:staff nacos
 # 启动独立服务器
 cd nacos/bin
 sh startup.sh -m standalone
+sh bin/startup.sh -m standalone
 
 ```
 
 Console: http://127.0.0.1:8848/nacos/index.html
 http://localhost:8848/nacos
+
+
+3.关闭Nacos服务器
+```shell
+# 关闭服务器
+sh shutdown.sh
+sh bin/shutdown.sh
+
+```
 
