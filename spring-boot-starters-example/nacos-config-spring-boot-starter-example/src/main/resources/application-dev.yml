@@ -5,4 +5,4 @@ nacos:
     # 命名空间（隔离）
     namespace: 'nacos-env-dev'
     # 分组身份
-    group: 'DEVELOP'
+#    group: 'DEVELOP'

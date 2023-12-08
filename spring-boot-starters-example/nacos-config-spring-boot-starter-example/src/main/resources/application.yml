@@ -6,13 +6,13 @@
 spring:
   application:
     name: nacos-config-spring-boot-starter-example
-  profiles:
+#  profiles:
+#    active: dev
 #    active: prod,test,dev
-    active: dev
 
 # .A.11. Server Properties
 server:
-  port: 8080
+  port: 8680
   tomcat:
     threads:
       max: 200
@@ -50,6 +50,8 @@ nacos:
 #    enabled: true
     # 配置中心服务端地址
     server-addr: '127.0.0.1:8848'
+    # Endpoint ID 'nacos-config' contains invalid characters, please migrate to a valid format.
+#    endpoint: 'nacos-config'
     # 远程配置优先
     remote-first: true
     # 数据身份
