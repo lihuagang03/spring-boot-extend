@@ -28,7 +28,9 @@ mysql  Ver 8.0.33 for macos13 on x86_64 (MySQL Community Server - GPL)
 # 密码建议在下一行输入
 mysql -h localhost -P 3306 -u root -p
 
-mysql -h localhost -P 3306 -u root -phuofo141005
+mysql -h localhost -P 3306 -u root -p12345678
+
+mysql -h localhost -P 3306 -u nacos -pnacos
 
 ```
 
@@ -113,4 +115,7 @@ cd nacos/bin
 sh startup.sh -m standalone
 
 ```
+
+Console: http://172.0.0.1:8848/nacos/index.html
+http://localhost:8848/nacos
 
