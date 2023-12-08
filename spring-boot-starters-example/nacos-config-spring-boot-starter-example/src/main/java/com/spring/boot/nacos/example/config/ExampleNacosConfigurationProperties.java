@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 配置属性集
  *
- * @author guangyi
+ * @author guang.yi
  * @since 2023/7/21
  * @see NacosConfigurationProperties
  */
@@ -31,4 +31,5 @@ public class ExampleNacosConfigurationProperties {
     public ExampleNacosConfigurationProperties() {
         log.info("create ExampleNacosConfigurationProperties");
     }
+
 }

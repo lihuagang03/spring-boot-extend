@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 配置属性
  *
- * @author guangyi
+ * @author guang.yi
  * @since 2023/7/21
  * @see NacosValue
  * @see NacosConfigListener
@@ -44,4 +44,5 @@ public class ExampleNacosConfigListener {
     public final void onChange(String newContent) {
         log.info("config onChange,newContent={}", newContent);
     }
+
 }

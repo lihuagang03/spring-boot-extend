@@ -13,7 +13,7 @@ import static org.springframework.core.env.StandardEnvironment.SYSTEM_PROPERTIES
 /**
  * nacos配置属性源
  *
- * @author guangyi
+ * @author guang.yi
  * @since 2023/7/21
  * @see EnableNacosConfig
  * @see NacosPropertySource
@@ -37,4 +37,5 @@ public class NacosConfiguration {
     public NacosConfiguration() {
         log.info("create NacosConfiguration");
     }
+
 }

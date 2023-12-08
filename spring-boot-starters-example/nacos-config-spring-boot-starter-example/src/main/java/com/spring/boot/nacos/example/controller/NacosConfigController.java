@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * nacos配置控制器
  *
- * @author guangyi
+ * @author guang.yi
  * @since 2023/7/19
  */
 @Slf4j
 @RequestMapping("/config/nacos")
-@RestController("configServiceController")
+@RestController("nacosConfigController")
 public class NacosConfigController {
 
     private final ConfigServiceDemo configServiceDemo;
@@ -70,4 +70,5 @@ public class NacosConfigController {
     public final String getConfigValueListener() {
         return exampleNacosConfigListener.getCount();
     }
+
 }
