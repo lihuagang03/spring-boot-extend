@@ -15,18 +15,21 @@ bin/startup.sh
 
 ## SkyWalking OAP 启动
 ```shell
+bin/oapService.sh
 nohup bin/oapService.sh >oap-nohup.out 2>&1 &
 
 ```
 
 ## SkyWalking UI 启动
 ```shell
+bin/oapService.sh
 nohup bin/webappService.sh >webapp-nohup.out 2>&1 &
 
 ```
 
 # SkyWalking 控制台
 http://127.0.0.1:8080/
+http://127.0.0.1:8080/General-Service/Services
 
 
 - [Setup java agent](https://skywalking.apache.org/docs/skywalking-java/next/en/setup/service-agent/java-agent/readme/)
