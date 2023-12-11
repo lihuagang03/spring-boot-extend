@@ -1,7 +1,7 @@
 
 
 ```shell
-/Library/Java/JavaVirtualMachines/jdk1.8.0_333.jdk/Contents/Home/bin/java com.spring.boot.observability.example.ObservabilityApplication
+/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/bin/java com.spring.boot.observability.example.ObservabilityApplication
 # Spring应用事件侦听器 创建
 11:33:19.284 [main] INFO com.spring.boot.observability.event.PrometheusClientApplicationEventListener - create PrometheusClientApplicationEventListener
 11:33:19.289 [main] INFO com.spring.boot.log.event.LogSpringApplicationEventListener - create LogSpringApplicationEventListener
@@ -19,7 +19,7 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::               (v2.7.16)
 
-# 创建并准备好ApplicationContext后调用
+# 创建并准备好ApplicationContext后调用(应用上下文初始化完成事件)
 2023-09-18 11:33:19.847  INFO 49225 --- [           main] .b.l.e.LogSpringApplicationEventListener : receive event org.springframework.boot.context.event.ApplicationContextInitializedEvent[source=org.springframework.boot.SpringApplication@10163d6]
 2023-09-18 11:33:19.847  INFO 49225 --- [           main] c.s.b.l.LogSpringApplicationRunListener  : Called once the ApplicationContext has been created and prepared, but before sources have been loaded. context=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4a7f959b, started on Thu Jan 01 08:00:00 CST 1970
 # 启动应用程序
@@ -76,9 +76,11 @@
 2023-09-18 11:33:22.478  INFO 49225 --- [2)-172.16.22.50] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2023-09-18 11:33:22.479  INFO 49225 --- [2)-172.16.22.50] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 
+
 2023-09-18 11:34:46.709  INFO 49225 --- [io-38081-exec-1] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2023-09-18 11:34:46.710  INFO 49225 --- [io-38081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2023-09-18 11:34:46.715  INFO 49225 --- [io-38081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+
 
 2023-09-18 11:35:14.019  INFO 49225 --- [ionShutdownHook] c.s.b.l.e.ReadinessStateEventListener    : receive event REFUSING_TRAFFIC
 2023-09-18 11:35:14.022  INFO 49225 --- [ionShutdownHook] c.s.b.l.e.ReadinessStateEventListener    : receive event REFUSING_TRAFFIC
