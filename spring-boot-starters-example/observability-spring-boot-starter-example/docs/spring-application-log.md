@@ -1,6 +1,6 @@
 
 
-```
+```shell
 /Library/Java/JavaVirtualMachines/jdk1.8.0_333.jdk/Contents/Home/bin/java com.spring.boot.observability.example.ObservabilityApplication
 # Spring应用事件侦听器 创建
 11:33:19.284 [main] INFO com.spring.boot.observability.event.PrometheusClientApplicationEventListener - create PrometheusClientApplicationEventListener
