@@ -17,8 +17,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://localhost:3306/digital?autoReconnect=true&failOverReadOnly=false&maxReconnects=10&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    # 配置中心里配置，防止泄露
     username: root
-    password: huofo141005_mysql
+    password: 12345678
     druid:
 #      配置初始化大小、最小、最大
       initial-size: 5
@@ -63,7 +64,7 @@ server:
       enabled: true
       pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
       prefix: tomcat_access
-      directory: "/data/logs/${spring.application.name}/"
+      directory: "/opt/logs/${spring.application.name}/"
 
 mybatis-plus:
   executor-type: reuse
@@ -72,4 +73,6 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+    banner: true
+    enable-sql-runner: true
 #  db-type: mysql
