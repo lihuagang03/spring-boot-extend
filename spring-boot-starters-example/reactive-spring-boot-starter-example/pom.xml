@@ -18,13 +18,21 @@
   <description>Reactive Example for Spring Boot Starter</description>
 
   <properties>
-    <java.version>11</java.version>
     <reactor-bom.version>2022.0.9</reactor-bom.version>
     <snakeyaml.version>2.1</snakeyaml.version>
+
+    <java.version>11</java.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <!-- 二方库 -->
+      <dependency>
+        <groupId>com.spring.boot</groupId>
+        <artifactId>log-spring-boot-starter</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+      </dependency>
+
       <!-- spring-boot-dependencies -->
 <!--      <dependency>-->
 <!--        <groupId>io.projectreactor</groupId>-->
@@ -37,6 +45,12 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- 二方库 -->
+    <dependency>
+      <groupId>com.spring.boot</groupId>
+      <artifactId>log-spring-boot-starter</artifactId>
+    </dependency>
+
     <!-- spring-boot-starter -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -54,12 +68,6 @@
 <!--      </exclusions>-->
     </dependency>
 
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <optional>true</optional>
-    </dependency>
-
     <!-- reactor -->
     <dependency>
       <groupId>io.projectreactor</groupId>
@@ -73,6 +81,13 @@
 <!--      <groupId>org.springframework.boot</groupId>-->
 <!--      <artifactId>spring-boot-starter-reactor-netty</artifactId>-->
 <!--    </dependency>-->
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+
     <!-- test -->
     <dependency>
       <groupId>io.projectreactor</groupId>
