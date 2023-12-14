@@ -1,5 +1,6 @@
 package com.spring.boot.reactive.web.flux;
 
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -21,8 +22,12 @@ public class GreetingClient {
 
     private final WebClient client;
 
-    public GreetingClient(WebClient.Builder builder) {
-        this.client = builder.baseUrl("http://localhost:8080")
+    public GreetingClient(
+            WebClient.Builder webClientBuilder,
+            ServerProperties serverProperties
+    ) {
+        String baseUrl = "http://localhost:" + serverProperties.getPort();
+        this.client = webClientBuilder.baseUrl(baseUrl)
                 .build();
     }
 

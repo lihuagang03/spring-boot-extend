@@ -30,7 +30,7 @@ public class CoffeeController {
 
     /**
      * <pre>
-     * <a href="http://localhost:8080/coffees">http://localhost:8080/coffees</a>
+     * <a href="http://localhost:8386/coffees">http://localhost:8386/coffees</a>
      *
      * [
      *     {

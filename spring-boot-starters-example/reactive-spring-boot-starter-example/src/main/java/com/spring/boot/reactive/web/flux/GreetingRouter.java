@@ -27,7 +27,7 @@ public class GreetingRouter {
 
     /**
      * <pre>
-     * <a href="http://localhost:8080/hello">http://localhost:8080/hello</a>
+     * <a href="http://localhost:8386/hello">http://localhost:8386/hello</a>
      *
      * {"message":"Hello, Spring!"}
      * </pre>

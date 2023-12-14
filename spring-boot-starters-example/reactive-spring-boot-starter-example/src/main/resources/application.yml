@@ -1,0 +1,10 @@
+
+spring:
+  application:
+    name: reactive-spring-boot-starter-example
+#  profiles:
+#    active: dev
+
+# ServerProperties
+server:
+  port: 8386
