@@ -1,13 +1,12 @@
 package com.spring.boot.reactive.web.flux;
 
-import javax.annotation.Resource;
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import com.spring.boot.reactive.web.flux.entity.Greeting;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 

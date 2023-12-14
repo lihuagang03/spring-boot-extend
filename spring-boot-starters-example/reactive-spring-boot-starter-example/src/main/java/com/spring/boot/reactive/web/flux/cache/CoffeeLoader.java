@@ -1,7 +1,5 @@
 package com.spring.boot.reactive.web.flux.cache;
 
-import javax.annotation.PostConstruct;
-
 import java.util.UUID;
 
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
 import com.spring.boot.reactive.web.flux.entity.Coffee;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -38,6 +37,7 @@ public class CoffeeLoader {
 
     @PostConstruct
     public void loadData() {
+        log.info("loadData");
         reactiveRedisConnectionFactory.getReactiveConnection()
                 .serverCommands()
                 .flushAll()
