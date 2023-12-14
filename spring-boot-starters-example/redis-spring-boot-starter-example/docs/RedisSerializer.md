@@ -4,11 +4,13 @@ Redis对象序列化/反序列化
 ======
 > `org.springframework.data.redis.serializer.RedisSerializer<T>`
 
+序列化方式使用`String`和`JSON`。
+
 
 ### RedisSerializer.java()
 > new JdkSerializationRedisSerializer(null)
 >
-> 不推荐，缓存值可读性差且又长！
+> 不推荐，缓存值可读性差，长而浪费空间！
 
 ```shell
 localhost:6379> GET "user:user-info::123456"
@@ -39,14 +41,16 @@ localhost:6379> GET "user:user-info::123456"
 ```
 
 
-### ~~Jackson2JsonRedisSerializer~~
-> new Jackson2JsonRedisSerializer<>(Object.class))
-> 
+### Jackson2JsonRedisSerializer
 > new Jackson2JsonRedisSerializer<>(User.class)
 >
-> 不推荐，有坑，不通用！
+> 不通用，大数据量下的优化方法，有较好的效益。
+>
+> new Jackson2JsonRedisSerializer<>(Object.class))
+>
+> 不推荐，有坑！
 
-类型信息丢失，读取时对象类型转换失败
+类型信息丢失，读取时对象类型转换失败。
 ```shell
 localhost:6379> GET "user:user-info::123456"
 "{\"id\":123456,\"phone\":\"13666555888\",\"nickName\":\"\xe6\x9d\x8e\xe5\x9b\x9b\"}"
@@ -69,14 +73,16 @@ localhost:6379> GET "user:user-info::123456"
 ```
 
 
-### ~~FastJsonRedisSerializer~~
+### FastJsonRedisSerializer
+> new FastJsonRedisSerializer<>(User.class)
+>
+> 不通用，大数据量下的优化方法，有较好的效益。
+>
 > new FastJsonRedisSerializer<>(Object.class))
 > 
-> new FastJsonRedisSerializer<>(User.class)
-> 
-> 不推荐，有坑，不通用！
+> 不推荐，有坑！
 
-类型信息丢失，读取时对象类型转换失败
+类型信息丢失，读取时对象类型转换失败。
 ```shell
 localhost:6379> GET "user:user-info::123456"
 "{\"id\":123456,\"nickName\":\"\xe6\x9d\x8e\xe5\x9b\x9b\",\"phone\":\"13666555888\"}"
