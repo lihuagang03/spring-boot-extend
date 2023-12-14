@@ -41,8 +41,10 @@ localhost:6379> GET "user:user-info::123456"
 
 ### ~~Jackson2JsonRedisSerializer~~
 > new Jackson2JsonRedisSerializer<>(Object.class))
+> 
+> new Jackson2JsonRedisSerializer<>(User.class)
 >
-> 不推荐，有坑！
+> 不推荐，有坑，不通用！
 
 类型信息丢失，读取时对象类型转换失败
 ```shell
@@ -70,7 +72,9 @@ localhost:6379> GET "user:user-info::123456"
 ### ~~FastJsonRedisSerializer~~
 > new FastJsonRedisSerializer<>(Object.class))
 > 
-> 不推荐，有坑！
+> new FastJsonRedisSerializer<>(User.class)
+> 
+> 不推荐，有坑，不通用！
 
 类型信息丢失，读取时对象类型转换失败
 ```shell
