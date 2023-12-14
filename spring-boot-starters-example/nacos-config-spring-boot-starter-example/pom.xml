@@ -18,8 +18,9 @@
   <description>Nacos Config Example for Spring Boot Starter</description>
 
   <properties>
-    <java.version>11</java.version>
     <nacos-config-spring-boot.version>0.2.12</nacos-config-spring-boot.version>
+
+    <java.version>1.8</java.version>
   </properties>
 
   <dependencyManagement>

@@ -17,8 +17,9 @@
   <description>基于WebSocket实现的ChatGPT实时对话交互</description>
 
   <properties>
-    <java.version>11</java.version>
     <snakeyaml.version>2.1</snakeyaml.version>
+
+    <java.version>1.8</java.version>
   </properties>
 
   <dependencies>

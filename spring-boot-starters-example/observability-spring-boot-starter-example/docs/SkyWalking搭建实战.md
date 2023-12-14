@@ -1,6 +1,6 @@
 
 
-SkyWalking 搭建
+SkyWalking搭建
 ======
 > [SkyWalking 极简入门](https://skywalking.apache.org/zh/2020-04-19-skywalking-quick-start/)
 
