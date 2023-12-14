@@ -42,6 +42,7 @@ public class CoffeeConfiguration {
     public ReactiveRedisOperations<String, Coffee> reactiveRedisOperations(
             ReactiveRedisConnectionFactory reactiveRedisConnectionFactory
     ) {
+        // 不通用，大数据量下的优化方法，有较好的效益
         Jackson2JsonRedisSerializer<Coffee> serializer = new Jackson2JsonRedisSerializer<>(Coffee.class);
 
         RedisSerializationContext.RedisSerializationContextBuilder<String, Coffee> builder =
