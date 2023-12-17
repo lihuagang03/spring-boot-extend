@@ -15,7 +15,7 @@ spring:
     port: 6379
     timeout: 1s
     connect-timeout: 300ms
-    client-name: "user-example"
+    client-name: "user-cache-example"
 #    client-type: lettuce
 #    sentinel:
 #      master: ""
