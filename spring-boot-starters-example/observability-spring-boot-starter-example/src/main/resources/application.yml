@@ -1,27 +1,73 @@
 
+# Appendices
+# Appendix A: Common Application Properties
+
 spring:
   application:
     name: observability-spring-boot-starter-example
   profiles:
     active: dev
+  # RedisProperties
+  redis:
+    database: 0
+    host: "localhost"
+    port: 6379
+    timeout: 1s
+    connect-timeout: 1s
+    client-name: "observability-cache-example"
+#    client-type: lettuce
+#    sentinel:
+#      master: ""
+#      nodes: "host:port"
+#    cluster:
+#      nodes: "host:port"
+#      max-redirects: 3
+#    jedis:
+#      pool:
+#        enabled: true
+#        max-idle: 8
+#        min-idle: 0
+#        max-active: 8
+#        max-wait: 300ms
+#        time-between-eviction-runs: 5m
+    lettuce:
+      shutdown-timeout: 100ms
+      pool:
+        enabled: true
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+        time-between-eviction-runs: 5m
+  # CacheProperties
+  cache:
+    type: redis
+    #    cache-names: ["user"]
+    redis:
+      time-to-live: 5m
+      #      cache-null-values: true
+#      key-prefix: "user:"
+      use-key-prefix: true
+#      enable-statistics: true
 
+# .A.11. Server Properties
 server:
   port: 8383
-  tomcat:
-    threads:
-      max: 200
-      min-spare: 10
-    accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
-      enabled: true
-      pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
-      prefix: tomcat_access
-      directory: "/opt/logs/${spring.application.name}/"
+#  tomcat:
+#    threads:
+#      max: 200
+#      min-spare: 10
+#    accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
+#      enabled: true
+#      pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
+#      prefix: tomcat_access
+#      directory: "/opt/logs/${spring.application.name}/"
 
-#logging:
-#  level:
-#    root: info
-#  file:
-#    name:
+logging:
+  level:
+    root: info
+  file:
+    path: "/opt/logs/${spring.application.name}/"
 
 management:
   # ManagementServerProperties
