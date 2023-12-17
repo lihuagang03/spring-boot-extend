@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.boot.redis.example.model.CacheKey;
 import com.spring.boot.redis.example.model.UserDto;
-import com.spring.boot.redis.example.service.RedisService;
+import com.spring.boot.redis.example.service.CacheService;
 import com.spring.boot.redis.example.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,14 +29,14 @@ public class UserController {
 
     private final UserService userService;
 
-    private final RedisService redisService;
+    private final CacheService cacheService;
 
     public UserController(
             UserService userService,
-            RedisService redisService
+            CacheService cacheService
     ) {
         this.userService = userService;
-        this.redisService = redisService;
+        this.cacheService = cacheService;
     }
 
     @GetMapping("/user/{userId}")
@@ -55,10 +55,10 @@ public class UserController {
      * @param cacheKey 缓存的键
      * @return 操作结果
      */
-    @PostMapping("/cache/cleanCache")
+    @PostMapping("/cache/clean")
     @ResponseBody
     public String cleanCache(@Valid @RequestBody CacheKey cacheKey) {
-        redisService.cleanCache(cacheKey);
+        cacheService.cleanCache(cacheKey);
 
         return "{\"code\":0,\"message\":\"ok\"}";
     }
