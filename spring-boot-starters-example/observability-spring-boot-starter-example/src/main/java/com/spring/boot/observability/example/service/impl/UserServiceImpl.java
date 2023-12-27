@@ -1,8 +1,11 @@
 package com.spring.boot.observability.example.service.impl;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.Executors;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.hash.BeanUtilsHashMapper;
 import org.springframework.data.redis.hash.Jackson2HashMapper;
@@ -27,7 +30,7 @@ import org.apache.rocketmq.spring.core.RocketMQTemplate;
  */
 @Slf4j
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, InitializingBean {
 
     private final UserDomainRepository userDomainRepository;
 
@@ -49,6 +52,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void afterPropertiesSet() {
+        Executors.newFixedThreadPool(1)
+                .execute(() -> {
+                    List<UserEntity> userEntityList = rocketMQTemplate.receive(UserEntity.class);
+                    log.info("receive userEntityList={}", userEntityList);
+                });
+    }
+
+    @Override
     public Mono<UserModel> getById(Long id) {
         return Optional.of(id)
                 .map(this::getUserEntityById)
@@ -63,13 +75,22 @@ public class UserServiceImpl implements UserService {
     private static final String TOPIC_NAME_TAGS = "userTopicName:userTags";
 
     private UserModel sendUserMessage(UserEntity userEntity) {
+        // 普通消息
         SendResult sendResult = rocketMQTemplate.syncSend(TOPIC_NAME_TAGS, userEntity);
-        log.info("sendResult={}", sendResult);
+        log.info("syncSend sendResult={}", sendResult);
         if (sendResult.getSendStatus() != SendStatus.SEND_OK) {
             // 消息发送失败
             // 如何处理
             log.error("sendUserMessage fail, sendResult={}, userEntity={}", sendResult, userEntity);
         }
+        // 顺序消息
+        // ...
+        // 定时/延时消息
+        sendResult = rocketMQTemplate.syncSendDelayTimeSeconds(TOPIC_NAME_TAGS, userEntity, 30L);
+        log.info("syncSendDelayTimeSeconds sendResult={}", sendResult);
+        // 事务消息
+        // ...
+
         return applyAsUserModel(userEntity);
     }
 

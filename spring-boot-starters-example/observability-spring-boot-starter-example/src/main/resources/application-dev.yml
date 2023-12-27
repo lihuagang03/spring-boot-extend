@@ -17,11 +17,13 @@ rocketmq:
 #    selector-type: "TAG"
 #    pull-batch-size: 10
     enable-msg-trace: true
-#  consumer:
-#    group: "userGroup"
-#    namespace: "userNamespace"
-#    topic: "userTopicName"
-##    message-model: "CLUSTERING"
-##    selector-type: "TAG"
-##    pull-batch-size: 10
-#    enable-msg-trace: true
+  consumer:
+    group: "userGroup"
+    namespace: "userNamespace"
+    topic: "userTopicName"
+    listeners:
+      { "userGroup": { "userNamespace%userTopicName": true } }
+#    message-model: "CLUSTERING"
+#    selector-type: "TAG"
+#    pull-batch-size: 10
+    enable-msg-trace: true
