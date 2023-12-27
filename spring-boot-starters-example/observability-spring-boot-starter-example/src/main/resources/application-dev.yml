@@ -6,12 +6,12 @@ rocketmq:
   access-channel: "LOCAL"
   producer:
     group: "userGroup"
-    namespace: "userNamespace"
+#    namespace: "userNamespace"
     enable-msg-trace: true
 #    send-message-timeout: 3000
   pull-consumer:
     group: "userGroup"
-    namespace: "userNamespace"
+#    namespace: "userNamespace"
     topic: "userTopicName"
 #    message-model: "CLUSTERING"
 #    selector-type: "TAG"
@@ -19,11 +19,12 @@ rocketmq:
     enable-msg-trace: true
   consumer:
     group: "userGroup"
-    namespace: "userNamespace"
+#    namespace: "userNamespace"
     topic: "userTopicName"
     listeners:
-      { "userGroup": { "userNamespace%userTopicName": true } }
+      { "userGroup": { "userTopicName": true } }
 #    message-model: "CLUSTERING"
 #    selector-type: "TAG"
+#    selector-expression: "*"
 #    pull-batch-size: 10
     enable-msg-trace: true
