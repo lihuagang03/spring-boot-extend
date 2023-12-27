@@ -1,2 +1,27 @@
 
-
+# RocketMQAutoConfiguration
+# RocketMQProperties
+rocketmq:
+  name-server: "localhost:9876"
+  access-channel: "LOCAL"
+  producer:
+    group: "userGroup"
+    namespace: "userNamespace"
+    enable-msg-trace: true
+#    send-message-timeout: 3000
+  pull-consumer:
+    group: "userGroup"
+    namespace: "userNamespace"
+    topic: "userTopicName"
+#    message-model: "CLUSTERING"
+#    selector-type: "TAG"
+#    pull-batch-size: 10
+    enable-msg-trace: true
+#  consumer:
+#    group: "userGroup"
+#    namespace: "userNamespace"
+#    topic: "userTopicName"
+##    message-model: "CLUSTERING"
+##    selector-type: "TAG"
+##    pull-batch-size: 10
+#    enable-msg-trace: true
