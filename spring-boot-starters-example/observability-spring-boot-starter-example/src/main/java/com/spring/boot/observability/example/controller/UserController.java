@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import reactor.core.publisher.Mono;
 
+import com.alibaba.fastjson.JSON;
 import com.spring.boot.observability.example.model.UserModel;
 import com.spring.boot.observability.example.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,10 @@ public class UserController {
     @GetMapping("/{userId}")
     public Mono<UserModel> getById(@PathVariable("userId") Long userId) {
         Mono<UserModel> mono = userService.getById(userId);
+        // mono=MonoJust
         log.info("mono={}", mono);
+        // mono={"scanAvailable":true}
+        log.info("mono={}", JSON.toJSONString(mono));
         return mono;
     }
 

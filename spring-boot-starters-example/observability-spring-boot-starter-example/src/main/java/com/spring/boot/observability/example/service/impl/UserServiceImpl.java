@@ -15,6 +15,9 @@ import com.spring.boot.observability.example.domain.repository.UserDomainReposit
 import com.spring.boot.observability.example.model.UserModel;
 import com.spring.boot.observability.example.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.client.producer.SendStatus;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 
 /**
  * 用户服务实现
@@ -31,23 +34,43 @@ public class UserServiceImpl implements UserService {
     private final RedisTemplate<String, UserEntity> userRedisTemplate;
     private final RedisTemplate<Object, Object> redisTemplate;
 
+    private final RocketMQTemplate rocketMQTemplate;
+
     public UserServiceImpl(
             UserDomainRepository userDomainRepository,
             RedisTemplate<String, UserEntity> userRedisTemplate,
-            RedisTemplate<Object, Object> redisTemplate
+            RedisTemplate<Object, Object> redisTemplate,
+            RocketMQTemplate rocketMQTemplate
     ) {
         this.userDomainRepository = userDomainRepository;
         this.userRedisTemplate = userRedisTemplate;
         this.redisTemplate = redisTemplate;
+        this.rocketMQTemplate = rocketMQTemplate;
     }
 
     @Override
     public Mono<UserModel> getById(Long id) {
         return Optional.of(id)
                 .map(this::getUserEntityById)
-                .map(UserServiceImpl::applyAsUserModel)
+                .map(this::sendUserMessage)
                 .map(Mono::just)
                 .orElse(Mono.empty());
+    }
+
+    /**
+     * formats: `topicName:tags`
+     */
+    private static final String TOPIC_NAME_TAGS = "userTopicName:userTags";
+
+    private UserModel sendUserMessage(UserEntity userEntity) {
+        SendResult sendResult = rocketMQTemplate.syncSend(TOPIC_NAME_TAGS, userEntity);
+        log.info("sendResult={}", sendResult);
+        if (sendResult.getSendStatus() != SendStatus.SEND_OK) {
+            // 消息发送失败
+            // 如何处理
+            log.error("sendUserMessage fail, sendResult={}, userEntity={}", sendResult, userEntity);
+        }
+        return applyAsUserModel(userEntity);
     }
 
     private static UserModel applyAsUserModel(UserEntity userEntity) {
