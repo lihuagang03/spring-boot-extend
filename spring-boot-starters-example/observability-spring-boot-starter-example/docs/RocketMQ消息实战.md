@@ -47,6 +47,18 @@ Wed Dec 27 13:50:45 CST 2023 rocketmq-proxy startup successfully
 ```
 
 
+# 启动Dashboard
+> [部署 & 运维 > RocketMQ Dashboard](https://rocketmq.apache.org/zh/docs/deploymentOperations/04Dashboard/)
+
+```properties
+server.port=8083
+
+rocketmq.config.namesrvAddr=localhost:9876
+rocketmq.config.isVIPChannel=true
+rocketmq.config.timeoutMillis=5000
+```
+
+
 # 参考引用
 * [快速开始](https://rocketmq.apache.org/zh/docs/quickStart/01quickstart)
 * [部署方式](https://rocketmq.apache.org/zh/docs/deploymentOperations/01deploy/)
