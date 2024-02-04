@@ -56,11 +56,12 @@
   </dependencyManagement>
 
   <dependencies>
-    <!-- spring-boot -->
+    <!-- spring-boot-starter -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
+    <!-- micrometer -->
     <dependency>
       <groupId>io.micrometer</groupId>
       <artifactId>micrometer-registry-prometheus</artifactId>
@@ -79,7 +80,7 @@
       <artifactId>simpleclient_spring_boot</artifactId>
       <optional>true</optional>
     </dependency>
-
+    <!-- spring-boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure</artifactId>
@@ -181,5 +182,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>

@@ -46,9 +46,11 @@
       <artifactId>mybatis-plus-boot-starter</artifactId>
       <version>${mybatis-plus-boot-starter.version}</version>
     </dependency>
+    <!-- spring-boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -146,5 +148,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>
