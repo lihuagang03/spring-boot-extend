@@ -34,9 +34,9 @@ spring:
       shutdown-timeout: 100ms
       pool:
         enabled: true
-        max-idle: 8
+        max-idle: 1
         min-idle: 0
-        max-active: 8
+        max-active: 1
         max-wait: -1
         time-between-eviction-runs: 5m
   # CacheProperties
@@ -53,15 +53,15 @@ spring:
 # .A.11. Server Properties
 server:
   port: 8383
-#  tomcat:
-#    threads:
-#      max: 200
-#      min-spare: 10
-#    accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
-#      enabled: true
-#      pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
-#      prefix: tomcat_access
-#      directory: "/opt/logs/${spring.application.name}/"
+  tomcat:
+    threads:
+      max: 1
+      min-spare: 1
+    accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
+      enabled: true
+      pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
+      prefix: tomcat_access
+      directory: "${HOME}/logs/${spring.application.name}/"
 
 logging:
   level:
@@ -72,7 +72,7 @@ logging:
 management:
   # ManagementServerProperties
   server:
-    port: 38081
+#    port: 38081
     base-path: ""
   endpoints:
     # WebEndpointProperties

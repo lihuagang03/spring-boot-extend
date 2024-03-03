@@ -10,7 +10,7 @@ rocketmq:
     enable-msg-trace: true
 #    send-message-timeout: 3000
   pull-consumer:
-    group: "userGroup"
+    group: "userGroup-pull-consumer-userTopicName"
 #    namespace: "userNamespace"
     topic: "userTopicName"
 #    message-model: "CLUSTERING"
@@ -18,11 +18,11 @@ rocketmq:
 #    pull-batch-size: 10
     enable-msg-trace: true
   consumer:
-    group: "userGroup"
+    group: "userGroup-consumer-userTopicName"
 #    namespace: "userNamespace"
     topic: "userTopicName"
-    listeners:
-      { "userGroup": { "userTopicName": true } }
+#    listeners:
+#      { "userGroup": { "userTopicName": true } }
 #    message-model: "CLUSTERING"
 #    selector-type: "TAG"
 #    selector-expression: "*"
