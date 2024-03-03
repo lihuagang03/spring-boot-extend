@@ -31,22 +31,10 @@
       <charset>UTF-8</charset>
     </encoder>
   </appender>
-  <!-- 上报给logstash -->
-<!--  <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
-<!--    <destination>${StashUrl}</destination>-->
-<!--    &lt;!&ndash; logstash logback plugin &ndash;&gt;-->
-<!--    <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">-->
-<!--      &lt;!&ndash; add TID(traceId) field &ndash;&gt;-->
-<!--      <provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.TraceIdJsonProvider"/>-->
-<!--      &lt;!&ndash; add SW_CTX(SkyWalking context) field &ndash;&gt;-->
-<!--      <provider class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.logstash.SkyWalkingContextJsonProvider"/>-->
-<!--      <customFields>{"appName":"${app.name}"}</customFields>-->
-<!--    </encoder>-->
-<!--  </appender>-->
   <!-- add converter for %tid -->
-  <conversionRule conversionWord="tid" converterClass="org.apache.skywalking.apm.toolkit.log.logback.v1.x.LogbackPatternConverter"/>
+<!--  <conversionRule conversionWord="tid" converterClass="org.apache.skywalking.apm.toolkit.log.logback.v1.x.LogbackPatternConverter"/>-->
   <!-- add converter for %sw_ctx -->
-  <conversionRule conversionWord="sw_ctx" converterClass="org.apache.skywalking.apm.toolkit.log.logback.v1.x.LogbackSkyWalkingContextPatternConverter"/>
+<!--  <conversionRule conversionWord="sw_ctx" converterClass="org.apache.skywalking.apm.toolkit.log.logback.v1.x.LogbackSkyWalkingContextPatternConverter"/>-->
   <!-- 打印需要单独收集的业务数据，如面向报表、业务明细等需求 -->
   <appender name="REPORT" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>${log.path}/${app.name}.report.log</file>
@@ -71,6 +59,5 @@
   <root level="INFO">
     <appender-ref ref="STDOUT"/>
     <appender-ref ref="FILE"/>
-<!--    <appender-ref ref="LOGSTASH"/>-->
   </root>
 </configuration>
