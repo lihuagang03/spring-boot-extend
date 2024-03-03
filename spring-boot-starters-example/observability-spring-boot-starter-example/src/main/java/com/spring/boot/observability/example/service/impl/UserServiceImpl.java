@@ -3,7 +3,9 @@ package com.spring.boot.observability.example.service.impl;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,11 +15,13 @@ import org.springframework.stereotype.Service;
 
 import reactor.core.publisher.Mono;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.spring.boot.observability.example.domain.entity.UserEntity;
 import com.spring.boot.observability.example.domain.repository.UserDomainRepository;
 import com.spring.boot.observability.example.model.UserModel;
 import com.spring.boot.observability.example.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.client.producer.SendStatus;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -39,6 +43,8 @@ public class UserServiceImpl implements UserService, InitializingBean {
 
     private final RocketMQTemplate rocketMQTemplate;
 
+    private final ThreadPoolExecutor threadPoolExecutor;
+
     public UserServiceImpl(
             UserDomainRepository userDomainRepository,
             RedisTemplate<String, UserEntity> userRedisTemplate,
@@ -49,12 +55,23 @@ public class UserServiceImpl implements UserService, InitializingBean {
         this.userRedisTemplate = userRedisTemplate;
         this.redisTemplate = redisTemplate;
         this.rocketMQTemplate = rocketMQTemplate;
+
+        this.threadPoolExecutor = new ThreadPoolExecutor(1, 1,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(1),
+                new ThreadFactoryBuilder()
+                        .setNameFormat("observability-thread-%d")
+                        .setDaemon(true)
+                        .build()
+        );
     }
 
     @Override
-    public void afterPropertiesSet() {
-        Executors.newFixedThreadPool(1)
-                .execute(() -> {
+    public void afterPropertiesSet() throws Exception {
+        rocketMQTemplate.getConsumer()
+                .subscribe(MESSAGE_TOPIC_NAME, MESSAGE_TAGS);
+
+        threadPoolExecutor.execute(() -> {
                     List<UserEntity> userEntityList = rocketMQTemplate.receive(UserEntity.class);
                     log.info("receive userEntityList={}", userEntityList);
                 });
@@ -69,14 +86,16 @@ public class UserServiceImpl implements UserService, InitializingBean {
                 .orElse(Mono.empty());
     }
 
+    public static final String MESSAGE_TOPIC_NAME = "userTopicName";
+    public static final String MESSAGE_TAGS = "userTags";
     /**
      * formats: `topicName:tags`
      */
-    private static final String TOPIC_NAME_TAGS = "userTopicName:userTags";
+    private static final String MESSAGE_TOPIC_NAME_TAGS = MESSAGE_TOPIC_NAME + ':' + MESSAGE_TAGS;
 
     private UserModel sendUserMessage(UserEntity userEntity) {
         // 普通消息
-        SendResult sendResult = rocketMQTemplate.syncSend(TOPIC_NAME_TAGS, userEntity);
+        SendResult sendResult = rocketMQTemplate.syncSend(MESSAGE_TOPIC_NAME_TAGS, userEntity, 10_000L);
         log.info("syncSend sendResult={}", sendResult);
         if (sendResult.getSendStatus() != SendStatus.SEND_OK) {
             // 消息发送失败
@@ -86,12 +105,28 @@ public class UserServiceImpl implements UserService, InitializingBean {
         // 顺序消息
         // ...
         // 定时/延时消息
-        sendResult = rocketMQTemplate.syncSendDelayTimeSeconds(TOPIC_NAME_TAGS, userEntity, 30L);
+        sendResult = rocketMQTemplate.syncSendDelayTimeSeconds(MESSAGE_TOPIC_NAME_TAGS, userEntity, 30L);
         log.info("syncSendDelayTimeSeconds sendResult={}", sendResult);
         // 事务消息
         // ...
+        // 异步消息
+        rocketMQTemplate.asyncSend(MESSAGE_TOPIC_NAME_TAGS, userEntity,
+                new CustomSendCallback(), 10_000L);
 
         return applyAsUserModel(userEntity);
+    }
+
+    @Slf4j
+    private static class CustomSendCallback implements SendCallback {
+        @Override
+        public void onSuccess(SendResult sendResult) {
+            log.info("message SendCallback.onSuccess(), sendResult={}", sendResult);
+        }
+
+        @Override
+        public void onException(Throwable e) {
+            log.info("message SendCallback.onException()", e);
+        }
     }
 
     private static UserModel applyAsUserModel(UserEntity userEntity) {
@@ -138,8 +173,15 @@ public class UserServiceImpl implements UserService, InitializingBean {
         // set to Cache
         redisTemplate.<String, Object>opsForHash()
                 .putAll(cacheKey, JACKSON_2_HASH_MAPPER.toHash(userEntity));
-        redisTemplate.<String, String>opsForHash()
-                .putAll(cacheKey + ":BeanUtils", BEAN_UTILS_HASH_MAPPER.toHash(userEntity));
+        threadPoolExecutor.execute(() -> {
+                    String key = cacheKey + ":BeanUtils";
+                    log.info("async redisTemplate opsForHash, key={}", key);
+                    redisTemplate.<String, String>opsForHash()
+                            .putAll(key, BEAN_UTILS_HASH_MAPPER.toHash(userEntity));
+                }
+        );
+//        redisTemplate.<String, String>opsForHash()
+//                .putAll(cacheKey + ":BeanUtils", BEAN_UTILS_HASH_MAPPER.toHash(userEntity));
 //        redisTemplate.<byte[], byte[]>opsForHash()
 //                .putAll(cacheKey + ":Object-to-Hash", OBJECT_HASH_MAPPER.toHash(userEntity));
         return userEntity;

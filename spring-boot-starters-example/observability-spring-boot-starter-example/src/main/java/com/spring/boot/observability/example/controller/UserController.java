@@ -33,9 +33,9 @@ public class UserController {
     public Mono<UserModel> getById(@PathVariable("userId") Long userId) {
         Mono<UserModel> mono = userService.getById(userId);
         // mono=MonoJust
-        log.info("mono={}", mono);
+//        log.info("mono={}", mono);
         // mono={"scanAvailable":true}
-        log.info("mono={}", JSON.toJSONString(mono));
+//        log.info("mono={}", JSON.toJSONString(mono));
         return mono;
     }
 
