@@ -13,7 +13,7 @@ Redis对象序列化/反序列化
 > 不推荐，缓存值可读性差，长而浪费空间！
 
 ```shell
-localhost:6379> GET "user:user-info::123456"
+localhost:6379> GET "user:user.info::123456"
 "\xac\xed\x00\x05sr\x00+com.spring.boot.redis.example.model.UserDto\xb7\x8a\xefY\xa8\xccS`
 \x02\x00\x03L\x00\x02idt\x00\x10Ljava/lang/Long;
 L\x00\bnickNamet\x00\x12Ljava/lang/String;
@@ -36,7 +36,7 @@ valuexr\x00\x10java.lang.Number\x86\xac\x95\x1d\x0b\x94\xe0\x8b\x02\x00\x00xp\x0
 
 类型信息
 ```shell
-localhost:6379> GET "user:user-info::123456"
+localhost:6379> GET "user:user.info::123456"
 "{\"@class\":\"com.spring.boot.redis.example.model.UserDto\",\"id\":123456,\"phone\":\"13666555888\",\"nickName\":\"\xe6\x9d\x8e\xe5\x9b\x9b\"}"
 ```
 
@@ -52,7 +52,7 @@ localhost:6379> GET "user:user-info::123456"
 
 类型信息丢失，读取时对象类型转换失败。
 ```shell
-localhost:6379> GET "user:user-info::123456"
+localhost:6379> GET "user:user.info::123456"
 "{\"id\":123456,\"phone\":\"13666555888\",\"nickName\":\"\xe6\x9d\x8e\xe5\x9b\x9b\"}"
 ```
 ```shell
@@ -68,7 +68,7 @@ java.lang.ClassCastException: class java.util.LinkedHashMap cannot be cast to cl
 
 类型信息
 ```shell
-localhost:6379> GET "user:user-info::123456"
+localhost:6379> GET "user:user.info::123456"
 "{\"@type\":\"com.spring.boot.redis.example.model.UserDto\",\"id\":123456L,\"nickName\":\"\xe6\x9d\x8e\xe5\x9b\x9b\",\"phone\":\"13666555888\"}"
 ```
 
@@ -84,7 +84,7 @@ localhost:6379> GET "user:user-info::123456"
 
 类型信息丢失，读取时对象类型转换失败。
 ```shell
-localhost:6379> GET "user:user-info::123456"
+localhost:6379> GET "user:user.info::123456"
 "{\"id\":123456,\"nickName\":\"\xe6\x9d\x8e\xe5\x9b\x9b\",\"phone\":\"13666555888\"}"
 ```
 ```shell

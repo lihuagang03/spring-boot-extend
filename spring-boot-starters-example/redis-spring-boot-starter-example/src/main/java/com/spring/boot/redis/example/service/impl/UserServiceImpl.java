@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
         log.info("create UserServiceImpl");
     }
 
-    @Cacheable(cacheNames = "user-info", key = "#userId")
+    @Cacheable(cacheNames = "user.info", key = "#userId")
     @Override
     public UserDto getById(long userId) {
         log.info("getById, userId={}", userId);
