@@ -7,7 +7,7 @@ spring:
   application:
     name: redis-spring-boot-starter-example
 #  profiles:
-#    active: prod,test,dev
+#    active: prod,pre,test,dev
   # RedisProperties
   redis:
     database: 0
@@ -26,30 +26,37 @@ spring:
 #    jedis:
 #      pool:
 #        enabled: true
-#        max-idle: 8
-#        min-idle: 0
-#        max-active: 8
+#        max-idle: 50
+#        min-idle: 10
+#        max-active: 50
 #        max-wait: 300ms
-#        time-between-eviction-runs: 5m
+#        time-between-eviction-runs: 10m
     lettuce:
       shutdown-timeout: 100ms
       pool:
         enabled: true
-        max-idle: 8
-        min-idle: 0
-        max-active: 8
-        max-wait: -1
-        time-between-eviction-runs: 5m
+        # 根据业务缓存实际的平均响应rt和请求量来合理调整
+        max-idle: 50
+        min-idle: 10
+        max-active: 50
+        max-wait: 300ms
+        time-between-eviction-runs: 10m
+#      cluster:
+#        refresh:
+#          dynamic-refresh-sources: true
+#          period: 10s
+#          adaptive: false
   # CacheProperties
   cache:
     type: redis
-#    cache-names: ["user"]
+    cache-names: "user-cache1,user-cache2"
     redis:
-      time-to-live: 5m
+#      time-to-live: "10m"
+      time-to-live: 1d
 #      cache-null-values: true
       key-prefix: "user:"
       use-key-prefix: true
-#      enable-statistics: true
+      enable-statistics: true
 
 # .A.11. Server Properties
 server:
@@ -57,9 +64,9 @@ server:
   tomcat:
     threads:
       max: 200
-      min-spare: 10
+      min-spare: 20
     accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
       enabled: true
       pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
-      prefix: tomcat_access
+      prefix: "tomcat_access"
       directory: "~/logs/${spring.application.name}/"
