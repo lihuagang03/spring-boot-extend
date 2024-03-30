@@ -5,9 +5,9 @@
 # .A.1. Core Properties
 spring:
   application:
-    name: redis-spring-boot-starter-example
+    name: "redis-spring-boot-starter-example"
 #  profiles:
-#    active: prod,pre,test,dev
+#    active: "prod,pre,test,dev"
   # RedisProperties
   redis:
     database: 0
@@ -15,7 +15,7 @@ spring:
     port: 6379
     timeout: 1s
     connect-timeout: 300ms
-    client-name: "user-cache-example"
+    client-name: "${spring.application.name}"
 #    client-type: lettuce
 #    sentinel:
 #      master: ""
