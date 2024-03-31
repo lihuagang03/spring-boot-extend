@@ -1,7 +1,11 @@
 
+# Appendices
+# Appendix A: Common Application Properties
+
+# .A.1. Core Properties
 spring:
   application:
-    name: mybatis-plus-spring-boot-starter-example
+    name: 'mybatis-plus-spring-boot-starter-example'
   servlet:
     multipart:
       max-file-size: 1MB
@@ -10,69 +14,83 @@ spring:
     format:
       date: 'yyyy-MM-dd'
       date-time: 'yyyy-MM-dd HH:mm:ss'
-#    dispatch-trace-request: true
   jackson:
-    default-property-inclusion: NON_NULL
-#    serialization.WRITE_DATES_AS_TIMESTAMPS: false
+#    date-format: 'yyyy-MM-dd HH:mm:ss'
+    default-property-inclusion: non_null
+#    serialization:
+#      WRITE_DATES_AS_TIMESTAMPS: false
+  # DataSourceProperties
   datasource:
+    generate-unique-name: false
+    name: "${spring.application.name}"
+    # DruidDataSourceAutoConfigure
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/digital?autoReconnect=true&failOverReadOnly=false&maxReconnects=10&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: "jdbc:mysql://localhost:3306/digital?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=3&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true"
     # 配置中心里配置，防止泄露
-    username: root
-    password: 12345678
+    username: "root"
+    password: "12345678"
+    # DruidStatProperties
     druid:
-#      配置初始化大小、最小、最大
-      initial-size: 5
-      min-idle: 10
-      max-active: 20
-#      配置获取连接等待超时的时间
-      max-wait: 6000
-#      配置间隔多久才进行一次检测，检测需要关闭的空闲连接
-      time-between-eviction-runs-millis: 60000
-#      配置一个连接在池中最小生存的时间
-      min-evictable-idle-time-millis: 600000
-      validation-query: select 1
+      # DruidAbstractDataSource
+      # 根据业务缓存实际的平均响应rt和请求量来合理调整
+      # 配置初始化大小、最小、最大
+      initial-size: 10
+      min-idle: 20
+      max-active: 100
+      # 配置获取连接等待超时的时间
+      max-wait: 3_000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60_000
+      # 配置一个连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 600_000
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
-      keep-alive: true
+      validation-query: "select 'x'"
+#      keep-alive: true
       pool-prepared-statements: true
-      max-pool-prepared-statement-per-connection-size: 20
+#      max-pool-prepared-statement-per-connection-size: 10
       max-open-prepared-statements: 20
-      use-global-data-source-stat: false
-#      配置监控统计拦截的filters
+#      use-global-data-source-stat: true
+      # 配置监控统计拦截的filters
       filters: stat,wall,slf4j
-#      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=1000
+#      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=1000;druid.stat.logSlowSql=true
+      # DruidFilterConfiguration
       filter:
         stat:
           enabled: true
           merge-sql: true
           slow-sql-millis: 1000
           log-slow-sql: true
-      stat-view-servlet:
-        enabled: false
-      web-stat-filter:
-        enabled: false
+#        config:
+#          enabled: true
+#      stat-view-servlet:
+#        enabled: false
+#      web-stat-filter:
+#        enabled: false
 
-server:
-  port: 8080
-  tomcat:
-    threads:
-      max: 200
-      min-spare: 10
-    accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
-      enabled: true
-      pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
-      prefix: tomcat_access
-      directory: "/opt/logs/${spring.application.name}/"
-
+# MybatisPlusProperties
 mybatis-plus:
   executor-type: reuse
-#  事务未实时提交，数据未实时写入，未查询到刚写入的数据记录
+  # 事务未实时提交，数据未实时写入，未查询到刚写入的数据记录
 #  executor-type: batch
+  # GlobalConfig
   global-config:
     db-config:
       id-type: auto
     banner: true
     enable-sql-runner: true
 #  db-type: mysql
+
+# .A.11. Server Properties
+server:
+  port: 8387
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 20
+    accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
+      enabled: true
+      pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
+      prefix: tomcat_access
+      directory: "~/logs/${spring.application.name}/"
