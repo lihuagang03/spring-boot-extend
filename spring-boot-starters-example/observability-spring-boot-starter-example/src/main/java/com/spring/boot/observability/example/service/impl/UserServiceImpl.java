@@ -25,11 +25,12 @@ import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.client.producer.SendStatus;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.apache.skywalking.apm.toolkit.trace.TraceContext;
+import org.slf4j.MDC;
 
 /**
  * 用户服务实现
  *
- * @author guang.yi
  * @since 2023/12/16
  */
 @Slf4j
@@ -184,6 +185,23 @@ public class UserServiceImpl implements UserService, InitializingBean {
 //                .putAll(cacheKey + ":BeanUtils", BEAN_UTILS_HASH_MAPPER.toHash(userEntity));
 //        redisTemplate.<byte[], byte[]>opsForHash()
 //                .putAll(cacheKey + ":Object-to-Hash", OBJECT_HASH_MAPPER.toHash(userEntity));
+
+        try {
+            // mdc
+            MDC.put("traceId", TraceContext.traceId());
+            MDC.put("userId", "123456");
+//            MDC.put("responseCode", "0");
+//            MDC.put("responseTime", "123");
+
+            // CorrelationContext-关联上下文，sw3-correlation
+//            TraceContext.putCorrelation("traceId", TraceContext.traceId());
+//            TraceContext.putCorrelation("userId", "123456789");
+
+            log.info("getUserEntityById, userEntity={}", userEntity);
+        } finally {
+            MDC.clear();
+        }
+
         return userEntity;
     }
 
