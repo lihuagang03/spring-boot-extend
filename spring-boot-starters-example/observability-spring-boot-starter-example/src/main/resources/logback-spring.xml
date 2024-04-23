@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- https://logback.qos.ch/manual/configuration.html -->
-<configuration>
+<configuration scan="true" scanPeriod="10 seconds">
   <springProperty scope="context" name="app.name" source="spring.application.name"/>
   <springProperty scope="context" name="log.path" source="logging.file.path"/>
 <!--  <property name="app.name" value="observability-spring-boot-starter-example"/>-->
-<!--  <property name="log.path" value="/opt/logs/${app.name}"/>-->
+<!--  <property name="log.path" value="${HOME}/logs/${app.name}"/>-->
 
   <!-- logback plugin  https://github.com/apache/skywalking-java/blob/main/docs/en/setup/service-agent/java-agent/Application-toolkit-logback-1.x.md -->
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
       <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
-        <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36} %msg%n</Pattern>
+        <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
       </layout>
       <charset>UTF-8</charset>
     </encoder>
@@ -26,15 +26,11 @@
     </rollingPolicy>
     <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
       <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
-        <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36} %msg%n</Pattern>
+        <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36} -%msg%n</Pattern>
       </layout>
       <charset>UTF-8</charset>
     </encoder>
   </appender>
-  <!-- add converter for %tid -->
-<!--  <conversionRule conversionWord="tid" converterClass="org.apache.skywalking.apm.toolkit.log.logback.v1.x.LogbackPatternConverter"/>-->
-  <!-- add converter for %sw_ctx -->
-<!--  <conversionRule conversionWord="sw_ctx" converterClass="org.apache.skywalking.apm.toolkit.log.logback.v1.x.LogbackSkyWalkingContextPatternConverter"/>-->
   <!-- 打印需要单独收集的业务数据，如面向报表、业务明细等需求 -->
   <appender name="REPORT" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>${log.path}/${app.name}.report.log</file>
@@ -56,8 +52,17 @@
     <appender-ref ref="REPORT"/>
   </logger>
 
+  <!-- https://logback.qos.ch/manual/appenders.html#AsyncAppender -->
+  <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <discardingThreshold>0</discardingThreshold>
+    <queueSize>256</queueSize>
+    <neverBlock>true</neverBlock>
+    <appender-ref ref="STDOUT"/>
+  </appender>
+
   <root level="INFO">
     <appender-ref ref="STDOUT"/>
-    <appender-ref ref="FILE"/>
+<!--    <appender-ref ref="FILE"/>-->
+<!--    <appender-ref ref="ASYNC"/>-->
   </root>
 </configuration>
