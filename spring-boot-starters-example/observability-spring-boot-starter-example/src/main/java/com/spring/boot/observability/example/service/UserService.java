@@ -7,7 +7,6 @@ import com.spring.boot.observability.example.model.UserModel;
 /**
  * 用户服务
  *
- * @author guang.yi
  * @since 2023/12/16
  */
 public interface UserService {

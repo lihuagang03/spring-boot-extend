@@ -19,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Redis配置
  *
- * @author guang.yi
  * @since 2023/12/16
  * @see org.springframework.boot.autoconfigure.data.redis.RedisReactiveAutoConfiguration
  * @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration

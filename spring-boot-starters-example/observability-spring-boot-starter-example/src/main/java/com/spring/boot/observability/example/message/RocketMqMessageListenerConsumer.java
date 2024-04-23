@@ -11,7 +11,6 @@ import org.apache.rocketmq.spring.core.RocketMQListener;
 /**
  * RocketMQ消息消费者
  *
- * @author guang.yi
  * @since 2024/3/3
  */
 @Slf4j

@@ -28,7 +28,6 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 /**
  * Redis配置
  *
- * @author guang.yi
  * @since 2023/7/30
  * @see org.springframework.boot.autoconfigure.data.redis.RedisReactiveAutoConfiguration
  * @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration

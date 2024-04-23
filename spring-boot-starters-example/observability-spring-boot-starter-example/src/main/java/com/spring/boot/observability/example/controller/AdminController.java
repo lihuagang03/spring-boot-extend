@@ -1,6 +1,7 @@
 package com.spring.boot.observability.example.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
@@ -8,10 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 管理员控制器
  *
- * @author guang.yi
  * @since 2023/12/8
  */
 @Slf4j
+@RequestMapping(path = "/admin")
 @RestController("adminController")
 public class AdminController {
 
