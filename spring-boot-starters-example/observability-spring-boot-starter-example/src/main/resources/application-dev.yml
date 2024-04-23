@@ -5,26 +5,31 @@ rocketmq:
   name-server: "localhost:9876"
   access-channel: "LOCAL"
   producer:
-    group: "userGroup"
+    group: "userProducerGroup"
 #    namespace: "userNamespace"
-    enable-msg-trace: true
 #    send-message-timeout: 3000
-  pull-consumer:
-    group: "userGroup-pull-consumer-userTopicName"
-#    namespace: "userNamespace"
-    topic: "userTopicName"
-#    message-model: "CLUSTERING"
-#    selector-type: "TAG"
-#    pull-batch-size: 10
     enable-msg-trace: true
-  consumer:
-    group: "userGroup-consumer-userTopicName"
+#    instance-name: "DEFAULT"
+  pull-consumer:
+    group: "userConsumerGroup"
 #    namespace: "userNamespace"
     topic: "userTopicName"
-#    listeners:
-#      { "userGroup": { "userTopicName": true } }
 #    message-model: "CLUSTERING"
 #    selector-type: "TAG"
 #    selector-expression: "*"
 #    pull-batch-size: 10
     enable-msg-trace: true
+#    instance-name: "DEFAULT"
+  consumer:
+    group: "userConsumerGroup"
+#    namespace: "userNamespace"
+    topic: "userTopicName"
+    # 推送消费者的监听器，默认开启
+#    listeners:
+#      { "userConsumerGroup": { "userTopicName": false } }
+#    message-model: "CLUSTERING"
+#    selector-type: "TAG"
+#    selector-expression: "*"
+#    pull-batch-size: 10
+    enable-msg-trace: true
+#    instance-name: "DEFAULT"
