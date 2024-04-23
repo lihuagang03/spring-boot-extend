@@ -69,11 +69,32 @@
         <artifactId>apm-toolkit-logback-1.x</artifactId>
         <version>${skywalking.version}</version>
       </dependency>
-<!--      <dependency>-->
-<!--        <groupId>net.logstash.logback</groupId>-->
-<!--        <artifactId>logstash-logback-encoder</artifactId>-->
-<!--        <version>7.4</version>-->
-<!--      </dependency>-->
+
+      <!-- debug -->
+      <dependency>
+        <groupId>org.apache.skywalking</groupId>
+        <artifactId>apm-toolkit-logback-1.x-activation</artifactId>
+        <version>${skywalking.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.skywalking</groupId>
+        <artifactId>apm-trace-ignore-plugin</artifactId>
+        <version>${skywalking.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.skywalking</groupId>
+        <artifactId>apm-agent-core</artifactId>
+        <version>${skywalking.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.skywalking</groupId>
+        <artifactId>apm-agent</artifactId>
+        <version>${skywalking.version}</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -96,6 +117,10 @@
 <!--    <dependency>-->
 <!--      <groupId>org.springframework.boot</groupId>-->
 <!--      <artifactId>spring-boot-starter-web</artifactId>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.boot</groupId>-->
+<!--      <artifactId>spring-boot-starter-reactor-netty</artifactId>-->
 <!--    </dependency>-->
     <!-- jdbc -->
 <!--    <dependency>-->
@@ -129,6 +154,11 @@
 <!--      <artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
 <!--    </dependency>-->
 
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+    </dependency>
+
     <!-- trace -->
     <dependency>
       <groupId>org.apache.skywalking</groupId>
@@ -138,9 +168,23 @@
       <groupId>org.apache.skywalking</groupId>
       <artifactId>apm-toolkit-logback-1.x</artifactId>
     </dependency>
+
+    <!-- debug -->
+    <dependency>
+      <groupId>org.apache.skywalking</groupId>
+      <artifactId>apm-trace-ignore-plugin</artifactId>
+    </dependency>
 <!--    <dependency>-->
-<!--      <groupId>net.logstash.logback</groupId>-->
-<!--      <artifactId>logstash-logback-encoder</artifactId>-->
+<!--      <groupId>org.apache.skywalking</groupId>-->
+<!--      <artifactId>apm-toolkit-logback-1.x-activation</artifactId>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.skywalking</groupId>-->
+<!--      <artifactId>apm-agent-core</artifactId>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.skywalking</groupId>-->
+<!--      <artifactId>apm-agent</artifactId>-->
 <!--    </dependency>-->
 
     <dependency>
