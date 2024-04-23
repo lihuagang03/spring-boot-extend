@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService, InitializingBean {
 
         threadPoolExecutor.execute(() -> {
                     List<UserEntity> userEntityList = rocketMQTemplate.receive(UserEntity.class);
-                    log.info("receive userEntityList={}", userEntityList);
+                    log.info("receive message, userEntityList={}", userEntityList);
                 });
     }
 
@@ -187,18 +187,21 @@ public class UserServiceImpl implements UserService, InitializingBean {
 //                .putAll(cacheKey + ":Object-to-Hash", OBJECT_HASH_MAPPER.toHash(userEntity));
 
         try {
-            // mdc
-            MDC.put("traceId", TraceContext.traceId());
+            // 在日志输出前设置过程数据到MDC
+            // 可选-同步/异步
             MDC.put("userId", "123456");
 //            MDC.put("responseCode", "0");
 //            MDC.put("responseTime", "123");
+            // 异步输出日志时，才需要设置
+            MDC.put("traceId", TraceContext.traceId());
 
             // CorrelationContext-关联上下文，sw3-correlation
 //            TraceContext.putCorrelation("traceId", TraceContext.traceId());
-//            TraceContext.putCorrelation("userId", "123456789");
+            TraceContext.putCorrelation("userId", "123456789");
 
             log.info("getUserEntityById, userEntity={}", userEntity);
         } finally {
+            // 资源清理
             MDC.clear();
         }
 

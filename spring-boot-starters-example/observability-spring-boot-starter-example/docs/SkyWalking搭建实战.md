@@ -18,6 +18,9 @@ nohup bin/startup.sh &
 nohup bin/oapService.sh > oapService.log 2>&1 &
 
 tail -f logs/skywalking-oap-server.log
+Serving HTTP at /0:0:0:0:0:0:0:0%0:9090 - http://127.0.0.1:9090/
+Serving HTTP at /0:0:0:0:0:0:0:0%0:12801 - http://127.0.0.1:12801/
+The key booting parameters of Apache SkyWalking OAP are listed as following.
 ```
 
 ## SkyWalking UI 启动
