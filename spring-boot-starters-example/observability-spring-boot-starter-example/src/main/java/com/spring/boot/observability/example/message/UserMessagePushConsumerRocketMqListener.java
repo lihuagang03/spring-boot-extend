@@ -19,7 +19,7 @@ import org.apache.rocketmq.spring.core.RocketMQListener;
 @Slf4j
 @Component
 @RocketMQMessageListener(
-        consumerGroup = "userConsumerGroup",
+        consumerGroup = "userConsumerGroup" + '%' + UserServiceImpl.MESSAGE_TAGS,
         topic = UserServiceImpl.MESSAGE_TOPIC_NAME,
 //        selectorType = SelectorType.TAG,
         selectorExpression = UserServiceImpl.MESSAGE_TAGS, // "*"
