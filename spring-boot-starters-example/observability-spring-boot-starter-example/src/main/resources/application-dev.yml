@@ -6,12 +6,13 @@ rocketmq:
   access-channel: "LOCAL"
   producer:
     group: "userProducerGroup"
+    # Topic主题: userNamespace%userTopicName
 #    namespace: "userNamespace"
 #    send-message-timeout: 3000
     enable-msg-trace: true
 #    instance-name: "DEFAULT"
   pull-consumer:
-    group: "userConsumerGroup"
+    group: "userConsumerGroup%userTags"
 #    namespace: "userNamespace"
     topic: "userTopicName"
 #    message-model: "CLUSTERING"
@@ -21,12 +22,12 @@ rocketmq:
     enable-msg-trace: true
 #    instance-name: "DEFAULT"
   consumer:
-    group: "userConsumerGroup"
+    group: "userConsumerGroup%userTags"
 #    namespace: "userNamespace"
     topic: "userTopicName"
     # 推送消费者的监听器，默认开启
 #    listeners:
-#      { "userConsumerGroup": { "userTopicName": false } }
+#      { "userConsumerGroup%userTags": { "userTopicName": false } }
 #    message-model: "CLUSTERING"
 #    selector-type: "TAG"
 #    selector-expression: "*"
