@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 配置属性集
  *
- * @author guang.yi
  * @since 2023/7/21
  * @see NacosConfigurationProperties
  */

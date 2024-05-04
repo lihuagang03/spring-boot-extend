@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 配置属性
  *
- * @author guang.yi
  * @since 2023/7/21
  * @see NacosValue
  * @see NacosConfigListener

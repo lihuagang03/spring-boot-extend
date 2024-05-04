@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 /**
  * 配置服务实现
  *
- * @author guang.yi
  * @since 2023/7/19
  * @see NacosInjected
  */
