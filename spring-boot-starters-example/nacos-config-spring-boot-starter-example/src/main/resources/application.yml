@@ -5,10 +5,10 @@
 # .A.1. Core Properties
 spring:
   application:
-    name: nacos-config-spring-boot-starter-example
+    name: "nacos-config-spring-boot-starter-example"
 #  profiles:
-#    active: dev
-#    active: prod,test,dev
+#    active: "dev"
+#    active: "prod,test,dev"
 
 # .A.11. Server Properties
 server:
@@ -34,18 +34,18 @@ management:
 #      show-components: always
       show-details: always
 
-# config
+# config center
 # com.alibaba.boot.nacos.config.autoconfigure.NacosConfigAutoConfiguration
 # com.alibaba.boot.nacos.config.properties.NacosConfigProperties
 nacos:
   # 最大重试次数
-  maxRetry: 10
+  max-retry: 10
   # 重试时间
-  configRetryTime: 3000
+  config-retry-time: 3000
   # 长轮询连接的超时时间
-  configLongPollTimeout: 60000
+  config-long-poll-timeout: 60000
   # 启用远程同步配置
-  enableRemoteSyncConfig: true
+  enable-remote-sync-config: true
   config:
 #    enabled: true
     # 配置中心服务端地址

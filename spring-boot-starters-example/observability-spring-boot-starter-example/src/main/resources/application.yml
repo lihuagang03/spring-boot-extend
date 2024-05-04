@@ -4,9 +4,9 @@
 
 spring:
   application:
-    name: observability-spring-boot-starter-example
+    name: "observability-spring-boot-starter-example"
   profiles:
-    active: dev
+    active: "dev"
   # RedisProperties
   redis:
     database: 0
