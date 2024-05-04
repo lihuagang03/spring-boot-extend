@@ -13,7 +13,6 @@ import com.spring.boot.reactive.web.flux.entity.Greeting;
  * Create a WebClient
  * Web客户端
  *
- * @author guang.yi
  * @since 2023/8/14
  * @see WebClient
  */

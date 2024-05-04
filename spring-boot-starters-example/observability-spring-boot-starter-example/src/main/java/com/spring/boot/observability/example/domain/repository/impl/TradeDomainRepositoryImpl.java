@@ -10,7 +10,6 @@ import com.spring.boot.observability.example.domain.repository.TradeDomainReposi
 /**
  * 交易单领域仓储实现
  *
- * @author guang.yi
  * @since 2023/12/16
  */
 @Repository("tradeDomainRepository")

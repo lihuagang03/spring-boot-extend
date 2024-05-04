@@ -5,7 +5,6 @@ import java.util.List;
 /**
  * 单线程的事件侦听器
  *
- * @author guangyi
  * @since 2023/7/27
  */
 public interface SingleThreadEventListener<T> extends MyEventListener<T> {

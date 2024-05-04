@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 本地缓存验证程序
  *
- * @author guang.yi
  * @since 2023/9/12
  */
 @Slf4j

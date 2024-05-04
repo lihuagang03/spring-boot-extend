@@ -23,7 +23,6 @@ import javax.sql.DataSource;
 /**
  * MybatisPlus 自动配置
  *
- * @author lihuagang
  * @since 2023/6/9
  * @see MybatisPlusAutoConfiguration
  */

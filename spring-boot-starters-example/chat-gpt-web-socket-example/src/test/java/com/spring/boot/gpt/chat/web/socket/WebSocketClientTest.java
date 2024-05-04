@@ -20,7 +20,6 @@ import static org.assertj.core.api.Assertions.*;
 /**
  * Test of {@link WebSocketClient}.
  *
- * @author lihuagang
  * @since 2023/6/15
  */
 @Slf4j

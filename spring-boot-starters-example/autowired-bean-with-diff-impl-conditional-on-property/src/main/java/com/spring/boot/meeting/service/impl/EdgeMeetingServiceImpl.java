@@ -11,7 +11,6 @@ import javax.annotation.Resource;
 /**
  * 边侧数据源的会议服务实现
  *
- * @author lihuagang
  * @since 2023/6/13
  */
 @Slf4j

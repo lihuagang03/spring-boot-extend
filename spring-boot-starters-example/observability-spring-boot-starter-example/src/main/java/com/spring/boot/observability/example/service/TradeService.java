@@ -5,7 +5,6 @@ import com.spring.boot.observability.example.model.TradeModel;
 /**
  * 交易单服务
  *
- * @author guang.yi
  * @since 2023/12/16
  */
 public interface TradeService {

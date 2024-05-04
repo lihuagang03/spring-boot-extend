@@ -14,7 +14,6 @@ import lombok.experimental.Accessors;
 /**
  * 用户信息表
  *
- * @author lihuagang
  * @since 2023/6/10
  */
 @Data

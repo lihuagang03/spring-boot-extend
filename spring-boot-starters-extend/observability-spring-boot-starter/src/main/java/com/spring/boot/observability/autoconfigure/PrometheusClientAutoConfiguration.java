@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Prometheus自动配置
  *
- * @author guang.yi
  * @since 2023/9/17
  * @see org.springframework.boot.actuate.autoconfigure.metrics.export.prometheus.PrometheusMetricsExportAutoConfiguration
  */

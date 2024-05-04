@@ -15,7 +15,6 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
  * Create a Router
  * 路由器
  *
- * @author guang.yi
  * @since 2023/8/13
  * @see RouterFunction
  * @see RouterFunctions

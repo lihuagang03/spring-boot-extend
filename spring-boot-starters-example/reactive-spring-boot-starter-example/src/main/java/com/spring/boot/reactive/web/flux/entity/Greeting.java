@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 /**
  * 问候实体
  *
- * @author guang.yi
  * @since 2023/8/13
  */
 @Data

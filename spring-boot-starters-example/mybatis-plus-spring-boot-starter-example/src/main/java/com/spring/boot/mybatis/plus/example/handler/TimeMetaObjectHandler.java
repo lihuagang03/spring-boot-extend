@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 /**
  * 元对象字段填充控制器，实现公共字段自动写入
  *
- * @author lihuagang
  * @since 2023/6/10
  * @see com.baomidou.mybatisplus.core.handlers.MetaObjectHandler
  */

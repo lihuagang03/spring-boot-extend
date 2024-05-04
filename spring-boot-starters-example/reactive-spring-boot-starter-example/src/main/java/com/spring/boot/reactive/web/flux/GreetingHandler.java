@@ -16,7 +16,6 @@ import reactor.core.publisher.Mono;
  * Create a WebFlux Handler
  * WebFlux处理器
  *
- * @author guang.yi
  * @since 2023/8/13
  * @see HandlerFunction
  * @see ServerRequest

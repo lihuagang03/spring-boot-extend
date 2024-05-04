@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
  * Create a Configuration Class
  * 咖啡配置
  *
- * @author guang.yi
  * @since 2023/8/14
  * @see RedisReactiveAutoConfiguration
  * @see ReactiveRedisTemplate

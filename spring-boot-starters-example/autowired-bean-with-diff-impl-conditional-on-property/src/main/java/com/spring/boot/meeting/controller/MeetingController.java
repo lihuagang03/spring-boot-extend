@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 /**
  * 会议控制器
  *
- * @author lihuagang
  * @since 2023/6/13
  */
 @RestController("meetingController")

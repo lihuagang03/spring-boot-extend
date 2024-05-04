@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
  * https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
  * </pre>
  *
- * @author lihuagang
  * @since 2023/6/14
  */
 @RestController("probeController")

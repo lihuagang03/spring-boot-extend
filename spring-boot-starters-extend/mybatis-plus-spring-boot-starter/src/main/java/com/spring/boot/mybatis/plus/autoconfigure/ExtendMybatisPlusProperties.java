@@ -10,7 +10,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * MybatisPlus 配置属性集
  *
- * @author lihuagang
  * @since 2023/6/9
  * @see com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties
  */

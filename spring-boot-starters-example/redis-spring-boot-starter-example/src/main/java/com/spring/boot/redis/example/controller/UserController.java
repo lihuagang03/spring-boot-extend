@@ -19,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 用户控制器
  *
- * @author guang.yi
  * @since 2023/11/27
  */
 @Slf4j

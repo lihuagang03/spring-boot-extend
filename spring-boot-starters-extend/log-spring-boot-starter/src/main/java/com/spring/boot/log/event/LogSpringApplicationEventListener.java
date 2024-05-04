@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
  * <p>
  * 7.1.7. Application Events and Listeners
  *
- * @author guang.yi
  * @since 2023/9/13
  * @see org.springframework.context.ApplicationListener
  * @see org.springframework.boot.context.event.SpringApplicationEvent

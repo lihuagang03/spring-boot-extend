@@ -8,7 +8,6 @@ import lombok.experimental.Accessors;
 /**
  * 用户模型
  *
- * @author guang.yi
  * @since 2023/11/27
  */
 @Data

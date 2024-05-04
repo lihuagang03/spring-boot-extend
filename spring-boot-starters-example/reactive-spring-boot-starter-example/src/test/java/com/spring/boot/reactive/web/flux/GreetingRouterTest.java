@@ -17,7 +17,6 @@ import static org.assertj.core.api.Assertions.*;
  * <p>
  * We create a `@SpringBootTest`, starting an actual server on a `RANDOM_PORT`
  *
- * @author guang.yi
  * @since 2023/8/14
  * @see WebTestClient
  */

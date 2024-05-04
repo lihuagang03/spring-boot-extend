@@ -5,7 +5,6 @@ import com.spring.boot.redis.example.model.UserDto;
 /**
  * 用户服务
  *
- * @author guang.yi
  * @since 2023/11/27
  */
 public interface UserService {

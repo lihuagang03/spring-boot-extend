@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
  * Create a Spring Bean to Load Data
  * 数据缓存加载器
  *
- * @author guang.yi
  * @since 2023/8/14
  */
 @Slf4j

@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Auto-configuration for Log.
  *
- * @author guang.yi
  * @since 2023/9/11
  */
 @Slf4j

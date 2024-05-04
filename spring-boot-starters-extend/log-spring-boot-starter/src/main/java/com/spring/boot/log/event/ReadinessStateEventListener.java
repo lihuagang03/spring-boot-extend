@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
  * <p>
  * Managing the Application Availability State
  *
- * @author guang.yi
  * @since 2023/9/12
  * @see org.springframework.boot.availability.AvailabilityChangeEvent
  * @see org.springframework.boot.availability.ReadinessState

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
  * Create a Domain Class
  * 咖啡实体
  *
- * @author guang.yi
  * @since 2023/8/14
  */
 @Data

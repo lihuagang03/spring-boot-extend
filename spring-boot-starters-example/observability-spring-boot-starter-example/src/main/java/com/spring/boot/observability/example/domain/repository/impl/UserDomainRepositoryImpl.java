@@ -11,7 +11,6 @@ import com.spring.boot.observability.example.domain.repository.UserDomainReposit
 /**
  * 用户领域仓储实现
  *
- * @author guang.yi
  * @since 2023/12/16
  */
 @Repository("userDomainRepository")

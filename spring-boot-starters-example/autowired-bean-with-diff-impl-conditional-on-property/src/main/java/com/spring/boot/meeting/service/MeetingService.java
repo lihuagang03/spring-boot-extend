@@ -5,7 +5,6 @@ package com.spring.boot.meeting.service;
  * <p>
  * "云-边-端"架构
  *
- * @author lihuagang
  * @since 2023/6/13
  */
 public interface MeetingService {

@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Spring应用运行侦听器
  *
- * @author guang.yi
  * @since 2023/9/13
  * @see org.springframework.boot.SpringApplicationRunListener
  * @see org.springframework.boot.context.event.EventPublishingRunListener

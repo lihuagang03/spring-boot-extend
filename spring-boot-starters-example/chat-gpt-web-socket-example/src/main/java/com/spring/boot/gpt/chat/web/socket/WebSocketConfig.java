@@ -24,7 +24,6 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
  * Sec-WebSocket-Version: 13
  * </pre>
  *
- * @author lihuagang
  * @since 2023/6/14
  * @see org.springframework.web.socket.config.annotation.WebSocketConfigurer
  */

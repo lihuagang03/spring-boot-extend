@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
  * <p>
  * 父子交易单模型
  *
- * @author guang.yi
  * @since 2023/12/16
  */
 @Data

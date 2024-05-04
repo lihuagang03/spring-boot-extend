@@ -5,7 +5,6 @@ import com.spring.boot.redis.example.model.CacheKey;
 /**
  * 缓存服务
  *
- * @author guang.yi
  * @since 2023/7/30
  */
 public interface CacheService {

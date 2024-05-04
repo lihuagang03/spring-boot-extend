@@ -13,7 +13,6 @@ import static org.assertj.core.api.Assertions.*;
 /**
  * Test of {@link MeetingController}.
  *
- * @author lihuagang
  * @since 2023/6/13
  */
 @SpringBootTest

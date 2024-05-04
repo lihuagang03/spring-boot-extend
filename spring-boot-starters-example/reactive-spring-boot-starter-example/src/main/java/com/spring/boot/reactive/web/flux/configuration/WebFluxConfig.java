@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
  * <a href="https://docs.spring.io/spring-framework/reference/web/webflux/config.html">
  *     WebFlux Config</a>
  *
- * @author guang.yi
  * @since 2023/12/14
  */
 @Slf4j

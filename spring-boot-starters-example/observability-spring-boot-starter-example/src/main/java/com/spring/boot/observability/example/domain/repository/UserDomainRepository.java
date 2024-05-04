@@ -5,7 +5,6 @@ import com.spring.boot.observability.example.domain.entity.UserEntity;
 /**
  * 用户领域仓储
  *
- * @author guang.yi
  * @since 2023/12/16
  */
 public interface UserDomainRepository {

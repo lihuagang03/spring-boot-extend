@@ -11,7 +11,6 @@ import java.lang.annotation.Target;
 /**
  * 云侧服务 Property Conditions
  *
- * @author lihuagang
  * @since 2023/6/13
  * @see ConditionalOnProperty
  */
