@@ -11,7 +11,7 @@
   <description>MyBatis Plus for Spring Boot Starter</description>
 
   <properties>
-    <mybatis-plus-boot-starter.version>3.5.3.1</mybatis-plus-boot-starter.version>
+    <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
     <spring-boot.version>2.7.16</spring-boot.version>
     <snakeyaml.version>2.1</snakeyaml.version>
 
@@ -37,14 +37,23 @@
         <artifactId>snakeyaml</artifactId>
         <version>${snakeyaml.version}</version>
       </dependency>
+
+      <!-- data-source -->
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-bom</artifactId>
+        <version>${mybatis-plus.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
+    <!-- data-source -->
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-boot-starter</artifactId>
-      <version>${mybatis-plus-boot-starter.version}</version>
     </dependency>
     <!-- spring-boot -->
     <dependency>
