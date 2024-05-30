@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.time.LocalDateTime;
 
+import com.spring.boot.mybatis.plus.example.repository.value.EnableStateEnum;
+import com.spring.boot.mybatis.plus.example.repository.value.EnvironmentTagEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -18,7 +20,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@TableName(value = "t_digital_user")
+@TableName(value = "t_digital_user", autoResultMap = true)
 public class User {
     /**
      * 主键
@@ -43,6 +45,18 @@ public class User {
      */
     @TableField(value = "mobile")
     private String mobile;
+
+    /**
+     * 环境标签
+     */
+    @TableField(value = "environment_tag")
+    private EnvironmentTagEnum environmentTag;
+
+    /**
+     * 启用状态
+     */
+    @TableField(value = "enable_status")
+    private EnableStateEnum enableStatus;
 
     /**
      * 创建时间
