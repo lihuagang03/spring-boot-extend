@@ -63,7 +63,9 @@ public class ExtendMybatisPlusAutoConfiguration {
         return properties -> {
             MybatisConfiguration configuration = new MybatisConfiguration();
             configuration.setMapUnderscoreToCamelCase(true);
-            // 枚举属性转换器
+            // 自动映射枚举
+            // 方式二：全局修改 DefaultEnumTypeHandler
+            // https://baomidou.com/guides/auto-convert-enum/#%E6%96%B9%E5%BC%8F%E4%BA%8C%E5%85%A8%E5%B1%80%E4%BF%AE%E6%94%B9-defaultenumtypehandler
             configuration.setDefaultEnumTypeHandler(MybatisEnumTypeHandler.class);
             properties.setConfiguration(configuration);
         };
