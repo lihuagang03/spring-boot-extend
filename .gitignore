@@ -12,6 +12,9 @@ test-output/
 # TestNG
 test-output/
 
+# Arthas
+arthas-output/
+
 # Gradle
 .gradle/
 

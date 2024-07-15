@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.7</version>
+    <version>3.3.1</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -19,7 +19,6 @@
 
   <properties>
 <!--    <reactor-bom.version>2023.0.7</reactor-bom.version>-->
-<!--    <snakeyaml.version>2.2</snakeyaml.version>-->
 
     <java.version>17</java.version>
   </properties>
