@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.16</version>
+    <version>2.7.18</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -92,6 +92,12 @@
       <dependency>
         <groupId>org.apache.skywalking</groupId>
         <artifactId>apm-agent</artifactId>
+        <version>${skywalking.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.skywalking</groupId>
+        <artifactId>apm-springmvc-annotation-commons</artifactId>
         <version>${skywalking.version}</version>
         <scope>test</scope>
       </dependency>
@@ -186,6 +192,10 @@
 <!--      <groupId>org.apache.skywalking</groupId>-->
 <!--      <artifactId>apm-agent</artifactId>-->
 <!--    </dependency>-->
+    <dependency>
+      <groupId>org.apache.skywalking</groupId>
+      <artifactId>apm-springmvc-annotation-commons</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.projectlombok</groupId>
