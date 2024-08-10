@@ -19,6 +19,6 @@
     <module>mybatis-plus-spring-boot-starter</module>
     <module>log-spring-boot-starter</module>
     <module>observability-spring-boot-starter</module>
-    <module>druid-plus-spring-boot-starter</module>
+    <module>druid-actuator-spring-boot-starter</module>
   </modules>
 </project>
