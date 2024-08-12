@@ -49,6 +49,17 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- jdbc -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>com.zaxxer</groupId>
+          <artifactId>HikariCP</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <!-- data-source -->
     <dependency>
       <groupId>com.alibaba</groupId>
