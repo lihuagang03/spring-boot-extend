@@ -36,13 +36,13 @@ public class DruidDataSourcePoolMetadata extends AbstractDataSourcePoolMetadata<
 
     @Override
     public Integer getIdle() {
-//        try {
-//            return (int) getDataSource().getConnectCount();
-//        }
-//        catch (Exception ex) {
-//            return null;
-//        }
-        return (int) getDataSource().getDataSourceStat().getConnectionStat().getConnectCount();
+        try {
+            return (int) getDataSource().getConnectCount();
+        }
+        catch (Exception ex) {
+            return null;
+        }
+//        return (int) getDataSource().getDataSourceStat().getConnectionStat().getConnectCount();
     }
 
     private int getEvictCount() {
