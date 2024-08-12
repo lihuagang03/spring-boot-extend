@@ -6,10 +6,6 @@
 spring:
   application:
     name: 'mybatis-plus-spring-boot-starter-example'
-  servlet:
-    multipart:
-      max-file-size: 1MB
-      max-request-size: 10MB
   mvc:
     format:
       date: 'yyyy-MM-dd'
@@ -21,7 +17,8 @@ spring:
 #      WRITE_DATES_AS_TIMESTAMPS: false
   # DataSourceProperties
   datasource:
-    generate-unique-name: false
+#    generate-unique-name: true
+#    unique-name: "${spring.application.name}-DruidDataSource"
     name: "${spring.application.name}"
     # DruidDataSourceAutoConfigure
     type: com.alibaba.druid.pool.DruidDataSource
@@ -37,9 +34,10 @@ spring:
       # 配置初始化大小、最小、最大
       initial-size: 10
       max-active: 100
-      min-idle: 20
+      min-idle: 10
       # 配置获取连接等待超时的时间
       max-wait: 3000
+      use-unfair-lock: false
       validation-query: "SELECT 'x'"
 #      test-on-borrow: false
 #      test-on-return: false
@@ -97,5 +95,44 @@ server:
     accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
       enabled: true
       pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
-      prefix: tomcat_access
-      directory: "~/logs/${spring.application.name}/"
+      prefix: "tomcat_access"
+      directory: "${HOME}/logs/${spring.application.name}/"
+
+management:
+  # ManagementServerProperties
+  server:
+    port: 38081
+    base-path: ""
+  endpoints:
+    # WebEndpointProperties
+    web:
+      exposure:
+        include: "*"
+#        exclude: "heapdump,threaddump,metrics"
+#      base-path: "/actuator"
+      # Customizing the Management Endpoint Paths
+#      path-mapping:
+#        "prometheus": "metrics"
+  # MetricsProperties
+  metrics:
+    use-global-registry: true
+#    enable:
+#      heapdump: false
+#      threaddump: false
+    tags:
+      application: "${spring.application.name}"
+    export:
+      # JmxProperties
+      jmx:
+        enabled: true
+        domain: "metrics"
+        step: 1m
+      # PrometheusProperties
+      prometheus:
+        enabled: true
+#        descriptions: true
+#        pushgateway:
+#          enabled: false
+#          push-rate: 1m
+#          shutdown-operation: push
+        step: 1m
