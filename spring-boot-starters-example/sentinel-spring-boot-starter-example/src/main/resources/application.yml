@@ -1,0 +1,25 @@
+
+spring:
+  application:
+    name: sentinel-demo
+  cloud:
+    sentinel:
+      eager: true
+      transport:
+        dashboard: localhost:8081
+      datasource:
+        ds:
+          apollo:
+            rule-type: flow
+            namespaceName: application
+            flowRulesKey: ${spring.application.name}-flow-sentinel-rule.json
+            defaultFlowRuleValue: "[]"
+
+# apollo
+app:
+  id: ${spring.application.name}
+apollo:
+  meta: http://localhost:8080
+
+server:
+  port: 8083

@@ -25,5 +25,6 @@
     <module>log-spring-boot-starter-example</module>
     <module>observability-spring-boot-starter-example</module>
     <module>qq-weixin-spring-boot-starter</module>
+    <module>sentinel-spring-boot-starter-example</module>
   </modules>
 </project>
