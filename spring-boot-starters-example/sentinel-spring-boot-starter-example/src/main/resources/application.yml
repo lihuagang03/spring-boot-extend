@@ -12,8 +12,8 @@ spring:
           apollo:
             rule-type: flow
             namespaceName: application
-            flowRulesKey: ${spring.application.name}-flow-sentinel-rule.json
-            defaultFlowRuleValue: "[]"
+            flowRulesKey: ${spring.application.name}.sentinel.flowRules
+#            defaultFlowRuleValue: "[]"
 
 # apollo
 app:
