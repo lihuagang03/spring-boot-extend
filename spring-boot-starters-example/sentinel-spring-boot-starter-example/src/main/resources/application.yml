@@ -5,6 +5,8 @@ spring:
   cloud:
     sentinel:
       eager: true
+      filter:
+        enabled: false
       transport:
         dashboard: localhost:8081
       datasource:
@@ -23,3 +25,32 @@ apollo:
 
 server:
   port: 8083
+
+logging:
+  level:
+    root: info
+  file:
+    path: "${HOME}/logs/${spring.application.name}/"
+
+management:
+  # ManagementServerProperties
+  server:
+    port: 38081
+  endpoints:
+    # WebEndpointProperties
+    web:
+      exposure:
+        include: "*"
+#        exclude: "metrics,heapdump,threaddump"
+#      base-path: "/actuator"
+# Customizing the Management Endpoint Paths
+#      path-mapping:
+#        "prometheus": "metrics"
+  # MetricsProperties
+  metrics:
+    use-global-registry: true
+#    enable:
+#      heapdump: false
+#      threaddump: false
+    tags:
+      application: "${spring.application.name}"
