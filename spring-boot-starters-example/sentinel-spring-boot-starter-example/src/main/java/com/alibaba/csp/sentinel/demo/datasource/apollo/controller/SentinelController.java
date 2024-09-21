@@ -25,7 +25,7 @@ public class SentinelController {
 
 //    @SentinelResource(value = "/hello", blockHandler = "helloBlockHandler")
     @GetMapping(value = "/hello/{name}")
-    public String apiHello(@PathVariable String name) {
+    public String sayHello(@PathVariable String name) {
         return sentinelService.sayHello(name);
     }
 
