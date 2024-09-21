@@ -35,7 +35,7 @@ logging:
 management:
   # ManagementServerProperties
   server:
-    port: 38081
+    port: 38083
   endpoints:
     # WebEndpointProperties
     web:
