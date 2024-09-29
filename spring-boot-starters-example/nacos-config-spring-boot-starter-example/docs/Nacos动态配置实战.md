@@ -54,8 +54,8 @@ DROP USER 'nacos'@'127.0.0.1';
 https://dev.mysql.com/doc/refman/8.0/en/create-database.html
 ```shell
 CREATE DATABASE IF NOT EXISTS nacos
-  DEFAULT CHARACTER SET utf8
-  DEFAULT COLLATE utf8_bin;
+  DEFAULT CHARACTER SET = utf8mb4
+  DEFAULT COLLATE = utf8mb4_bin;
 
 # 删除数据库
 DROP DATABASE nacos;
