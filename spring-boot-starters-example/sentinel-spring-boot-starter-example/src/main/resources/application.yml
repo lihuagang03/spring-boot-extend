@@ -8,20 +8,27 @@ spring:
       filter:
         enabled: false
       transport:
-        dashboard: localhost:8081
+        dashboard: "http://localhost:8081"
       datasource:
-        ds:
-          apollo:
+        dataSourceName:
+          http:
             rule-type: flow
-            namespaceName: application
-            flowRulesKey: ${spring.application.name}.sentinel.flowRules
+            app-name: ${spring.application.name}
+            dashboard-url: "http://localhost:8081"
+#            default-rule-value: "[]"
+#          apollo:
+#            rule-type: flow
+#            namespaceName: application
+##            namespaceName: sentinel
+#            flowRulesKey: ${spring.application.name}.sentinel.flowRules
 #            defaultFlowRuleValue: "[]"
 
 # apollo
-app:
-  id: ${spring.application.name}
-apollo:
-  meta: http://localhost:8080
+#app:
+#  id: ${spring.application.name}
+#apollo:
+#  meta: http://localhost:8080
+#  meta: http://172.16.150.23:8080
 
 server:
   port: 8083
