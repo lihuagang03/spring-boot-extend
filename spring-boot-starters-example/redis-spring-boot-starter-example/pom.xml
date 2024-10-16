@@ -5,8 +5,8 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.18</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <version>3.2.10</version>
+    <relativePath/>
   </parent>
 
   <groupId>com.spring.boot</groupId>
@@ -18,9 +18,7 @@
   <description>Redis Example for Spring Boot Starter</description>
 
   <properties>
-    <snakeyaml.version>2.1</snakeyaml.version>
-
-    <java.version>1.8</java.version>
+    <java.version>21</java.version>
   </properties>
 
   <dependencyManagement>
@@ -39,7 +37,7 @@
       <dependency>
         <groupId>cn.hutool</groupId>
         <artifactId>hutool-bom</artifactId>
-        <version>5.8.22</version>
+        <version>5.8.32</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -51,6 +49,10 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -88,6 +90,11 @@
 <!--      <groupId>redis.clients</groupId>-->
 <!--      <artifactId>jedis</artifactId>-->
 <!--    </dependency>-->
+    <!-- micrometer -->
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>com.alibaba.fastjson2</groupId>
@@ -122,6 +129,12 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.xmlunit</groupId>
+          <artifactId>xmlunit-core</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 

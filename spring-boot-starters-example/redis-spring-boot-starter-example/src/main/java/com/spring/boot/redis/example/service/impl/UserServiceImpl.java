@@ -13,9 +13,8 @@ import lombok.extern.slf4j.Slf4j;
  * @since 2023/11/27
  */
 @Slf4j
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService {
-
     public UserServiceImpl() {
         log.info("create UserServiceImpl");
     }
@@ -29,5 +28,4 @@ public class UserServiceImpl implements UserService {
                 .setPhone("13666555888")
                 .setNickName("李四");
     }
-
 }

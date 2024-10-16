@@ -1,6 +1,6 @@
 package com.spring.boot.redis.example.config;
 
-import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
+//import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.ObjectProvider;
@@ -38,7 +38,6 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureBefore({RedisAutoConfiguration.class, RedisReactiveAutoConfiguration.class})
 public class RedisConfiguration {
-
     public RedisConfiguration() {
         log.info("create RedisConfiguration");
     }
@@ -200,5 +199,4 @@ public class RedisConfiguration {
         template.setDefaultSerializer(RedisSerializer.string());
         return template;
     }
-
 }

@@ -5,51 +5,56 @@
 # .A.1. Core Properties
 spring:
   application:
-    name: "redis-spring-boot-starter-example"
+    name: redis-spring-boot-starter-example
 #  profiles:
-#    active: "prod,pre,test,dev"
-  # RedisProperties
-  redis:
-    database: 0
-    host: "localhost"
-    port: 6379
-    timeout: 1s
-    connect-timeout: 300ms
-    client-name: "${spring.application.name}"
-#    client-type: lettuce
-#    sentinel:
-#      master: ""
-#      nodes: "host:port"
-#    cluster:
-#      nodes: "host:port"
-#      max-redirects: 3
-#    jedis:
-#      pool:
-#        enabled: true
-#        max-idle: 50
-#        min-idle: 10
-#        max-active: 50
-#        max-wait: 300ms
-#        time-between-eviction-runs: 10m
-    lettuce:
-      shutdown-timeout: 100ms
-      pool:
-        enabled: true
-        # 根据业务缓存实际的平均响应rt和请求量来合理调整
-        max-idle: 50
-        min-idle: 10
-        max-active: 50
-        max-wait: 300ms
-        time-between-eviction-runs: 10m
-#      cluster:
-#        refresh:
-#          dynamic-refresh-sources: true
-#          period: 10s
-#          adaptive: false
+#    active: prod,pre,test,dev
+  # VirtualThreads
+  threads:
+    virtual:
+      enabled: true
+  data:
+    # RedisProperties
+    redis:
+      database: 0
+      host: localhost
+      port: 6379
+      timeout: 1s
+      connect-timeout: 300ms
+      client-name: ${spring.application.name}
+  #    client-type: lettuce
+  #    sentinel:
+  #      master: ""
+  #      nodes: "host:port"
+  #    cluster:
+  #      nodes: "host:port"
+  #      max-redirects: 3
+  #    jedis:
+  #      pool:
+  #        enabled: true
+  #        max-idle: 50
+  #        min-idle: 10
+  #        max-active: 50
+  #        max-wait: 300ms
+  #        time-between-eviction-runs: 10m
+      lettuce:
+        shutdown-timeout: 100ms
+        pool:
+          enabled: true
+          # 根据业务缓存实际的平均响应rt和请求量来合理调整
+          max-idle: 50
+          min-idle: 10
+          max-active: 50
+          max-wait: 300ms
+          time-between-eviction-runs: 10m
+#        cluster:
+#          refresh:
+#            dynamic-refresh-sources: true
+#            period: 10s
+#            adaptive: false
   # CacheProperties
   cache:
     type: redis
-    cache-names: "user-cache1,user-cache2"
+    cache-names: "user.info"
     redis:
 #      time-to-live: "10m"
       time-to-live: 1d
@@ -65,8 +70,50 @@ server:
     threads:
       max: 200
       min-spare: 20
-    accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
+    access-log: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
       enabled: true
       pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
       prefix: "tomcat_access"
       directory: "${HOME}/logs/${spring.application.name}/"
+
+management:
+  # ManagementServerProperties
+  server:
+    port: 38081
+    base-path: ""
+  endpoints:
+    # WebEndpointProperties
+    web:
+      exposure:
+        include: "*"
+#        exclude: "metrics,heapdump,threaddump"
+#      base-path: "/actuator"
+      # Customizing the Management Endpoint Paths
+#      path-mapping:
+#        "prometheus": "metrics"
+  # MetricsProperties
+  metrics:
+    use-global-registry: true
+#    enable:
+#      heapdump: false
+#      threaddump: false
+    tags:
+      application: "${spring.application.name}"
+  # JmxProperties
+  jmx:
+    metrics:
+      export:
+        enabled: true
+        domain: "metrics"
+        step: 1m
+  # PrometheusProperties
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+#        descriptions: true
+#        pushgateway:
+#          enabled: false
+#          push-rate: 1m
+#          shutdown-operation: put
+        step: 1m
