@@ -1,5 +1,6 @@
 package com.spring.boot.redis.example.model;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import lombok.Data;
@@ -13,7 +14,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class UserDto implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = -5221097649619578016L;
 
     /**
@@ -30,5 +31,4 @@ public class UserDto implements Serializable {
      * 昵称
      */
     private String nickName;
-
 }

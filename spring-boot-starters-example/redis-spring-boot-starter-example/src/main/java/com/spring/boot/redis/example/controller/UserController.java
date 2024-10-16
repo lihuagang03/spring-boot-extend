@@ -24,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 @Validated
 @RestController("userController")
 public class UserController {
-
     private final UserService userService;
 
     private final CacheService cacheService;
@@ -60,5 +59,4 @@ public class UserController {
 
         return "{\"code\":0,\"message\":\"ok\"}";
     }
-
 }

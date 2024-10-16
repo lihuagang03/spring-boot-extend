@@ -10,11 +10,9 @@ import lombok.Data;
  */
 @Data
 public class CacheKey {
-
     @NotEmpty(message = "cacheName must be not empty")
     private String cacheName;
 
     @NotEmpty(message = "keyPattern must be not empty")
     private String keyPattern;
-
 }

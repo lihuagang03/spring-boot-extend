@@ -27,7 +27,6 @@ import org.springframework.util.StopWatch;
 @Slf4j
 @Service("cacheService")
 public class CacheServiceImpl implements CacheService {
-
     /**
      * 并发开关
      */
@@ -91,5 +90,4 @@ public class CacheServiceImpl implements CacheService {
         // 先SCAN，再批量DEL
         redisCacheWriter.clean(cacheName, keyPattern.getBytes(StandardCharsets.UTF_8));
     }
-
 }

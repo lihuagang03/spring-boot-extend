@@ -8,7 +8,6 @@ import com.spring.boot.redis.example.model.UserDto;
  * @since 2023/11/27
  */
 public interface UserService {
-
     /**
      * 通过用户id查询用户信息
      *
@@ -16,5 +15,4 @@ public interface UserService {
      * @return 用户信息
      */
     UserDto getById(long userId);
-
 }
