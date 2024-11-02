@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.18</version>
+    <version>3.2.11</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -19,7 +19,7 @@
   <description>Log Example for Spring Boot Starter</description>
 
   <properties>
-    <snakeyaml.version>2.1</snakeyaml.version>
+<!--    <java.version>17</java.version>-->
   </properties>
 
   <dependencyManagement>
@@ -65,6 +65,12 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.xmlunit</groupId>
+          <artifactId>xmlunit-core</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 
