@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.3.1</version>
+    <version>3.2.11</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -18,9 +18,7 @@
   <description>Reactive Example for Spring Boot Starter</description>
 
   <properties>
-<!--    <reactor-bom.version>2023.0.7</reactor-bom.version>-->
-
-    <java.version>17</java.version>
+<!--    <java.version>17</java.version>-->
   </properties>
 
   <dependencyManagement>

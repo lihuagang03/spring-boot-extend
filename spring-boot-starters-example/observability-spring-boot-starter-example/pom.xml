@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.18</version>
+    <version>3.2.11</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -19,11 +19,11 @@
   <description>Observability Example for Spring Boot Starter</description>
 
   <properties>
-    <skywalking.version>9.1.0</skywalking.version>
+    <skywalking.version>9.3.0</skywalking.version>
     <druid.version>1.2.23</druid.version>
-    <fastjson.version>1.2.83</fastjson.version>
+    <fastjson2.version>2.0.53</fastjson2.version>
 
-    <java.version>1.8</java.version>
+<!--    <java.version>17</java.version>-->
   </properties>
 
   <dependencyManagement>
@@ -69,9 +69,9 @@
         <version>2.2.3</version>
       </dependency>
       <dependency>
-        <groupId>com.alibaba</groupId>
-        <artifactId>fastjson</artifactId>
-        <version>${fastjson.version}</version>
+        <groupId>com.alibaba.fastjson2</groupId>
+        <artifactId>fastjson2</artifactId>
+        <version>${fastjson2.version}</version>
       </dependency>
       <dependency>
         <groupId>com.google.protobuf</groupId>
@@ -196,8 +196,8 @@
 <!--    </dependency>-->
 
     <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
+      <groupId>com.alibaba.fastjson2</groupId>
+      <artifactId>fastjson2</artifactId>
     </dependency>
 
     <!-- trace -->
