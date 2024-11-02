@@ -30,7 +30,6 @@ import lombok.extern.slf4j.Slf4j;
         RedisAutoConfiguration.class, RedisReactiveAutoConfiguration.class
 })
 public class RedisConfiguration {
-
     public RedisConfiguration() {
         log.info("create RedisConfiguration");
     }
@@ -188,5 +187,4 @@ public class RedisConfiguration {
         template.setDefaultSerializer(RedisSerializer.string());
         return template;
     }
-
 }

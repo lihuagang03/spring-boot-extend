@@ -12,10 +12,9 @@ import lombok.extern.slf4j.Slf4j;
  * @since 2023/12/8
  */
 @Slf4j
+@RestController
 @RequestMapping(path = "/admin")
-@RestController("adminController")
 public class AdminController {
-
     /**
      * 健康检查
      */
@@ -24,5 +23,4 @@ public class AdminController {
         log.info("checkHealth");
         return "OK";
     }
-
 }

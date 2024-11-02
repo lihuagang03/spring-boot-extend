@@ -12,7 +12,7 @@ RocketMQ 5.0：云原生“消息、事件、流”实时数据处理平台，�
 # 启动NameServer
 ```shell
 # 首先启动NameServer
-nohup sh bin/mqnamesrv > logs/mqnamesrv.log 2>&1 &
+nohup sh bin/mqnamesrv > logs/mqnamesrv.log 2>&1 & 
 
 # 查看日志，确认是否成功
 tail -f logs/mqnamesrv.log
@@ -22,7 +22,7 @@ The Name Server boot success. serializeType=JSON, address 0.0.0.0:9876
 
 # 启动Broker+Proxy
 ```shell
-nohup sh bin/mqbroker -n localhost:9876 --enable-proxy > logs/broker-a.log 2>&1 &
+nohup sh bin/mqbroker -n localhost:9876 --enable-proxy > logs/broker-a.log 2>&1 & 
 
 # 查看日志，确认是否成功
 tail -f logs/broker-a.log

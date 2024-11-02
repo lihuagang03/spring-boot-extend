@@ -12,9 +12,8 @@ import com.spring.boot.observability.example.domain.repository.TradeDomainReposi
  *
  * @since 2023/12/16
  */
-@Repository("tradeDomainRepository")
+@Repository
 public class TradeDomainRepositoryImpl implements TradeDomainRepository {
-
     @Override
     public boolean save(TradeEntity entity) {
         if (entity.getCreateTime() == null || entity.getUpdateTime() == null) {
@@ -37,5 +36,4 @@ public class TradeDomainRepositoryImpl implements TradeDomainRepository {
                 .setCreateTime(now)
                 .setUpdateTime(now);
     }
-
 }

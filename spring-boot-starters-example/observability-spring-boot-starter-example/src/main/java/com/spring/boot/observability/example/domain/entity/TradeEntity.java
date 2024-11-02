@@ -15,7 +15,6 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class TradeEntity {
-
     /**
      * 交易单身份
      */
@@ -45,5 +44,4 @@ public class TradeEntity {
      * 更新时间
      */
     private LocalDateTime updateTime;
-
 }

@@ -9,14 +9,17 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.hash.BeanUtilsHashMapper;
 import org.springframework.data.redis.hash.Jackson2HashMapper;
 import org.springframework.stereotype.Service;
 
 import reactor.core.publisher.Mono;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.spring.boot.observability.example.domain.entity.UserEntity;
+import com.spring.boot.observability.example.domain.mapper.UserMapper;
 import com.spring.boot.observability.example.domain.repository.UserDomainRepository;
 import com.spring.boot.observability.example.model.UserModel;
 import com.spring.boot.observability.example.service.UserService;
@@ -25,7 +28,6 @@ import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.client.producer.SendStatus;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.slf4j.MDC;
 
 /**
@@ -34,13 +36,14 @@ import org.slf4j.MDC;
  * @since 2023/12/16
  */
 @Slf4j
-@Service("userService")
-public class UserServiceImpl implements UserService, InitializingBean {
-
+@Service
+public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
+        implements UserService, InitializingBean {
     private final UserDomainRepository userDomainRepository;
 
     private final RedisTemplate<String, UserEntity> userRedisTemplate;
     private final RedisTemplate<Object, Object> redisTemplate;
+    private final StringRedisTemplate stringRedisTemplate;
 
     private final RocketMQTemplate rocketMQTemplate;
 
@@ -50,11 +53,14 @@ public class UserServiceImpl implements UserService, InitializingBean {
             UserDomainRepository userDomainRepository,
             RedisTemplate<String, UserEntity> userRedisTemplate,
             RedisTemplate<Object, Object> redisTemplate,
+            StringRedisTemplate stringRedisTemplate,
             RocketMQTemplate rocketMQTemplate
     ) {
+        log.info("UserServiceImpl init");
         this.userDomainRepository = userDomainRepository;
         this.userRedisTemplate = userRedisTemplate;
         this.redisTemplate = redisTemplate;
+        this.stringRedisTemplate = stringRedisTemplate;
         this.rocketMQTemplate = rocketMQTemplate;
 
         this.threadPoolExecutor = new ThreadPoolExecutor(1, 1,
@@ -155,6 +161,7 @@ public class UserServiceImpl implements UserService, InitializingBean {
         String cacheKey = applyAsCacheKey(id);
         Map<String, Object> entries = redisTemplate.<String, Object>opsForHash()
                 .entries(cacheKey);
+//        Map<String, String> entries = stringRedisTemplate.<String, String>opsForHash().entries(cacheKey);
         if (!entries.isEmpty()) {
             return JACKSON_2_HASH_MAPPER.fromHash(UserEntity.class, entries);
         }
@@ -174,15 +181,19 @@ public class UserServiceImpl implements UserService, InitializingBean {
         // set to Cache
         redisTemplate.<String, Object>opsForHash()
                 .putAll(cacheKey, JACKSON_2_HASH_MAPPER.toHash(userEntity));
+        redisTemplate.expire(cacheKey, 1L, TimeUnit.DAYS);
+//        redisTemplate.expire(cacheKey, Duration.of(1L, ChronoUnit.DAYS));
         threadPoolExecutor.execute(() -> {
                     String key = cacheKey + ":BeanUtils";
                     log.info("async redisTemplate opsForHash, key={}", key);
                     redisTemplate.<String, String>opsForHash()
                             .putAll(key, BEAN_UTILS_HASH_MAPPER.toHash(userEntity));
+                    redisTemplate.expire(key, 1L, TimeUnit.DAYS);
                 }
         );
+//        String key = cacheKey + ":BeanUtils";
 //        redisTemplate.<String, String>opsForHash()
-//                .putAll(cacheKey + ":BeanUtils", BEAN_UTILS_HASH_MAPPER.toHash(userEntity));
+//                .putAll(key, BEAN_UTILS_HASH_MAPPER.toHash(userEntity));
 //        redisTemplate.<byte[], byte[]>opsForHash()
 //                .putAll(cacheKey + ":Object-to-Hash", OBJECT_HASH_MAPPER.toHash(userEntity));
 
@@ -193,11 +204,7 @@ public class UserServiceImpl implements UserService, InitializingBean {
 //            MDC.put("responseCode", "0");
 //            MDC.put("responseTime", "123");
             // 异步输出日志时，才需要设置
-            MDC.put("traceId", TraceContext.traceId());
-
-            // CorrelationContext-关联上下文，sw3-correlation
-//            TraceContext.putCorrelation("traceId", TraceContext.traceId());
-            TraceContext.putCorrelation("userId", "123456789");
+//            MDC.put("traceId", TraceContext.traceId());
 
             log.info("getUserEntityById, userEntity={}", userEntity);
         } finally {
@@ -211,5 +218,4 @@ public class UserServiceImpl implements UserService, InitializingBean {
     private static String applyAsCacheKey(Long id) {
         return "user:" + id;
     }
-
 }

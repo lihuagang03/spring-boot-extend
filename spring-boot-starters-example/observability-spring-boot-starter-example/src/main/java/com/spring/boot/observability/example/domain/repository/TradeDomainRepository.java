@@ -8,7 +8,6 @@ import com.spring.boot.observability.example.domain.entity.TradeEntity;
  * @since 2023/12/16
  */
 public interface TradeDomainRepository {
-
     /**
      * 保存用户
      *
@@ -24,5 +23,4 @@ public interface TradeDomainRepository {
      * @return 实体
      */
     TradeEntity getById(Long id);
-
 }

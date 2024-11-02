@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import reactor.core.publisher.Mono;
 
-import com.alibaba.fastjson.JSON;
 import com.spring.boot.observability.example.model.UserModel;
 import com.spring.boot.observability.example.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+//import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 
 /**
  * 用户控制器
@@ -18,18 +18,28 @@ import lombok.extern.slf4j.Slf4j;
  * @since 2023/12/16
  */
 @Slf4j
+@RestController
 @RequestMapping(path = "/user")
-@RestController("userController")
 public class UserController {
-
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public UserController(
+            UserService userService
+    ) {
         this.userService = userService;
     }
 
     @GetMapping("/{userId}")
     public Mono<UserModel> getById(@PathVariable("userId") Long userId) {
+//        // CorrelationContext-关联上下文，sw8-correlation
+////        TraceContext.putCorrelation("trace_id", TraceContext.traceId());
+//        TraceContext.putCorrelation("sw8_userId", "123456789");
+//        TraceContext.putCorrelation("scene", "p0");
+////        TraceContext.putCorrelation("scene.label", "p0");
+//
+//        TraceContext.putCorrelation("scene-tag", "p0");
+//        TraceContext.putCorrelation("cyborg-flow", "true");
+
         Mono<UserModel> mono = userService.getById(userId);
         // mono=MonoJust
 //        log.info("mono={}", mono);
@@ -37,5 +47,4 @@ public class UserController {
 //        log.info("mono={}", JSON.toJSONString(mono));
         return mono;
     }
-
 }

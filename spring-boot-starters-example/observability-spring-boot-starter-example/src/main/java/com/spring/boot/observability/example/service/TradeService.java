@@ -8,7 +8,6 @@ import com.spring.boot.observability.example.model.TradeModel;
  * @since 2023/12/16
  */
 public interface TradeService {
-
     /**
      * 通过身份获取用户
      *
@@ -16,5 +15,4 @@ public interface TradeService {
      * @return 实体
      */
     TradeModel getById(Long id);
-
 }
