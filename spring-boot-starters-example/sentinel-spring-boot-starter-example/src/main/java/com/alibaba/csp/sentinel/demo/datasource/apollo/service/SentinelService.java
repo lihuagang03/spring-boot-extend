@@ -12,12 +12,12 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
  */
 @Service
 public class SentinelService {
-    @SentinelResource(value = "sayHello", blockHandler = "sayHelloBlockHandler")
+    @SentinelResource(value = "SentinelService.sayHello", blockHandler = "sayHelloBlockHandler")
     public String sayHello(String name) {
         return "Hello, " + name;
     }
 
-    public String sayHelloBlockHandler(String str , BlockException e) {
-        return str + ": 请稍后重试";
+    public String sayHelloBlockHandler(String name, BlockException e) {
+        return name + ": 请稍后重试";
     }
 }

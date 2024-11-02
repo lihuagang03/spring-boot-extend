@@ -8,13 +8,19 @@ spring:
       filter:
         enabled: false
       transport:
-        dashboard: "http://localhost:8081"
+        dashboard: http://localhost:8081
+#        dashboard: https://sit-api-sentinel-dashboard.xxx.com
       datasource:
-        dataSourceName:
+        dataSourceName1:
           http:
-            rule-type: flow
+            dashboard-url: ${spring.cloud.sentinel.transport.dashboard}
             app-name: ${spring.application.name}
-            dashboard-url: "http://localhost:8081"
+            rule-type: flow
+        dataSourceName2:
+          http:
+            dashboard-url: ${spring.cloud.sentinel.transport.dashboard}
+            app-name: ${spring.application.name}
+            rule-type: degrade
 #            default-rule-value: "[]"
 #          apollo:
 #            rule-type: flow

@@ -29,7 +29,7 @@ public class SentinelController {
         return sentinelService.sayHello(name);
     }
 
-    public String helloBlockHandler(String str, BlockException e) {
-        return str + ": 请稍后重试";
+    public String helloBlockHandler(String name, BlockException e) {
+        return name + ": 请稍后重试";
     }
 }
