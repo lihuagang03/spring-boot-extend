@@ -36,7 +36,7 @@ spring:
       max-active: 100
       min-idle: 10
       # 配置获取连接等待超时的时间
-      max-wait: 3000
+      max-wait: 300
       use-unfair-lock: false
       validation-query: "SELECT 'x'"
 #      test-on-borrow: false

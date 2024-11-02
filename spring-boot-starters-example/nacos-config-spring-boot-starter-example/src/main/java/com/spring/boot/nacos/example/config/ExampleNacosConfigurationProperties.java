@@ -20,9 +20,8 @@ import org.springframework.context.annotation.Configuration;
         type = ConfigType.YAML,
         autoRefreshed = true
 )
-@Configuration(value = "exampleNacosConfigurationProperties", proxyBeanMethods = false)
+@Configuration(proxyBeanMethods = false)
 public class ExampleNacosConfigurationProperties {
-
     private String dynamicConfig;
 
     private String configNamespace;
@@ -30,5 +29,4 @@ public class ExampleNacosConfigurationProperties {
     public ExampleNacosConfigurationProperties() {
         log.info("create ExampleNacosConfigurationProperties");
     }
-
 }

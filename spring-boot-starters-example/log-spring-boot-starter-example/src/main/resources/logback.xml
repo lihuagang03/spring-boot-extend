@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://logback.qos.ch/manual/configuration.html -->
+<configuration scan="true" scanPeriod="10 seconds">
+  <property name="log.name" value="log-spring-boot-starter-example"/>
+  <property name="log.path" source="~/logs"/>
+
+  <!-- logback plugin  https://github.com/apache/skywalking-java/blob/main/docs/en/setup/service-agent/java-agent/Application-toolkit-logback-1.x.md -->
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+      <layout class="ch.qos.logback.classic.PatternLayout">
+        <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35} -%msg%n</Pattern>
+      </layout>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+  <!-- 默认的应用日志输出 -->
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${log.path}/${log.name}.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${log.path}/${log.name}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <maxHistory>3</maxHistory>
+      <maxFileSize>100MB</maxFileSize>
+      <totalSizeCap>1GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+      <layout class="ch.qos.logback.classic.PatternLayout">
+        <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35} -%msg%n</Pattern>
+      </layout>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+  <!-- 打印需要单独收集的业务数据，如面向报表、业务明细等需求 -->
+  <appender name="REPORT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${log.path}/${log.name}.report.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <fileNamePattern>${log.path}/${log.name}.report.%i.log</fileNamePattern>
+      <minIndex>1</minIndex>
+      <maxIndex>1</maxIndex>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <maxFileSize>100MB</maxFileSize>
+    </triggeringPolicy>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <pattern>%msg%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <logger name="REPORT" level="INFO">
+    <appender-ref ref="REPORT"/>
+  </logger>
+
+  <!-- https://logback.qos.ch/manual/appenders.html#AsyncAppender -->
+  <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <discardingThreshold>0</discardingThreshold>
+    <queueSize>256</queueSize>
+    <neverBlock>true</neverBlock>
+    <appender-ref ref="STDOUT"/>
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="STDOUT"/>
+<!--    <appender-ref ref="FILE"/>-->
+<!--    <appender-ref ref="ASYNC"/>-->
+  </root>
+</configuration>

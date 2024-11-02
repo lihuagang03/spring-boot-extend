@@ -16,9 +16,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Slf4j
 @Data
 @Accessors(chain = true)
-@ConfigurationProperties(prefix = Constants.MYBATIS_PLUS)
+@ConfigurationProperties(Constants.MYBATIS_PLUS)
 public class ExtendMybatisPlusProperties {
-
     /**
      * MybatisPlus 支持的数据库类型，主要用于分页方言
      */
@@ -27,5 +26,4 @@ public class ExtendMybatisPlusProperties {
     public ExtendMybatisPlusProperties() {
         log.info("create ExtendMybatisPlusProperties");
     }
-
 }

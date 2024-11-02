@@ -39,13 +39,13 @@ management:
 # com.alibaba.boot.nacos.config.properties.NacosConfigProperties
 nacos:
   # 最大重试次数
-  max-retry: 10
+#  max-retry: 10
   # 重试时间
-  config-retry-time: 3000
+#  config-retry-time: 3000
   # 长轮询连接的超时时间
-  config-long-poll-timeout: 60000
+#  config-long-poll-timeout: 60000
   # 启用远程同步配置
-  enable-remote-sync-config: true
+#  enable-remote-sync-config: true
   config:
 #    enabled: true
     # 配置中心服务端地址
