@@ -24,7 +24,7 @@ public class StableAccessTokenRequest {
     private String appId;
 
     /**
-     * 账号唯一凭证密钥
+     * 账号唯一凭证密钥，即 AppSecret，获取方式同 AppId
      */
     @JsonProperty("secret")
     private String appSecret;

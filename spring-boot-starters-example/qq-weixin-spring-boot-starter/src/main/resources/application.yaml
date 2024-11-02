@@ -1,0 +1,82 @@
+
+# Appendices
+# Appendix A: Common Application Properties
+
+# .A.1. Core Properties
+spring:
+  application:
+    name: "qq-weixin-spring-boot-starter"
+#  profiles:
+#    active: "dev"
+#    active: "prod,test,dev"
+
+# .A.11. Server Properties
+server:
+  port: 8681
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
+    accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
+      enabled: true
+      pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
+      prefix: tomcat_access
+      directory: "~/logs/${spring.application.name}/"
+
+# .A.14. Actuator Properties
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+#      show-components: always
+      show-details: always
+
+# config center
+# com.alibaba.boot.nacos.config.autoconfigure.NacosConfigAutoConfiguration
+# com.alibaba.boot.nacos.config.properties.NacosConfigProperties
+nacos:
+#  # 最大重试次数
+#  maxRetry: 10
+#  # 重试时间
+#  configRetryTime: 3000
+#  # 长轮询连接的超时时间
+#  configLongPollTimeout: 60000
+#  # 启用远程同步配置
+#  enableRemoteSyncConfig: true
+  config:
+#    enabled: true
+    # 配置中心服务端地址
+    server-addr: "127.0.0.1:8848"
+    # Endpoint ID 'nacos-config' contains invalid characters, please migrate to a valid format.
+#    endpoint: "nacos-config"
+    # 远程配置优先
+    remote-first: true
+    # 数据身份
+    data-id: "${spring.application.name}"
+#    # 数据身份集合
+#    data-ids: ''
+    # 命名空间（隔离）
+    namespace: "dev-env"
+    # 分组身份
+    group: "DEFAULT_GROUP"
+    # 类型
+    type: yaml
+    # 自动刷新机制
+    auto-refresh: true
+    # 最大重试次数
+    max-retry: 10
+    # 重试时间
+    config-retry-time: 3000
+    # 长轮询连接的超时时间
+    config-long-poll-timeout: 60000
+    # 启用远程同步配置
+    enable-remote-sync-config: true
+#    # 账密
+#    username: "nacos"
+#    password: "nacos"
+    bootstrap:
+      enable: true
+      log-enable: true

@@ -17,7 +17,7 @@ public class AppId {
 
     public AppId(String appId) {
         if (appId == null || appId.isEmpty()) {
-            throw new IllegalArgumentException("'appId' must not be empty");
+            throw new IllegalArgumentException("appId must not be empty");
         }
         this.appId = appId;
     }
