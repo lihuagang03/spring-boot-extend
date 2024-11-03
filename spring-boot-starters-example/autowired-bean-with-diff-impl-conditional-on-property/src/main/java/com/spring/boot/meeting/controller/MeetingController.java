@@ -1,11 +1,10 @@
 package com.spring.boot.meeting.controller;
 
 import com.spring.boot.meeting.service.MeetingService;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 /**
  * 会议控制器
@@ -15,7 +14,6 @@ import javax.annotation.Resource;
 @RestController("meetingController")
 @RequestMapping(path = "/meeting")
 public class MeetingController {
-
     @Resource
     private MeetingService meetingService;
 

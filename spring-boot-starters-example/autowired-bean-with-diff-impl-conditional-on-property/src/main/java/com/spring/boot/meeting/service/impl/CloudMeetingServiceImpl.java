@@ -3,10 +3,9 @@ package com.spring.boot.meeting.service.impl;
 import com.spring.boot.meeting.autoconfigure.condition.CloudService;
 import com.spring.boot.meeting.service.MeetingRoomService;
 import com.spring.boot.meeting.service.MeetingService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * 云侧数据源的会议服务实现
@@ -17,7 +16,6 @@ import javax.annotation.Resource;
 @CloudService
 @Service("cloudMeetingService")
 public class CloudMeetingServiceImpl implements MeetingService {
-
     @Resource
     private MeetingRoomService meetingRoomService;
 

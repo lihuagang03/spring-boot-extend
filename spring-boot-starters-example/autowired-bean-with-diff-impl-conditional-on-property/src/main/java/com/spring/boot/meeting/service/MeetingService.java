@@ -8,7 +8,6 @@ package com.spring.boot.meeting.service;
  * @since 2023/6/13
  */
 public interface MeetingService {
-
     // 鉴权
 
     /**
@@ -17,5 +16,4 @@ public interface MeetingService {
      * @return 会话身份
      */
     String getAuthSessionId();
-
 }

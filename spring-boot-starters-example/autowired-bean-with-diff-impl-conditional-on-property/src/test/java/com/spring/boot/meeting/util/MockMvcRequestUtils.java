@@ -17,7 +17,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @since 2016-06-29
  */
 public final class MockMvcRequestUtils {
-
     /**
      * Mocks the GET request.
      *

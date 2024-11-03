@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 @EdgeService
 @Service("edgeMeetingRoomService")
 public class EdgeMeetingRoomServiceImpl implements MeetingRoomService {
-
     public EdgeMeetingRoomServiceImpl() {
         log.info("create EdgeMeetingRoomServiceImpl");
     }

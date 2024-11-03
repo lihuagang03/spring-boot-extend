@@ -20,7 +20,6 @@ import java.lang.annotation.Target;
 //@ConditionalOnProperty
 @ConditionalOnProperty(prefix = "meeting", name = "service", havingValue = "cloud")
 public @interface CloudService {
-
 //    @AliasFor(annotation = ConditionalOnProperty.class, attribute = "prefix")
 //    String prefix() default "meeting";
 //

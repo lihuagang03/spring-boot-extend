@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 @CloudService
 @Service("cloudMeetingRoomService")
 public class CloudMeetingRoomServiceImpl implements MeetingRoomService {
-
     public CloudMeetingRoomServiceImpl() {
         log.info("create CloudMeetingRoomServiceImpl");
     }

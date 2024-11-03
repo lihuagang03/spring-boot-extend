@@ -4,10 +4,26 @@ spring:
   application:
     name: autowired-bean-with-diff-impl-conditional-on-property
 
+# ServerProperties
+server:
+  port: 8087
+
 # 会议服务实现
 meeting:
   service: edge
 #  service: cloud
+
+management:
+  endpoints:
+    # WebEndpointProperties
+    web:
+      exposure:
+        include: "*"
+        exclude: "heapdump,threaddump"
+  # MetricsProperties
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 logging:
   charset:
@@ -15,11 +31,11 @@ logging:
     file: UTF-8
 #  config: "classpath:org/springframework/boot/logging/log4j2/log4j2-file.xml"
   file:
-    path: "/var/log"
+    path: ${HOME}/logs/${spring.application.name}/
   level:
     root: info
 #  logback:
-#    rollingpolicy:
+#    rolling-policy:
 #      file-name-pattern: "${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz"
 #      clean-history-on-start: false
 #      max-file-size: 10MB
