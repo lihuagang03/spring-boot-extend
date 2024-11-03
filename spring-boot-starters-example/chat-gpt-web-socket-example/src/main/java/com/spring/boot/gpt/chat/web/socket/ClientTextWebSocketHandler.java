@@ -16,7 +16,6 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
  */
 @Slf4j
 public class ClientTextWebSocketHandler extends TextWebSocketHandler {
-
     private final transient Object lock = new Object();
 
     private String outputText;

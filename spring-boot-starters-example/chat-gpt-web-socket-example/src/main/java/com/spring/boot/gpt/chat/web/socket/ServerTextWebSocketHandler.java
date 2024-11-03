@@ -16,7 +16,6 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
  */
 @Slf4j
 public class ServerTextWebSocketHandler extends TextWebSocketHandler {
-
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         log.info("Server connection established, session={}", session);
