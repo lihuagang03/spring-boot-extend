@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static com.spring.boot.disruptor.example.util.GsonUtil.GSON;
 
 /**
- * 用户事件业务处理器【消费者】
+ * 用户业务事件处理器【消费者】
  *
  * @author lihuagang
  */
