@@ -1,4 +1,4 @@
-package com.spring.boot.mybatis.plus.example;
+package com.spring.boot.disruptor.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,11 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * 应用程序启动入口
  *
- * @since 2023/6/10
+ * @author lihuagang
  */
 @SpringBootApplication
-public class MybatisApplication {
+public class DisruptorEventMessageApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MybatisApplication.class, args);
+        SpringApplication.run(DisruptorEventMessageApplication.class, args);
     }
 }

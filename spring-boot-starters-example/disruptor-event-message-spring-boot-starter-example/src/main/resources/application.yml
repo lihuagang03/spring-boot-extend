@@ -1,0 +1,28 @@
+
+
+spring:
+  application:
+    name: disruptor-event-message-spring-boot-starter-example
+#  profiles:
+#    active: dev
+
+# ServerProperties
+server:
+  port: 8388
+
+management:
+  # ManagementServerProperties
+  server:
+    port: 38088
+#    base-path: ""
+  endpoints:
+    # WebEndpointProperties
+    web:
+      exposure:
+        include: "*"
+        exclude: "heapdump,threaddump"
+#      base-path: "/actuator"
+      # Customizing the Management Endpoint Paths
+#      path-mapping:
+#        "metrics": "metrics"
+
