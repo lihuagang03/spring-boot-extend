@@ -8,7 +8,6 @@ management:
   server:
     port: 38081
 #    base-path: ""
-#    base-path: "/management"
   endpoints:
     # WebEndpointProperties
     web:
