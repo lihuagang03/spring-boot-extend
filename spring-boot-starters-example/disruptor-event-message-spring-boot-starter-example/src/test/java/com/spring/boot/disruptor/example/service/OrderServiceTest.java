@@ -7,19 +7,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.UUID;
 
 /**
- * Test of {@link UserService}
+ * Test of {@link OrderService}
  *
  * @author lihuagang
  */
 @SpringBootTest
-class UserServiceTest {
+class OrderServiceTest {
     @Resource
-    private UserService userService;
+    private OrderService orderService;
 
     @Test
-    void createUser() {
+    void createOrder() {
         for (int i = 0; i < 5; i++) {
-            userService.createUser(Integer.toString(i), UUID.randomUUID().toString());
+            orderService.createOrder(Integer.toString(i), UUID.randomUUID().toString());
         }
     }
 }
