@@ -21,21 +21,21 @@ spring:
       timeout: 1s
       connect-timeout: 300ms
       client-name: ${spring.application.name}
-  #    client-type: lettuce
-  #    sentinel:
-  #      master: ""
-  #      nodes: "host:port"
-  #    cluster:
-  #      nodes: "host:port"
-  #      max-redirects: 3
-  #    jedis:
-  #      pool:
-  #        enabled: true
-  #        max-idle: 50
-  #        min-idle: 10
-  #        max-active: 50
-  #        max-wait: 300ms
-  #        time-between-eviction-runs: 10m
+#      client-type: lettuce
+#      sentinel:
+#        master: ""
+#        nodes: "host:port"
+#      cluster:
+#        nodes: "host:port"
+#        max-redirects: 3
+#      jedis:
+#        pool:
+#          enabled: true
+#          max-idle: 50
+#          min-idle: 10
+#          max-active: 50
+#          max-wait: 300ms
+#          time-between-eviction-runs: 10m
       lettuce:
         shutdown-timeout: 100ms
         pool:

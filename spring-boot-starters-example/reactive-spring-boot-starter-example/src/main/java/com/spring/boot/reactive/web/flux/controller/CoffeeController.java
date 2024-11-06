@@ -9,6 +9,8 @@ import reactor.core.publisher.Flux;
 import com.spring.boot.reactive.web.flux.entity.Coffee;
 import lombok.extern.slf4j.Slf4j;
 
+import static com.spring.boot.reactive.web.flux.cache.CoffeeLoader.KEY_PREFIX;
+
 /**
  * Create a RestController
  *
@@ -17,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController("coffeeController")
 public class CoffeeController {
-
     private final ReactiveRedisOperations<String, Coffee> reactiveRedisOperations;
 
     public CoffeeController(
@@ -49,9 +50,8 @@ public class CoffeeController {
      */
     @GetMapping("/coffees")
     public Flux<Coffee> all() {
-        return reactiveRedisOperations.keys("*")
-                .flatMap(reactiveRedisOperations.opsForValue()::get)
-                ;
+        return reactiveRedisOperations.keys(KEY_PREFIX + "*")
+                .flatMap(reactiveRedisOperations.opsForValue()::get);
     }
 
 }

@@ -25,7 +25,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Configuration(proxyBeanMethods = false)
 public class CoffeeConfiguration {
-
     public CoffeeConfiguration() {
         log.info("create CoffeeConfiguration");
     }
@@ -47,8 +46,7 @@ public class CoffeeConfiguration {
         RedisSerializationContext.RedisSerializationContextBuilder<String, Coffee> builder =
                 RedisSerializationContext.newSerializationContext(RedisSerializer.string());
 
-        RedisSerializationContext<String, Coffee> serializationContext = builder.value(serializer)
-                .build();
+        RedisSerializationContext<String, Coffee> serializationContext = builder.value(serializer).build();
 
         return new ReactiveRedisTemplate<>(reactiveRedisConnectionFactory, serializationContext);
     }

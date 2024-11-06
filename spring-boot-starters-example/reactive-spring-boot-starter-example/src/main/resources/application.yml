@@ -4,6 +4,49 @@ spring:
     name: reactive-spring-boot-starter-example
 #  profiles:
 #    active: dev
+  # VirtualThreads
+  threads:
+    virtual:
+      enabled: true
+  data:
+    # RedisProperties
+    redis:
+      database: 0
+      host: localhost
+      port: 6379
+      timeout: 1s
+      connect-timeout: 300ms
+      client-name: ${spring.application.name}
+#      client-type: lettuce
+#      sentinel:
+#        master: ""
+#        nodes: "host:port"
+#      cluster:
+#        nodes: "host:port"
+#        max-redirects: 3
+#      jedis:
+#        pool:
+#          enabled: true
+#          max-idle: 50
+#          min-idle: 10
+#          max-active: 50
+#          max-wait: 300ms
+#          time-between-eviction-runs: 10m
+      lettuce:
+        shutdown-timeout: 100ms
+        pool:
+          enabled: true
+          # 根据业务缓存实际的平均响应rt和请求量来合理调整
+          max-idle: 50
+          min-idle: 10
+          max-active: 50
+          max-wait: 300ms
+          time-between-eviction-runs: 10m
+#        cluster:
+#          refresh:
+#            dynamic-refresh-sources: true
+#            period: 10s
+#            adaptive: false
 
 # ServerProperties
 server:

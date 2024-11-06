@@ -21,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component("coffeeLoader")
 public class CoffeeLoader {
-
     private final ReactiveRedisConnectionFactory reactiveRedisConnectionFactory;
     private final ReactiveRedisOperations<String, Coffee> reactiveRedisOperations;
 
@@ -34,25 +33,20 @@ public class CoffeeLoader {
         log.info("create CoffeeLoader");
     }
 
+    public static final String KEY_PREFIX = "coffee:";
+
     @PostConstruct
     public void loadData() {
-        log.info("loadData");
+        log.info("start loadData");
         reactiveRedisConnectionFactory.getReactiveConnection()
                 .serverCommands()
                 .flushAll()
                 .thenMany(
                         Flux.just("Jet Black Redis", "Darth Redis", "Black Alert Redis")
-                                .map(name -> new Coffee(UUID.randomUUID().toString(), name))
-                                .flatMap(
-                                        coffee -> reactiveRedisOperations.opsForValue()
-                                                .set(coffee.getId(), coffee)
-                                )
-                )
-                .thenMany(
-                        reactiveRedisOperations.keys("*")
-                                .flatMap(reactiveRedisOperations.opsForValue()::get)
-                )
-                .subscribe(System.out::println)
-        ;
+                                .map(name -> new Coffee(KEY_PREFIX + UUID.randomUUID().toString(), name))
+                                .flatMap(coffee -> reactiveRedisOperations.opsForValue().set(coffee.id(), coffee)))
+                .thenMany(reactiveRedisOperations.keys(KEY_PREFIX + "*")
+                        .flatMap(reactiveRedisOperations.opsForValue()::get))
+                .subscribe(System.out::println);
     }
 }
