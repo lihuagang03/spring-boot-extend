@@ -6,4 +6,5 @@ Spring WebFlux
 
 * [Building a Reactive RESTful Web Service](https://spring.io/guides/gs/reactive-rest-service/)
 * [Accessing Data Reactively with Redis](https://spring.io/guides/gs/spring-data-reactive-redis/)
+* [Introduction to Spring Data Redis](https://www.baeldung.com/spring-data-redis-tutorial)
 

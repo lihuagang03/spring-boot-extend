@@ -16,10 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @EnableWebFlux
 @Configuration(proxyBeanMethods = false)
 public class WebFluxConfig implements WebFluxConfigurer {
-    //
-
     public WebFluxConfig() {
         log.info("create WebFluxConfig");
     }
-
 }
