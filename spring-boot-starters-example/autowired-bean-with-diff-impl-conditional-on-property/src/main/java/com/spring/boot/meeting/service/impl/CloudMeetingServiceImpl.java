@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 /**
  * 云侧数据源的会议服务实现
  *
+ * @author guang.yi
  * @since 2023/6/13
  */
 @Slf4j
 @CloudService
-@Service("cloudMeetingService")
+@Service
 public class CloudMeetingServiceImpl implements MeetingService {
     @Resource
     private MeetingRoomService meetingRoomService;

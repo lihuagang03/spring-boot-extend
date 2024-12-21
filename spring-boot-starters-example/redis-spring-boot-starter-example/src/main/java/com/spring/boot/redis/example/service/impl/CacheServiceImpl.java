@@ -22,10 +22,11 @@ import org.springframework.util.StopWatch;
 /**
  * 缓存服务实现
  *
+ * @author lihuagang
  * @since 2023/7/30
  */
 @Slf4j
-@Service("cacheService")
+@Service
 public class CacheServiceImpl implements CacheService {
     /**
      * 并发开关
@@ -35,7 +36,7 @@ public class CacheServiceImpl implements CacheService {
     private final ExecutorService executorService = new ThreadPoolExecutor(
             1, 1, 5L, TimeUnit.MINUTES,
             new ArrayBlockingQueue<>(1),
-            new ThreadFactoryBuilder().setNamePrefix("cache-clean-")
+            new ThreadFactoryBuilder().setNamePrefix("redis-cache-clean-scan-")
                     .setDaemon(true).build()
     );
 

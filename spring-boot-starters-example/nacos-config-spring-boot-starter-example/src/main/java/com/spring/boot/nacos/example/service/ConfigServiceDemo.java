@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 /**
  * 配置服务实现
  *
+ * @author lihuagang
  * @since 2023/7/19
  * @see NacosInjected
  */
 @Slf4j
-@Service("configServiceDemo")
+@Service
 public class ConfigServiceDemo {
-
     /**
      * nacos配置服务
      *
@@ -39,7 +39,6 @@ public class ConfigServiceDemo {
 //    ) {
 //        this.configService = configService;
 //    }
-
 
     public ConfigServiceDemo() {
         log.info("create ConfigServiceDemo");

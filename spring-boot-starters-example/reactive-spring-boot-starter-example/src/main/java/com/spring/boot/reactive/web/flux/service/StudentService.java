@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
  * 学生服务
  *
  * @author lihuagang
+ * @since 2024/11/5
  */
-@Service("studentService")
+@Service
 public class StudentService {
     private final StudentRepository studentRepository;
 

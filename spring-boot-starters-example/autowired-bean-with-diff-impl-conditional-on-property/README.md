@@ -12,7 +12,7 @@
 
 ![语音订会期望的架构实现方案](docs/语音订会期望的架构实现方案.png)
 
-这个想法可行，通过 @ConditionalOnProperty + @Service 实现。
+这个想法可行，通过 `@ConditionalOnProperty` + `@Service` 实现。
 
 
 spring-boot：@ConditionalOnProperty根据不同配置注入不同实现的bean
