@@ -25,5 +25,5 @@ Spring Boot 扩展实战
   - [qq-weixin-spring-boot-starter](spring-boot-starters-example/qq-weixin-spring-boot-starter) QQ和微信小程序API示例
   - [sentinel-spring-boot-starter-example](spring-boot-starters-example/sentinel-spring-boot-starter-example) 流量治理最佳实践示例
   - [disruptor-event-message-spring-boot-starter-example](spring-boot-starters-example/disruptor-event-message-spring-boot-starter-example) Disruptor事件消息示例，无锁队列
-  - [ai-ollama-spring-boot-starter-example](spring-boot-starters-example/ai-ollama-spring-boot-starter-example) 基于Ollama的AI对话示例
+  - [ai-ollama-spring-boot-starter-example](spring-boot-starters-example/ai-ollama-spring-boot-starter-example) 基于Ollama的AI对话示例，LLM大语言模型有DeepSeek
 
