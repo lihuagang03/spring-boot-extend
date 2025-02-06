@@ -9,6 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 /**
  * 应用程序启动入口
  *
+ * @author lihuagang
  * @since 2023/8/13
  */
 @SpringBootApplication
