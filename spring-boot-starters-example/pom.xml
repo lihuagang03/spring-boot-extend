@@ -27,5 +27,6 @@
     <module>qq-weixin-spring-boot-starter</module>
     <module>sentinel-spring-boot-starter-example</module>
     <module>disruptor-event-message-spring-boot-starter-example</module>
+    <module>ai-ollama-spring-boot-starter-example</module>
   </modules>
 </project>

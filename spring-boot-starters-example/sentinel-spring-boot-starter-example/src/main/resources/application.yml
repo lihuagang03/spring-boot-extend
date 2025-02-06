@@ -9,7 +9,7 @@ spring:
         enabled: false
       transport:
         dashboard: http://localhost:8081
-#        dashboard: https://sit-api-sentinel-dashboard.xxx.com
+#        dashboard: https://sit-sentinel-dashboard.xxx.com
       datasource:
         dataSourceName1:
           http:

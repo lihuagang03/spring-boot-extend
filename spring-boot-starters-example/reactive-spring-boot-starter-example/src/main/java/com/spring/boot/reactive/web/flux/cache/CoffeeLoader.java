@@ -43,7 +43,7 @@ public class CoffeeLoader {
                 .flushAll()
                 .thenMany(
                         Flux.just("Jet Black Redis", "Darth Redis", "Black Alert Redis")
-                                .map(name -> new Coffee(KEY_PREFIX + UUID.randomUUID().toString(), name))
+                                .map(name -> new Coffee(KEY_PREFIX + UUID.randomUUID(), name))
                                 .flatMap(coffee -> reactiveRedisOperations.opsForValue().set(coffee.id(), coffee)))
                 .thenMany(reactiveRedisOperations.keys(KEY_PREFIX + "*")
                         .flatMap(reactiveRedisOperations.opsForValue()::get))
