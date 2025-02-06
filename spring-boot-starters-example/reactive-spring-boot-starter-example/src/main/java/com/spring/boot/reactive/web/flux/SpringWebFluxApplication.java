@@ -1,7 +1,5 @@
 package com.spring.boot.reactive.web.flux;
 
-import java.time.Duration;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -19,8 +17,9 @@ public class SpringWebFluxApplication {
 
         GreetingClient greetingClient = context.getBean(GreetingClient.class);
         // We need to block for the content here or the JVM might exit before the message is logged
-        String message = greetingClient.getMessage().block(Duration.ofSeconds(3L));
+        greetingClient.getMessage()
+                .doOnSuccess(message -> System.out.println(">> message = " + message))
+                .subscribe();
         // >> message = Hello, Spring!
-        System.out.println(">> message = " + message);
     }
 }
