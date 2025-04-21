@@ -23,7 +23,6 @@ import javax.sql.DataSource;
 /**
  * MybatisPlus 自动配置
  *
- * @since 2023/6/9
  * @see MybatisPlusAutoConfiguration
  */
 @Slf4j
@@ -32,7 +31,6 @@ import javax.sql.DataSource;
 @EnableConfigurationProperties({MybatisPlusProperties.class, ExtendMybatisPlusProperties.class})
 @AutoConfiguration(before = {MybatisPlusAutoConfiguration.class}, after = {DataSourceAutoConfiguration.class})
 public class ExtendMybatisPlusAutoConfiguration {
-
     /**
      * MybatisPlus 配置属性集
      *
@@ -53,7 +51,10 @@ public class ExtendMybatisPlusAutoConfiguration {
         // 拦截器
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         // 分页拦截器
-        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(properties.getDbType()));
+        PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor();
+        paginationInnerInterceptor.setDbType(properties.getDbType());
+        paginationInnerInterceptor.setMaxLimit(properties.getMaxLimit());
+        interceptor.addInnerInterceptor(paginationInnerInterceptor);
         return interceptor;
     }
 
@@ -70,5 +71,4 @@ public class ExtendMybatisPlusAutoConfiguration {
             properties.setConfiguration(configuration);
         };
     }
-
 }
