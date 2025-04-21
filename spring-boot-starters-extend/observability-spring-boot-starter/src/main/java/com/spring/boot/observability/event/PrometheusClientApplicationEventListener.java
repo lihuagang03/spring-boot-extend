@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
  * <p>
  * 7.1.7. Application Events and Listeners
  *
- * @since 2023/9/18
  * @see org.springframework.boot.autoconfigure.BackgroundPreinitializer
  * @see org.springframework.context.ApplicationListener
  * @see org.springframework.boot.context.event.SpringApplicationEvent
@@ -26,7 +25,9 @@ import lombok.extern.slf4j.Slf4j;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class PrometheusClientApplicationEventListener implements
         ApplicationListener<SpringApplicationEvent> {
-
+    /**
+     * 并发操作开关
+     */
     private static final AtomicBoolean ENABLE = new AtomicBoolean(false);
 
     public PrometheusClientApplicationEventListener() {
