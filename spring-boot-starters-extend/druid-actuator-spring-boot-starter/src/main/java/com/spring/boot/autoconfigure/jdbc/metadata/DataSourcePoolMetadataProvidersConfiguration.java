@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
  * Register the DataSourcePoolMetadataProvider instances for the supported data sources.
  *
  * @see org.springframework.boot.autoconfigure.jdbc.metadata.DataSourcePoolMetadataProvidersConfiguration
- * @since 2024/8/11
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)

@@ -9,7 +9,6 @@ import com.alibaba.druid.pool.DruidDataSource;
 /**
  * Druid数据源的连接池元数据
  *
- * @since 2024/8/11
  * @see org.springframework.boot.jdbc.metadata.AbstractDataSourcePoolMetadata
  * @see org.springframework.boot.jdbc.metadata.HikariDataSourcePoolMetadata
  */

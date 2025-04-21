@@ -20,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @see org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
  * @see com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
- * @since 2024/8/11
  */
 @Slf4j
 @AutoConfiguration
