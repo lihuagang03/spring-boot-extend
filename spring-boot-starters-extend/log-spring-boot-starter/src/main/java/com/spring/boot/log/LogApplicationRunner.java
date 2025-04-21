@@ -8,12 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 应用运行程序
  *
- * @since 2023/9/11
  * @see org.springframework.boot.ApplicationRunner
  */
 @Slf4j
 public class LogApplicationRunner implements ApplicationRunner {
-
     public LogApplicationRunner() {
         log.info("create LogApplicationRunner");
     }
@@ -22,5 +20,4 @@ public class LogApplicationRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         log.info("run ApplicationArguments, args={}", args);
     }
-
 }

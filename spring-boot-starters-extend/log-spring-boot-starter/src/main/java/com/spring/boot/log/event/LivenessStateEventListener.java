@@ -16,14 +16,12 @@ import lombok.extern.slf4j.Slf4j;
  * <p>
  * Managing the Application Availability State
  *
- * @since 2023/9/12
  * @see org.springframework.boot.availability.AvailabilityChangeEvent
  * @see org.springframework.boot.availability.ReadinessState
  * @see org.springframework.boot.availability.LivenessState
  */
 @Slf4j
 public class LivenessStateEventListener {
-
     public LivenessStateEventListener() {
         log.info("create LivenessStateEventListener");
     }
@@ -42,5 +40,4 @@ public class LivenessStateEventListener {
                 break;
         }
     }
-
 }

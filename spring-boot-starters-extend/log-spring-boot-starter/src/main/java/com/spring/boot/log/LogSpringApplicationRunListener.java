@@ -13,13 +13,14 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Spring应用运行侦听器
  *
- * @since 2023/9/13
  * @see org.springframework.boot.SpringApplicationRunListener
  * @see org.springframework.boot.context.event.EventPublishingRunListener
  */
 @Slf4j
 public class LogSpringApplicationRunListener implements SpringApplicationRunListener {
-
+    /**
+     * Spring应用实例
+     */
     private final SpringApplication application;
 
     private final String[] args;
@@ -85,5 +86,4 @@ public class LogSpringApplicationRunListener implements SpringApplicationRunList
         log.info("Called when a failure occurs when running the application. " +
                 "context={}", context, exception);
     }
-
 }

@@ -11,12 +11,12 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 本地缓存验证程序
- *
- * @since 2023/9/12
  */
 @Slf4j
 public class LocalCacheVerifier {
-
+    /**
+     * 应用事件发布者
+     */
     private final ApplicationEventPublisher applicationEventPublisher;
 
     public LocalCacheVerifier(
@@ -36,5 +36,4 @@ public class LocalCacheVerifier {
                     ex, LivenessState.BROKEN);
         }
     }
-
 }

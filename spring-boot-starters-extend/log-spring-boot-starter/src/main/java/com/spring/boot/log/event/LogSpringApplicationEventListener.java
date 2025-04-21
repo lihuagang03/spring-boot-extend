@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
  * <p>
  * 7.1.7. Application Events and Listeners
  *
- * @since 2023/9/13
  * @see org.springframework.context.ApplicationListener
  * @see org.springframework.boot.context.event.SpringApplicationEvent
  * @see org.springframework.boot.autoconfigure.BackgroundPreinitializer
@@ -25,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LogSpringApplicationEventListener implements
         ApplicationListener<SpringApplicationEvent> {
-
     public LogSpringApplicationEventListener() {
         log.info("create LogSpringApplicationEventListener");
     }
@@ -65,5 +63,4 @@ public class LogSpringApplicationEventListener implements
             // 9. An ApplicationFailedEvent is sent if there is an exception on startup.
         }
     }
-
 }
