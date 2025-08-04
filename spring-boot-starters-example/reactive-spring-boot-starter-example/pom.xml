@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.12</version>
+    <version>3.2.12</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -18,12 +18,18 @@
   <description>Reactive Example for Spring Boot Starter</description>
 
   <properties>
-    <java.version>11</java.version>
-    <reactor-bom.version>2022.0.9</reactor-bom.version>
+<!--    <java.version>17</java.version>-->
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <!-- 二方库 -->
+      <dependency>
+        <groupId>com.spring.boot</groupId>
+        <artifactId>log-spring-boot-starter</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+      </dependency>
+
       <!-- spring-boot-dependencies -->
 <!--      <dependency>-->
 <!--        <groupId>io.projectreactor</groupId>-->
@@ -36,10 +42,31 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- 二方库 -->
+    <dependency>
+      <groupId>com.spring.boot</groupId>
+      <artifactId>log-spring-boot-starter</artifactId>
+    </dependency>
+
     <!-- spring-boot-starter -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+    <!-- redis -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+<!--      <exclusions>-->
+<!--        <exclusion>-->
+<!--          <groupId>io.lettuce</groupId>-->
+<!--          <artifactId>lettuce-core</artifactId>-->
+<!--        </exclusion>-->
+<!--      </exclusions>-->
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-pool2</artifactId>
     </dependency>
 
     <!-- reactor -->
@@ -55,6 +82,13 @@
 <!--      <groupId>org.springframework.boot</groupId>-->
 <!--      <artifactId>spring-boot-starter-reactor-netty</artifactId>-->
 <!--    </dependency>-->
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+
     <!-- test -->
     <dependency>
       <groupId>io.projectreactor</groupId>
@@ -64,6 +98,13 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.xmlunit</groupId>
+          <artifactId>xmlunit-core</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 
@@ -72,6 +113,11 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <!-- native image -->
+      <plugin>
+        <groupId>org.graalvm.buildtools</groupId>
+        <artifactId>native-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

@@ -9,8 +9,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 配置属性集
  *
- * @author guangyi
- * @date 2023/7/21
+ * @since 2023/7/21
  * @see NacosConfigurationProperties
  */
 @Slf4j
@@ -21,9 +20,8 @@ import org.springframework.context.annotation.Configuration;
         type = ConfigType.YAML,
         autoRefreshed = true
 )
-@Configuration(value = "exampleNacosConfigurationProperties", proxyBeanMethods = false)
+@Configuration(proxyBeanMethods = false)
 public class ExampleNacosConfigurationProperties {
-
     private String dynamicConfig;
 
     private String configNamespace;

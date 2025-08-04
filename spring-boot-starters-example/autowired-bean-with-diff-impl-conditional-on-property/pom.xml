@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.12</version>
+    <version>3.2.12</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -17,10 +17,11 @@
   <description>基于配置属性条件自动装配不同实现的服务组件</description>
 
   <properties>
-    <java.version>11</java.version>
+<!--    <java.version>17</java.version>-->
   </properties>
 
   <dependencies>
+    <!-- spring-boot-starter -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
@@ -50,6 +51,7 @@
       <optional>true</optional>
     </dependency>
 
+    <!-- test -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>

@@ -11,8 +11,9 @@
   <description>MyBatis Plus for Spring Boot Starter</description>
 
   <properties>
-    <mybatis-plus-boot-starter.version>3.5.3.1</mybatis-plus-boot-starter.version>
-    <spring-boot.version>2.7.12</spring-boot.version>
+    <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
+    <spring-boot.version>2.7.18</spring-boot.version>
+    <snakeyaml.version>2.1</snakeyaml.version>
 
     <java.version>1.8</java.version>
     <resource.delimiter>@</resource.delimiter>
@@ -31,18 +32,34 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>${snakeyaml.version}</version>
+      </dependency>
+
+      <!-- data-source -->
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-bom</artifactId>
+        <version>${mybatis-plus.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
+    <!-- data-source -->
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-boot-starter</artifactId>
-      <version>${mybatis-plus-boot-starter.version}</version>
     </dependency>
+    <!-- spring-boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>

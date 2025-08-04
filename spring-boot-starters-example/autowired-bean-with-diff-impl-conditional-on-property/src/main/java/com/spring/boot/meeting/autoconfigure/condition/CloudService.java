@@ -11,8 +11,7 @@ import java.lang.annotation.Target;
 /**
  * 云侧服务 Property Conditions
  *
- * @author lihuagang
- * @date 2023/6/13
+ * @since 2023/6/13
  * @see ConditionalOnProperty
  */
 @Retention(RetentionPolicy.RUNTIME)
@@ -21,7 +20,6 @@ import java.lang.annotation.Target;
 //@ConditionalOnProperty
 @ConditionalOnProperty(prefix = "meeting", name = "service", havingValue = "cloud")
 public @interface CloudService {
-
 //    @AliasFor(annotation = ConditionalOnProperty.class, attribute = "prefix")
 //    String prefix() default "meeting";
 //

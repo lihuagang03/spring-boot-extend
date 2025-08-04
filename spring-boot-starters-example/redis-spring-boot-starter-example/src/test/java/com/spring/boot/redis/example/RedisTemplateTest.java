@@ -17,8 +17,7 @@ import static org.assertj.core.api.Assertions.*;
 /**
  * Test of {@link RedisTemplate}.
  *
- * @author guangyi
- * @date 2023/7/30
+ * @since 2023/7/30
  * @see RedisTemplate
  * @see StringRedisTemplate
  */

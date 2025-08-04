@@ -1,25 +1,22 @@
 package com.spring.boot.meeting.controller;
 
 import com.spring.boot.meeting.util.MockMvcRequestUtils;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-
-import javax.annotation.Resource;
 
 import static org.assertj.core.api.Assertions.*;
 
 /**
  * Test of {@link MeetingController}.
  *
- * @author lihuagang
- * @date 2023/6/13
+ * @since 2023/6/13
  */
 @SpringBootTest
 @AutoConfigureMockMvc
 class CloudMeetingControllerTest {
-
     private static final Object[] EMPTY_PARAMS = new Object[]{};
 
     @Resource

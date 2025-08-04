@@ -11,8 +11,7 @@ import java.util.List;
  * (1) a chunk of data is ready and (2) the processing is complete (terminal event),
  * as represented in the MyEventListener interface:
  *
- * @author guangyi
- * @date 2023/7/27
+ * @since 2023/7/27
  */
 public interface MyEventListener<T> {
 

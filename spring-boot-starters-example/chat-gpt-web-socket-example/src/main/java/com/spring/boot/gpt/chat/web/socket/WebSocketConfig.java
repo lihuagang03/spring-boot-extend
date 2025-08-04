@@ -11,8 +11,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 /**
  * WebSocket配置，注册处理器
  * <pre>
- * WebSockets
- * https://docs.spring.io/spring-framework/docs/5.3.x/reference/html/web.html#websocket
+ * <a href="https://docs.spring.io/spring-framework/docs/5.3.x/reference/html/web.html#websocket">WebSockets</a>
  *
  * WebSocket API
  *
@@ -24,17 +23,15 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
  * Sec-WebSocket-Version: 13
  * </pre>
  *
- * @author lihuagang
- * @date 2023/6/14
- * @see org.springframework.web.socket.config.annotation.WebSocketConfigurer
+ * @since 2023/6/14
+ * @see WebSocketConfigurer
  */
 @Slf4j
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
-
     public WebSocketConfig() {
-        log.info("create WebSocketConfig instance");
+        log.info("create WebSocketConfig");
     }
 
     @Bean

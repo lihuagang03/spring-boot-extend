@@ -6,12 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * 应用程序启动入口
  *
- * @author guangyi
- * @date 2023/7/30
+ * @author lihuagang
+ * @since 2023/7/30
  */
 @SpringBootApplication
 public class RedisApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(RedisApplication.class, args);
     }

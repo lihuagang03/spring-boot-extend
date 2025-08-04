@@ -7,17 +7,15 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 探针控制器
  * <pre>
- * 配置存活、就绪和启动探针
- * https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+ * <a href="https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">
+ *     配置存活、就绪和启动探针</a>
  * </pre>
  *
- * @author lihuagang
- * @date 2023/6/14
+ * @since 2023/6/14
  */
 @RestController("probeController")
 @RequestMapping("/probe")
 public class ProbeController {
-
     /**
      * 健康检查
      */

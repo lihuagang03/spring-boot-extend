@@ -8,8 +8,7 @@ import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 /**
  * WebSocket辅助方法
  *
- * @author lihuagang
- * @date 2023/5/15
+ * @since 2023/5/15
  */
 public final class WebSocketUtil {
     /**

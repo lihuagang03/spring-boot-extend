@@ -1,0 +1,12 @@
+
+# Run Listeners
+org.springframework.boot.SpringApplicationRunListener=\
+com.spring.boot.log.LogSpringApplicationRunListener
+
+# Application Listeners
+org.springframework.context.ApplicationListener=\
+com.spring.boot.log.event.LogSpringApplicationEventListener
+
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.spring.boot.log.autoconfigure.LogAutoConfiguration

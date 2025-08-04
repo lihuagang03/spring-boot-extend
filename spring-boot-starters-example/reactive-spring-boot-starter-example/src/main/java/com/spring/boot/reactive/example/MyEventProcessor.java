@@ -7,8 +7,7 @@ import java.util.List;
  * <p>
  * https://github.com/reactor/reactor-core/blob/main/reactor-core/src/test/java/reactor/guide/GuideTests.java#L868
  *
- * @author guangyi
- * @date 2023/7/27
+ * @since 2023/7/27
  */
 public interface MyEventProcessor {
 

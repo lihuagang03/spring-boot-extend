@@ -25,8 +25,7 @@ import static org.assertj.core.api.Assertions.*;
  * <p>
  * https://github.com/reactor/reactor-core/blob/main/reactor-core/src/test/java/reactor/guide/GuideTests.java
  *
- * @author guangyi
- * @date 2023/7/25
+ * @since 2023/7/25
  */
 class FluxTest {
 

@@ -1,0 +1,138 @@
+
+# Appendices
+# Appendix A: Common Application Properties
+
+# .A.1. Core Properties
+spring:
+  application:
+    name: 'mybatis-plus-spring-boot-starter-example'
+  mvc:
+    format:
+      date: 'yyyy-MM-dd'
+      date-time: 'yyyy-MM-dd HH:mm:ss'
+  jackson:
+#    date-format: 'yyyy-MM-dd HH:mm:ss'
+    default-property-inclusion: non_null
+#    serialization:
+#      WRITE_DATES_AS_TIMESTAMPS: false
+  # DataSourceProperties
+  datasource:
+#    generate-unique-name: true
+#    unique-name: "${spring.application.name}-DruidDataSource"
+    name: "${spring.application.name}"
+    # DruidDataSourceAutoConfigure
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://localhost:3306/digital?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=3&zeroDateTimeBehavior=convertToNull&useSSL=false&allowMultiQueries=true"
+    # 配置中心里配置，防止泄露
+    username: "root"
+    password: "12345678"
+    # DruidDataSourceWrapper
+    druid:
+      # DruidAbstractDataSource
+      # 根据业务缓存实际的平均响应rt和请求量来合理调整
+      # 配置初始化大小、最小、最大
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      # 配置获取连接等待超时的时间
+      max-wait: 300
+      use-unfair-lock: false
+      validation-query: "SELECT 'x'"
+#      test-on-borrow: false
+#      test-on-return: false
+#      test-while-idle: true
+      pool-prepared-statements: true
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接
+#      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间
+#      min-evictable-idle-time-millis: 600000
+      max-open-prepared-statements: 20
+      # 配置监控统计拦截的filters
+      filters: stat,wall,slf4j
+#      keep-alive: true
+#      use-global-data-source-stat: true
+#      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=1000;druid.stat.logSlowSql=true
+      # DruidFilterConfiguration
+      filter:
+        stat:
+          enabled: true
+          merge-sql: true
+          slow-sql-millis: 1000
+          log-slow-sql: true
+#        config:
+#          enabled: true
+#      stat-view-servlet:
+#        enabled: false
+#      web-stat-filter:
+#        enabled: false
+
+# MybatisPlusProperties
+mybatis-plus:
+  executor-type: reuse
+  # 事务未实时提交，数据未实时写入，未查询到刚写入的数据记录
+#  executor-type: batch
+  # GlobalConfig
+  global-config:
+    banner: true
+    enable-sql-runner: true
+    db-config:
+      id-type: auto
+#  db-type: mysql
+  configuration:
+    # 自动映射枚举
+    # 方式二：全局修改 DefaultEnumTypeHandler
+    # https://baomidou.com/guides/auto-convert-enum/#%E6%96%B9%E5%BC%8F%E4%BA%8C%E5%85%A8%E5%B1%80%E4%BF%AE%E6%94%B9-defaultenumtypehandler
+    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
+
+# .A.11. Server Properties
+server:
+  port: 8387
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 20
+    access-log: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
+      enabled: true
+      pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
+      prefix: "tomcat_access"
+      directory: "${HOME}/logs/${spring.application.name}/"
+
+management:
+  # ManagementServerProperties
+  server:
+    port: 38081
+    base-path: ""
+  endpoints:
+    # WebEndpointProperties
+    web:
+      exposure:
+        include: "*"
+#        exclude: "heapdump,threaddump,metrics"
+#      base-path: "/actuator"
+      # Customizing the Management Endpoint Paths
+#      path-mapping:
+#        "prometheus": "metrics"
+  # MetricsProperties
+  metrics:
+    use-global-registry: true
+#    enable:
+#      heapdump: false
+#      threaddump: false
+    tags:
+      application: "${spring.application.name}"
+    export:
+      # JmxProperties
+      jmx:
+        enabled: true
+        domain: "metrics"
+        step: 1m
+      # PrometheusProperties
+      prometheus:
+        enabled: true
+#        descriptions: true
+#        pushgateway:
+#          enabled: false
+#          push-rate: 1m
+#          shutdown-operation: push
+        step: 1m

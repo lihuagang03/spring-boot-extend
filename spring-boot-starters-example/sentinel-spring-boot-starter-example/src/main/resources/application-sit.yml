@@ -1,0 +1,16 @@
+
+spring:
+  cloud:
+    sentinel:
+      eager: true
+      filter:
+        enabled: false
+      transport:
+        dashboard: "https://sit-api-sentinel-dashboard.xxx.com"
+      datasource:
+        dataSourceName:
+          http:
+            dashboard-url: ${spring.cloud.sentinel.transport.dashboard}
+            app-name: ${spring.application.name}
+            rule-type: flow
+#            default-rule-value: "[]"

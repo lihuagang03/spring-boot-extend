@@ -1,0 +1,34 @@
+
+spring:
+  application:
+    name: log-spring-boot-starter-example
+
+management:
+  # ManagementServerProperties
+  server:
+    port: 38081
+#    base-path: ""
+  endpoints:
+    # WebEndpointProperties
+    web:
+      exposure:
+        include: "*"
+        exclude: "heapdump,threaddump"
+#      base-path: "/actuator"
+      # Customizing the Management Endpoint Paths
+#      path-mapping:
+#        "metrics": "metrics"
+  # MetricsProperties
+  metrics:
+    use-global-registry: true
+#    enable:
+#      heapdump: false
+#      threaddump: false
+    tags:
+      application: "${spring.application.name}"
+    export:
+      # JmxProperties
+      jmx:
+        enabled: true
+        domain: "metrics"
+        step: 1m

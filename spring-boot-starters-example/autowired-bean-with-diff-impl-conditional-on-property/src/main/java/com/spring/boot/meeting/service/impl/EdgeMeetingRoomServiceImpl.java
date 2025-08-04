@@ -8,16 +8,15 @@ import org.springframework.stereotype.Service;
 /**
  * 边侧数据源的会议室服务实现
  *
- * @author lihuagang
- * @date 2023/6/13
+ * @author guang.yi
+ * @since 2023/6/13
  */
 @Slf4j
 @EdgeService
-@Service("edgeMeetingRoomService")
+@Service
 public class EdgeMeetingRoomServiceImpl implements MeetingRoomService {
-
     public EdgeMeetingRoomServiceImpl() {
-        log.info("create EdgeMeetingRoomServiceImpl instance");
+        log.info("create EdgeMeetingRoomServiceImpl");
     }
 
     @Override

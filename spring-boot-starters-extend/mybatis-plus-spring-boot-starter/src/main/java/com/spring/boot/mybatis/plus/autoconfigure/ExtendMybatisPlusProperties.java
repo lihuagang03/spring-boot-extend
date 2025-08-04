@@ -2,7 +2,9 @@ package com.spring.boot.mybatis.plus.autoconfigure;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -10,22 +12,25 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * MybatisPlus 配置属性集
  *
- * @author lihuagang
- * @date 2023/6/9
  * @see com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties
  */
 @Slf4j
-@Data
+@Getter
+@Setter
+@ToString
 @Accessors(chain = true)
-@ConfigurationProperties(prefix = Constants.MYBATIS_PLUS)
+@ConfigurationProperties(Constants.MYBATIS_PLUS)
 public class ExtendMybatisPlusProperties {
-
     /**
      * MybatisPlus 支持的数据库类型，主要用于分页方言
      */
     private DbType dbType;
+    /**
+     * 单页分页条数限制
+     */
+    protected Long maxLimit = 100L;
 
     public ExtendMybatisPlusProperties() {
-        log.info("create ExtendMybatisPlusProperties instance");
+        log.info("create ExtendMybatisPlusProperties");
     }
 }

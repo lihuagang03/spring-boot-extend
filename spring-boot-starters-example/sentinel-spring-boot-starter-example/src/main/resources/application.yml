@@ -1,0 +1,69 @@
+
+spring:
+  application:
+    name: sentinel-demo
+  cloud:
+    sentinel:
+      eager: true
+      filter:
+        enabled: false
+      transport:
+        dashboard: http://localhost:8081
+#        dashboard: https://sit-sentinel-dashboard.xxx.com
+      datasource:
+        dataSourceName1:
+          http:
+            dashboard-url: ${spring.cloud.sentinel.transport.dashboard}
+            app-name: ${spring.application.name}
+            rule-type: flow
+        dataSourceName2:
+          http:
+            dashboard-url: ${spring.cloud.sentinel.transport.dashboard}
+            app-name: ${spring.application.name}
+            rule-type: degrade
+#            default-rule-value: "[]"
+#          apollo:
+#            rule-type: flow
+#            namespaceName: application
+##            namespaceName: sentinel
+#            flowRulesKey: ${spring.application.name}.sentinel.flowRules
+#            defaultFlowRuleValue: "[]"
+
+# apollo
+#app:
+#  id: ${spring.application.name}
+#apollo:
+#  meta: http://localhost:8080
+#  meta: http://172.16.150.23:8080
+
+server:
+  port: 8083
+
+logging:
+  level:
+    root: info
+  file:
+    path: "${HOME}/logs/${spring.application.name}/"
+
+management:
+  # ManagementServerProperties
+  server:
+    port: 38083
+  endpoints:
+    # WebEndpointProperties
+    web:
+      exposure:
+        include: "*"
+#        exclude: "metrics,heapdump,threaddump"
+#      base-path: "/actuator"
+# Customizing the Management Endpoint Paths
+#      path-mapping:
+#        "prometheus": "metrics"
+  # MetricsProperties
+  metrics:
+    use-global-registry: true
+#    enable:
+#      heapdump: false
+#      threaddump: false
+    tags:
+      application: "${spring.application.name}"

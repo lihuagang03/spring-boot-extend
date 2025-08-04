@@ -14,12 +14,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Utility methods of mock MVC request.
  *
- * @author Edward Lee
- * @date 2023-6-13
- * @since 2016-06-29 12:23
+ * @since 2016-06-29
  */
 public final class MockMvcRequestUtils {
-
     /**
      * Mocks the GET request.
      *

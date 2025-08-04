@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.12</version>
+    <version>3.2.12</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -17,7 +17,7 @@
   <description>基于WebSocket实现的ChatGPT实时对话交互</description>
 
   <properties>
-    <java.version>11</java.version>
+<!--    <java.version>17</java.version>-->
   </properties>
 
   <dependencies>
@@ -62,10 +62,17 @@
       <optional>true</optional>
     </dependency>
 
+    <!-- test -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.xmlunit</groupId>
+          <artifactId>xmlunit-core</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 

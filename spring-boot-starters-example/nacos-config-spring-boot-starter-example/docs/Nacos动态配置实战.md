@@ -20,7 +20,6 @@ MySQL
 mysql -V
 # 结果
 mysql  Ver 8.0.33 for macos13 on x86_64 (MySQL Community Server - GPL)
-
 ```
 
 ### cmd命令行客户端
@@ -28,8 +27,9 @@ mysql  Ver 8.0.33 for macos13 on x86_64 (MySQL Community Server - GPL)
 # 密码建议在下一行输入
 mysql -h localhost -P 3306 -u root -p
 
-mysql -h localhost -P 3306 -u root -phuofo141005
+mysql -h localhost -P 3306 -u root -p12345678
 
+mysql -h localhost -P 3306 -u nacos -pnacos
 ```
 
 ### 创建用户与授权
@@ -45,19 +45,17 @@ GRANT ALL ON *.* TO 'nacos'@'localhost';
 
 # 删除用户
 DROP USER 'nacos'@'127.0.0.1';
-
 ```
 
 ### 创建数据库
 https://dev.mysql.com/doc/refman/8.0/en/create-database.html
 ```shell
 CREATE DATABASE IF NOT EXISTS nacos
-  DEFAULT CHARACTER SET utf8
-  DEFAULT COLLATE utf8_bin;
+  DEFAULT CHARACTER SET = utf8mb4
+  DEFAULT COLLATE = utf8mb4_bin;
 
 # 删除数据库
 DROP DATABASE nacos;
-
 ```
 
 ### 创建数据表
@@ -68,12 +66,11 @@ USE nacos;
 
 # 创建数据表
 # nacos/conf/mysql-schema.sql
-
 ```
 
 
 ## 2.启动Nacos服务器
-1.增加 nacos/conf/application.properties 的数据源配置
+1.增加`nacos/conf/application.properties`的数据源配置
 ```properties
 #*************** Config Module Related Configurations ***************#
 ### If use MySQL as datasource:
@@ -93,7 +90,6 @@ db.num=1
 db.url.0=jdbc:mysql://127.0.0.1:3306/nacos?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC
 db.user.0=nacos
 db.password.0=nacos
-
 ```
 
 2.启动Nacos服务器
@@ -109,8 +105,19 @@ sudo ln -s nacos-server-2.2.3 nacos
 sudo chown -R feimen:staff nacos 
 
 # 启动独立服务器
+```shell
 cd nacos 
 sh bin/startup.sh -m standalone 
 tail -f /usr/local/nacos/logs/start.out 
+```
+
+控制台
+http://127.0.0.1:8848/nacos/index.html
+http://localhost:8848/nacos
+
+3.关闭Nacos服务器
+```shell
+# 关闭服务器
+sh bin/shutdown.sh
 ```
 

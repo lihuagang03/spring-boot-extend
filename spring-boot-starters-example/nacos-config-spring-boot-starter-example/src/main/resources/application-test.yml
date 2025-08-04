@@ -3,6 +3,6 @@
 nacos:
   config:
     # 命名空间（隔离）
-    namespace: 'nacos-env-test'
+    namespace: "test-env"
     # 分组身份
-    group: 'TEST'
+    group: "DEFAULT_GROUP"

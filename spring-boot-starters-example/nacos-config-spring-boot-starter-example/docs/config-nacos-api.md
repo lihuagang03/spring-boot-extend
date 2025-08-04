@@ -1,19 +1,18 @@
 
 
-## 动态配置
+## Nacos动态配置api
 
-http://localhost:8080/config/nacos
+http://localhost:8680/config/nacos
 
+配置
 ```yaml
-
-dynamic-config: 'yml-demo'
-actuator-endpoint: 'nacos-config'
+# 空
 
 ```
 
 
 ### 1.配置属性值
-http://localhost:8080/config/nacos/value
+http://localhost:8680/config/nacos/value
 
 ```json
 
@@ -25,11 +24,6 @@ http://localhost:8080/config/nacos/value
 dynamic:
   config:
     enable: true
-
-```
-
-```json
-false
 
 ```
 
@@ -40,12 +34,13 @@ true
 
 
 ### 2.配置属性集
-http://localhost:8080/config/nacos/properties
+http://localhost:8680/config/nacos/properties
 
 ```json
+
 {
-    "dynamicConfig":"yml-demo-dev",
-    "configNamespace":"nacos-config-dev"
+  "dynamicConfig":null,
+  "configNamespace":null
 }
 
 ```
@@ -53,19 +48,16 @@ http://localhost:8080/config/nacos/properties
 配置变更
 ```yaml
 
-dynamic:
-  config:
-    enable: true
-
-dynamic-config: 'yml-demo-dev-dynamic'
-config-namespace: 'nacos-config-dev'
+dynamic-config: 'yml-dynamic-config'
+config-namespace: 'nacos-config'
 
 ```
 
 ```json
+
 {
-    "dynamicConfig":"yml-demo-dev-dynamic",
-    "configNamespace":"nacos-config-dev"
+  "dynamicConfig":"yml-dynamic-config",
+  "configNamespace":"nacos-config"
 }
 
 ```
@@ -74,7 +66,7 @@ config-namespace: 'nacos-config-dev'
 ### 3.配置属性
 > 配置监视器
 
-http://localhost:8080/config/nacos/value/listener
+http://localhost:8680/config/nacos/value/listener
 
 ```json
 0
@@ -84,13 +76,6 @@ http://localhost:8080/config/nacos/value/listener
 配置变更
 ```yaml
 
-dynamic:
-  config:
-    enable: true
-
-dynamic-config: 'yml-demo-dev-dynamic'
-config-namespace: 'nacos-config-dev'
-
 people:
   count: 1
 
@@ -98,6 +83,23 @@ people:
 
 ```json
 1
+
+```
+
+### 完整的配置
+
+配置
+```yaml
+
+dynamic:
+  config:
+    enable: true
+
+dynamic-config: 'yml-dynamic-config'
+config-namespace: 'nacos-config'
+
+people:
+  count: 1
 
 ```
 

@@ -2,14 +2,12 @@ package com.spring.boot.meeting.service;
 
 /**
  * 会议服务
- * <p></p>
- * 云-边-端架构
+ * <p>
+ * "云-边-端"架构
  *
- * @author lihuagang
- * @date 2023/6/13
+ * @since 2023/6/13
  */
 public interface MeetingService {
-
     // 鉴权
 
     /**
@@ -18,5 +16,4 @@ public interface MeetingService {
      * @return 会话身份
      */
     String getAuthSessionId();
-
 }

@@ -3,6 +3,6 @@
 nacos:
   config:
     # 命名空间（隔离）
-    namespace: 'nacos-env-dev'
+    namespace: "dev-env"
     # 分组身份
-    group: 'DEVELOP'
+#    group: "DEFAULT_GROUP"

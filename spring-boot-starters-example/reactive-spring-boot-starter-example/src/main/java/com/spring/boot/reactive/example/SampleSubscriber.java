@@ -6,8 +6,7 @@ import reactor.core.publisher.BaseSubscriber;
 /**
  * 示例订阅者
  *
- * @author guangyi
- * @date 2023/7/27
+ * @since 2023/7/27
  */
 public class SampleSubscriber<T> extends BaseSubscriber<T> {
     @Override

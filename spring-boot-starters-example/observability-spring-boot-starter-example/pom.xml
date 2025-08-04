@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.7.18</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <groupId>com.spring.boot</groupId>
+  <artifactId>observability-spring-boot-starter-example</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>observability-spring-boot-starter-example</name>
+  <description>Observability Example for Spring Boot Starter</description>
+
+  <properties>
+    <skywalking.version>9.3.0</skywalking.version>
+    <druid.version>1.2.23</druid.version>
+    <fastjson2.version>2.0.53</fastjson2.version>
+
+<!--    <java.version>17</java.version>-->
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- 二方库 -->
+      <dependency>
+        <groupId>com.spring.boot</groupId>
+        <artifactId>observability-spring-boot-starter</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>com.spring.boot</groupId>
+        <artifactId>log-spring-boot-starter</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>com.spring.boot</groupId>
+        <artifactId>mybatis-plus-spring-boot-starter</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+      </dependency>
+
+      <!-- jdbc -->
+<!--      <dependency>-->
+<!--        <groupId>org.mybatis.spring.boot</groupId>-->
+<!--        <artifactId>mybatis-spring-boot-starter</artifactId>-->
+<!--        <version>3.0.2</version>-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--        <groupId>com.alibaba</groupId>-->
+<!--        <artifactId>druid</artifactId>-->
+<!--        <version>${druid.version}</version>-->
+<!--      </dependency>-->
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-starter</artifactId>
+        <version>${druid.version}</version>
+      </dependency>
+
+      <!-- message queue -->
+      <dependency>
+        <groupId>org.apache.rocketmq</groupId>
+        <artifactId>rocketmq-spring-boot-starter</artifactId>
+        <version>2.2.3</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba.fastjson2</groupId>
+        <artifactId>fastjson2</artifactId>
+        <version>${fastjson2.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.protobuf</groupId>
+        <artifactId>protobuf-bom</artifactId>
+        <version>3.25.1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- trace -->
+      <dependency>
+        <groupId>org.apache.skywalking</groupId>
+        <artifactId>apm-toolkit-trace</artifactId>
+        <version>${skywalking.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.skywalking</groupId>
+        <artifactId>apm-toolkit-logback-1.x</artifactId>
+        <version>${skywalking.version}</version>
+      </dependency>
+
+      <!-- debug -->
+      <dependency>
+        <groupId>org.apache.skywalking</groupId>
+        <artifactId>apm-toolkit-logback-1.x-activation</artifactId>
+        <version>${skywalking.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.skywalking</groupId>
+        <artifactId>apm-trace-ignore-plugin</artifactId>
+        <version>${skywalking.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.skywalking</groupId>
+        <artifactId>apm-agent-core</artifactId>
+        <version>${skywalking.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.skywalking</groupId>
+        <artifactId>apm-agent</artifactId>
+        <version>${skywalking.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.skywalking</groupId>
+        <artifactId>apm-springmvc-annotation-commons</artifactId>
+        <version>${skywalking.version}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- 二方库 -->
+    <dependency>
+      <groupId>com.spring.boot</groupId>
+      <artifactId>observability-spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.spring.boot</groupId>
+      <artifactId>log-spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.spring.boot</groupId>
+      <artifactId>mybatis-plus-spring-boot-starter</artifactId>
+    </dependency>
+
+    <!-- spring-boot-starter -->
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.boot</groupId>-->
+<!--      <artifactId>spring-boot-starter-webflux</artifactId>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.boot</groupId>-->
+<!--      <artifactId>spring-boot-starter-reactor-netty</artifactId>-->
+<!--    </dependency>-->
+    <!-- jdbc -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+    </dependency>
+    <!-- cache -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+<!--      <exclusions>-->
+<!--        <exclusion>-->
+<!--          <groupId>io.lettuce</groupId>-->
+<!--          <artifactId>lettuce-core</artifactId>-->
+<!--        </exclusion>-->
+<!--      </exclusions>-->
+    </dependency>
+    <!-- jdbc -->
+    <dependency>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid-spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-pool2</artifactId>
+    </dependency>
+    <!-- message queue -->
+    <dependency>
+      <groupId>org.apache.rocketmq</groupId>
+      <artifactId>rocketmq-spring-boot-starter</artifactId>
+    </dependency>
+    <!-- search -->
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.boot</groupId>-->
+<!--      <artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
+<!--    </dependency>-->
+
+    <dependency>
+      <groupId>com.alibaba.fastjson2</groupId>
+      <artifactId>fastjson2</artifactId>
+    </dependency>
+
+    <!-- trace -->
+    <dependency>
+      <groupId>org.apache.skywalking</groupId>
+      <artifactId>apm-toolkit-trace</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.skywalking</groupId>
+      <artifactId>apm-toolkit-logback-1.x</artifactId>
+    </dependency>
+
+    <!-- debug -->
+    <dependency>
+      <groupId>org.apache.skywalking</groupId>
+      <artifactId>apm-trace-ignore-plugin</artifactId>
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.apache.skywalking</groupId>-->
+<!--      <artifactId>apm-toolkit-logback-1.x-activation</artifactId>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>org.apache.skywalking</groupId>
+      <artifactId>apm-agent-core</artifactId>
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.apache.skywalking</groupId>-->
+<!--      <artifactId>apm-agent</artifactId>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>org.apache.skywalking</groupId>
+      <artifactId>apm-springmvc-annotation-commons</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- test -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -4,29 +4,24 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.StopWatch;
-import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.client.WebSocketClient;
 
 import java.io.IOException;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 
 import static org.assertj.core.api.Assertions.*;
 
 /**
  * Test of {@link WebSocketClient}.
  *
- * @author lihuagang
- * @date 2023/6/15
+ * @since 2023/6/15
  */
 @Slf4j
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class WebSocketClientTest {
-
     /**
      * 套接字客户端
      */
@@ -62,8 +57,8 @@ class WebSocketClientTest {
         ClientTextWebSocketHandler webSocketHandler = new ClientTextWebSocketHandler();
         String chatId = applyChatId(orgId, userId);
         String sessionId = applySessionId(appId, chatId);
-        ListenableFuture<WebSocketSession> listenableFuture = webSocketClient
-                .doHandshake(webSocketHandler, URI_TEMPLATE, sessionId);
+        CompletableFuture<WebSocketSession> listenableFuture = webSocketClient
+                .execute(webSocketHandler, URI_TEMPLATE, sessionId);
         stopWatch.stop();
         stopWatch.start("getWebSocketSession");
 

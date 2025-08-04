@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.12</version>
+    <version>3.2.12</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -18,8 +18,9 @@
   <description>Nacos Config Example for Spring Boot Starter</description>
 
   <properties>
-    <java.version>11</java.version>
     <nacos-config-spring-boot.version>0.2.12</nacos-config-spring-boot.version>
+
+<!--    <java.version>17</java.version>-->
   </properties>
 
   <dependencyManagement>
@@ -69,6 +70,12 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.xmlunit</groupId>
+          <artifactId>xmlunit-core</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 

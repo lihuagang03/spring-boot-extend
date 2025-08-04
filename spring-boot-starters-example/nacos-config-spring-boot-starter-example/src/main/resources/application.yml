@@ -5,19 +5,19 @@
 # .A.1. Core Properties
 spring:
   application:
-    name: nacos-config-spring-boot-starter-example
-  profiles:
-#    active: prod,test,dev
-    active: dev
+    name: "nacos-config-spring-boot-starter-example"
+#  profiles:
+#    active: "dev"
+#    active: "prod,test,dev"
 
 # .A.11. Server Properties
 server:
-  port: 8080
+  port: 8680
   tomcat:
     threads:
       max: 200
       min-spare: 10
-    accesslog: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
+    access-log: # https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Logging
       enabled: true
       pattern: "%{begin:yyyy-MM-dd HH:mm:ss.SSS}t  '%h %l %u' [%I] '\"%r\" %s %bB' '%Dms %Fms'"
       prefix: tomcat_access
@@ -34,32 +34,34 @@ management:
 #      show-components: always
       show-details: always
 
-# config
+# config center
 # com.alibaba.boot.nacos.config.autoconfigure.NacosConfigAutoConfiguration
 # com.alibaba.boot.nacos.config.properties.NacosConfigProperties
 nacos:
   # 最大重试次数
-  maxRetry: 10
+#  max-retry: 10
   # 重试时间
-  configRetryTime: 3000
+#  config-retry-time: 3000
   # 长轮询连接的超时时间
-  configLongPollTimeout: 60000
+#  config-long-poll-timeout: 60000
   # 启用远程同步配置
-  enableRemoteSyncConfig: true
+#  enable-remote-sync-config: true
   config:
 #    enabled: true
     # 配置中心服务端地址
-    server-addr: '127.0.0.1:8848'
+    server-addr: "127.0.0.1:8848"
+    # Endpoint ID 'nacos-config' contains invalid characters, please migrate to a valid format.
+#    endpoint: "nacos-config"
     # 远程配置优先
     remote-first: true
     # 数据身份
-    data-id: 'nacos-config-spring-boot-starter-example'
+    data-id: "${spring.application.name}"
 #    # 数据身份集合
 #    data-ids: ''
     # 命名空间（隔离）
-    namespace: ''
+    namespace: "dev-env"
     # 分组身份
-    group: 'DEFAULT_GROUP'
+    group: "DEFAULT_GROUP"
     # 类型
     type: yaml
     # 自动刷新机制
@@ -73,8 +75,8 @@ nacos:
     # 启用远程同步配置
     enable-remote-sync-config: true
 #    # 账密
-#    username: 'nacos'
-#    password: 'nacos'
+#    username: "nacos"
+#    password: "nacos"
     bootstrap:
       enable: true
       log-enable: true

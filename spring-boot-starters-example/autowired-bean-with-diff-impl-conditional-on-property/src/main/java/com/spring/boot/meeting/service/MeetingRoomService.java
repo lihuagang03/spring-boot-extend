@@ -2,14 +2,12 @@ package com.spring.boot.meeting.service;
 
 /**
  * 会议室服务
- * <p></p>
- * 云-边-端架构
+ * <p>
+ * "云-边-端"架构
  *
- * @author lihuagang
- * @date 2023/6/13
+ * @since 2023/6/13
  */
 public interface MeetingRoomService {
-
     /**
      * 获取会议室名称
      *
@@ -17,5 +15,4 @@ public interface MeetingRoomService {
      * @return 会议室名称
      */
     String getMeetingRoomName(Long id);
-
 }

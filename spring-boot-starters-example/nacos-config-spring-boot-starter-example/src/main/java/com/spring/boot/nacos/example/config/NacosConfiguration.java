@@ -3,7 +3,6 @@ package com.spring.boot.nacos.example.config;
 import com.alibaba.nacos.api.config.ConfigType;
 import com.alibaba.nacos.spring.context.annotation.config.EnableNacosConfig;
 import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,13 +12,12 @@ import static org.springframework.core.env.StandardEnvironment.SYSTEM_PROPERTIES
 /**
  * nacos配置属性源
  *
- * @author guangyi
- * @date 2023/7/21
+ * @since 2023/7/21
  * @see EnableNacosConfig
  * @see NacosPropertySource
  */
 @Slf4j
-@Data
+@EnableNacosConfig
 @NacosPropertySource(
         name = "dynamicConfig",
         groupId = "${nacos.config.group:}",
@@ -30,10 +28,8 @@ import static org.springframework.core.env.StandardEnvironment.SYSTEM_PROPERTIES
         after = SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME,
         type = ConfigType.YAML
 )
-@EnableNacosConfig
-@Configuration(value = "nacosConfiguration", proxyBeanMethods = false)
+@Configuration(proxyBeanMethods = false)
 public class NacosConfiguration {
-
     public NacosConfiguration() {
         log.info("create NacosConfiguration");
     }
