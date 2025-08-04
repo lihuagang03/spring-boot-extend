@@ -21,7 +21,7 @@
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::               (v2.7.12)
+ :: Spring Boot ::               (v2.7.18)
 
 #NacosConfigApplicationContextInitializer
 #nacos配置属性集构建

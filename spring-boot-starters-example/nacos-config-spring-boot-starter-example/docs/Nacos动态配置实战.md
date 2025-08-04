@@ -98,19 +98,19 @@ db.password.0=nacos
 
 2.启动Nacos服务器
 ```shell
-unzip nacos-server-2.2.3.zip
+unzip nacos-server-2.2.3.zip 
 # 移动文件夹
-sudo mv nacos-server-2.2.3 /usr/local
+sudo mv nacos-server-2.2.3 /usr/local 
 
-cd /usr/local
+cd /usr/local 
 # 创建软链接
-sudo ln -s nacos-server-2.2.3 nacos
+sudo ln -s nacos-server-2.2.3 nacos 
 # 变更软链接的所有者和分组
-sudo chown -R feimen:staff nacos
+sudo chown -R feimen:staff nacos 
 
 # 启动独立服务器
-cd nacos/bin
-sh startup.sh -m standalone
-
+cd nacos 
+sh bin/startup.sh -m standalone 
+tail -f /usr/local/nacos/logs/start.out 
 ```
 
