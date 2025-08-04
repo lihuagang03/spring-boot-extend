@@ -1,7 +1,7 @@
 
 
 ```shell
-/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/bin/java com.spring.boot.observability.example.ObservabilityApplication
+/Library/Java/JavaVirtualMachines/jdk-17.0.2.jdk/Contents/Home/bin/java com.spring.boot.observability.example.ObservabilityApplication
 # Spring应用事件侦听器 创建
 11:33:19.284 [main] INFO com.spring.boot.observability.event.PrometheusClientApplicationEventListener - create PrometheusClientApplicationEventListener
 11:33:19.289 [main] INFO com.spring.boot.log.event.LogSpringApplicationEventListener - create LogSpringApplicationEventListener
@@ -17,13 +17,13 @@
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::               (v2.7.16)
+ :: Spring Boot ::               (v3.2.12)
 
 # 创建并准备好ApplicationContext后调用(应用上下文初始化完成事件)
 2023-09-18 11:33:19.847  INFO 49225 --- [           main] .b.l.e.LogSpringApplicationEventListener : receive event org.springframework.boot.context.event.ApplicationContextInitializedEvent[source=org.springframework.boot.SpringApplication@10163d6]
 2023-09-18 11:33:19.847  INFO 49225 --- [           main] c.s.b.l.LogSpringApplicationRunListener  : Called once the ApplicationContext has been created and prepared, but before sources have been loaded. context=org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4a7f959b, started on Thu Jan 01 08:00:00 CST 1970
 # 启动应用程序
-2023-09-18 11:33:19.854  INFO 49225 --- [           main] c.s.b.o.e.ObservabilityApplication       : Starting ObservabilityApplication using Java 1.8.0_333 on lihuagangdebijibendiannao.local with PID 49225 (/Users/lihuagang/Documents/workspace/spring-boot-extend/spring-boot-starters-example/observability-spring-boot-starter-example/target/classes started by lihuagang in /Users/lihuagang/Documents/workspace/spring-boot-extend)
+2023-09-18 11:33:19.854  INFO 49225 --- [           main] c.s.b.o.e.ObservabilityApplication       : Starting ObservabilityApplication using Java 17.0.2 on lihuagangdebijibendiannao.local with PID 49225 (/Users/lihuagang/Documents/workspace/spring-boot-extend/spring-boot-starters-example/observability-spring-boot-starter-example/target/classes started by lihuagang in /Users/lihuagang/Documents/workspace/spring-boot-extend)
 # 活动配置文件集
 2023-09-18 11:33:19.856  INFO 49225 --- [           main] c.s.b.o.e.ObservabilityApplication       : No active profile set, falling back to 1 default profile: "default"
 # 在加载应用上下文之后但在刷新之前调用

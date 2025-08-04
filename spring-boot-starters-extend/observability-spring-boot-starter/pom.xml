@@ -12,10 +12,9 @@
   <description>Observability for Spring Boot Starter</description>
 
   <properties>
-    <spring-boot.version>2.7.18</spring-boot.version>
-    <snakeyaml.version>2.1</snakeyaml.version>
+    <spring-boot.version>3.2.12</spring-boot.version>
 
-    <java.version>1.8</java.version>
+    <java.version>17</java.version>
     <resource.delimiter>@</resource.delimiter>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -46,12 +45,6 @@
 <!--        <type>pom</type>-->
 <!--        <scope>import</scope>-->
 <!--      </dependency>-->
-
-      <dependency>
-        <groupId>org.yaml</groupId>
-        <artifactId>snakeyaml</artifactId>
-        <version>${snakeyaml.version}</version>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 

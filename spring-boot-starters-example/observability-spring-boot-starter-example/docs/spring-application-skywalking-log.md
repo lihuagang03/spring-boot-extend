@@ -6,7 +6,7 @@
 DEBUG 2023-12-11 16:14:25.380 main AgentPackagePath : The beacon class location is jar:file:/Users/lihuagang/Documents/SkyWalking/skywalking-agent/skywalking-agent.jar!/org/apache/skywalking/apm/agent/core/boot/AgentPackagePath.class. 
 # 代理配置初始化
 INFO 2023-12-11 16:14:25.381 main SnifferConfigInitializer : Config file found in /Users/lihuagang/Documents/SkyWalking/skywalking-agent/config/agent.config. 
-INFO 2023-12-11 16:14:25.445 main SnifferConfigInitializer : SnifferConfigInitializer url:jar:file:/Users/lihuagang/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/2.7.16/spring-boot-starter-actuator-2.7.16.jar!/META-INF/MANIFEST.MF 
+INFO 2023-12-11 16:14:25.445 main SnifferConfigInitializer : SnifferConfigInitializer url:jar:file:/Users/lihuagang/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.2.12/spring-boot-starter-actuator-3.2.12.jar!/META-INF/MANIFEST.MF 
 ......
 INFO 2023-12-11 16:14:25.493 main SnifferConfigInitializer : SnifferConfigInitializer url:jar:file:/Users/lihuagang/.m2/repository/org/apache/skywalking/apm-toolkit-logback-1.x/9.1.0/apm-toolkit-logback-1.x-9.1.0.jar!/META-INF/MANIFEST.MF 
 # 代理插件加载
@@ -44,7 +44,7 @@ INFO 2023-12-11 16:14:25.942 main SkyWalkingAgent : Skywalking agent begin to in
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::               (v2.7.16)
+ :: Spring Boot ::               (v3.2.12)
 
 # 创建并准备好ApplicationContext后调用(应用上下文初始化完成事件)
 2023-12-11 16:14:29.970 [TID:N/A] [main] INFO  c.s.b.l.e.LogSpringApplicationEventListener receive event org.springframework.boot.context.event.ApplicationContextInitializedEvent[source=org.springframework.boot.SpringApplication@d70e9a]
