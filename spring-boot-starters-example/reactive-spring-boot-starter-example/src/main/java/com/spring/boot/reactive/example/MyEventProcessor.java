@@ -9,21 +9,21 @@ import java.util.List;
  *
  * @since 2023/7/27
  */
-public interface MyEventProcessor {
+public interface MyEventProcessor<T> {
 
     /**
      * 注册事件侦听器
      *
      * @param eventListener 事件侦听器
      */
-    void register(MyEventListener<String> eventListener);
+    void register(MyEventListener<T> eventListener);
 
     /**
      * 处理数据块
      *
      * @param values 数据块
      */
-    void dataChunk(List<String> values);
+    void dataChunk(List<T> values);
 
     /**
      * 处理完成

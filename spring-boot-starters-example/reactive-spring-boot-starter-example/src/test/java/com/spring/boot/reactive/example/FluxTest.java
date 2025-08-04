@@ -2,6 +2,7 @@ package com.spring.boot.reactive.example;
 
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -255,7 +256,7 @@ class FluxTest {
         ;
     }
 
-    private final MyEventProcessor myEventProcessor = new MyEventProcessor() {
+    private final MyEventProcessor<String> myEventProcessor = new MyEventProcessor<>() {
 
         private MyEventListener<String> eventListener;
         private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
@@ -392,6 +393,86 @@ class FluxTest {
 //                .verifyComplete()
                 .then(() -> myEventProcessor.processError(new RuntimeException("done")))
                 .verifyErrorMessage("done")
+        ;
+    }
+
+    private final MyMessageProcessor<String> myMessageProcessor = new MyMessageProcessor<>() {
+
+        private MyMessageListener<String> messageListener;
+        private List<String> messages;
+
+        @Override
+        public void register(MyMessageListener<String> messageListener) {
+            this.messageListener = messageListener;
+            if (messages == null) {
+                messages = new LinkedList<>();
+            }
+        }
+
+        @Override
+        public void message(List<String> messages) {
+            this.messages.addAll(messages);
+            messageListener.onMessage(messages);
+        }
+
+        @Override
+        public void processComplete() {
+            messageListener.processComplete();
+        }
+
+        @Override
+        public List<String> getHistory(long n) {
+            return messages;
+        }
+    };
+
+    /**
+     * A hybrid push/pull model
+     * <p>
+     * Most Reactor operators, like create, follow a hybrid push/pull model.
+     * What we mean by that is that despite most of the processing being asynchronous (suggesting a push approach),
+     * there is a small pull component to it: the request.
+     * <p>
+     * The consumer pulls data from the source in the sense that it won’t emit anything until first requested.
+     * The source pushes data to the consumer whenever it becomes available, but within the bounds of its requested amount.
+     * <p>
+     * Note that push() and create() both allow to set up an onRequest consumer in order to
+     * manage the request amount and to ensure that data is pushed through the sink only when there is pending request.
+     */
+    @Test
+    void createHybridPushPullAsynchronousSequence() {
+        Flux<String> bridge = Flux.create(fluxSink -> {
+            myMessageProcessor.register(
+                    new MyMessageListener<>() {
+                        @Override
+                        public void onMessage(List<String> messages) {
+                            for (String s : messages) {
+                                fluxSink.next(s);
+                            }
+                        }
+
+                        @Override
+                        public void processComplete() {
+                            fluxSink.complete();
+                        }
+                    }
+            );
+            fluxSink.onRequest(value -> {
+                List<String> messages = myMessageProcessor.getHistory(value);
+                for (String s : messages) {
+                    fluxSink.next(s);
+                }
+            });
+        });
+
+        bridge.subscribe(System.out::println);
+
+        StepVerifier.withVirtualTime(() -> bridge)
+                .expectSubscription()
+                .then(() -> myMessageProcessor.message(Arrays.asList("push", "message", "streams")))
+                .expectNext("push", "message", "streams")
+                .then(myMessageProcessor::processComplete)
+                .verifyComplete()
         ;
     }
 
