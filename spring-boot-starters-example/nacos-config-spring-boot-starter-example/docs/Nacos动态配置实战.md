@@ -106,7 +106,7 @@ sudo chown -R feimen:staff nacos
 
 # 启动独立服务器
 ```shell
-cd nacos 
+cd /usr/local/nacos 
 sh bin/startup.sh -m standalone 
 tail -f /usr/local/nacos/logs/start.out 
 ```
