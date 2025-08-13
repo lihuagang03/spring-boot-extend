@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 问候实体
- *
- * @since 2023/8/13
+ * 问候【实体】
  */
 @Data
 @NoArgsConstructor
