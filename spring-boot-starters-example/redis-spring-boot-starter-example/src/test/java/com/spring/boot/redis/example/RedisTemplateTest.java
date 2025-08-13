@@ -1,8 +1,8 @@
 package com.spring.boot.redis.example;
 
-import javax.annotation.Resource;
 import java.time.Duration;
 
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

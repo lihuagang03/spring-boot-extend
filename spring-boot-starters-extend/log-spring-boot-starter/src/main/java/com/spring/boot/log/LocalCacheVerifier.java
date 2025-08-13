@@ -1,7 +1,6 @@
 package com.spring.boot.log;
 
-import javax.annotation.PostConstruct;
-
+import jakarta.annotation.PostConstruct;
 import org.springframework.boot.availability.AvailabilityChangeEvent;
 import org.springframework.boot.availability.LivenessState;
 import org.springframework.context.ApplicationEventPublisher;
