@@ -3,6 +3,12 @@ spring:
   application:
     name: log-spring-boot-starter-example
 
+# https://docs.spring.io/spring-boot/how-to/logging.html
+logging:
+  file:
+    name: ${spring.application.name}
+    path: logs
+
 management:
   # ManagementServerProperties
   server:
@@ -25,10 +31,18 @@ management:
 #      heapdump: false
 #      threaddump: false
     tags:
-      application: "${spring.application.name}"
+      application: ${spring.application.name}
     export:
       # JmxProperties
       jmx:
         enabled: true
         domain: "metrics"
         step: 1m
+  # https://docs.spring.io/spring-boot/reference/actuator/endpoints.html#actuator.endpoints.sanitization
+  endpoint:
+    env:
+      show-values: ALWAYS
+
+endpoints:
+  env:
+    keys-to-sanitize: password,secret
