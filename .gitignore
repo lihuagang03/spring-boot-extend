@@ -27,6 +27,9 @@ target/
 .idea/
 *.iml
 
+# Visual Studio Code
+.vscode/
+
 # Eclipse
 .settings/
 .classpath

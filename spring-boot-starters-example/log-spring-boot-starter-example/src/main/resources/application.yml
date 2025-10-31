@@ -1,7 +1,19 @@
 
+
 spring:
   application:
     name: log-spring-boot-starter-example
+  cloud:
+    nacos:
+      config:
+        server-addr: http://localhost:8848/
+        import-check:
+          enabled: false
+  nacos:
+    config:
+      server-addr: http://localhost:8848/
+  config:
+    import: optional:nacos
 
 # https://docs.spring.io/spring-boot/how-to/logging.html
 logging:
@@ -46,3 +58,4 @@ management:
 endpoints:
   env:
     keys-to-sanitize: password,secret
+
