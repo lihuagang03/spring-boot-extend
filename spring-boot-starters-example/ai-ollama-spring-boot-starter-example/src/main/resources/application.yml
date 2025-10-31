@@ -5,5 +5,5 @@ spring:
     ollama:
       base-url: http://localhost:11434
       chat:
-        model: deepseek-r1:1.5b
+        model: qwen3:4b
 
